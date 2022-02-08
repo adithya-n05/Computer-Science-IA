@@ -2,7 +2,7 @@ package effortgradepredictor.computerscienceia;
 
 import java.util.*;
 
-public class Person {
+public class Person implements Serializable {
     private int id;
     private String firstName;
     private String lastName;

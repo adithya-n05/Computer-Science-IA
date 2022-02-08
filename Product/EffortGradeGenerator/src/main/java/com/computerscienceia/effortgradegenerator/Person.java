@@ -4,11 +4,37 @@
  */
 package com.computerscienceia.effortgradegenerator;
 
+import java.io.Serializable;
 
-public class Person {
+
+public class Person implements Serializable{
     private int id;
-    private int firstName;
-    private int lastName;
+    private String firstName;
+    private String lastName;
+    private transient String password;
+    private transient String username;
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
+
+    public String getUsername() {
+        return username;
+    }
+
+    public void setUsername(String username) {
+        this.username = username;
+    }
+
+    public Person(int id, String firstName, String lastName) {
+        this.id = id;
+        this.firstName = firstName;
+        this.lastName = lastName;
+    }
 
     public int getId() {
         return id;
@@ -18,20 +44,20 @@ public class Person {
         this.id = id;
     }
 
-    public int getFirstName() {
+    public String getFirstName() {
         return firstName;
     }
 
-    public void setFirstName(int firstName) {
+    public void setFirstName(String firstName) {
         this.firstName = firstName;
     }
 
-    public int getLastName() {
+    public String getLastName() {
         return lastName;
     }
 
-    public void setLastName(int lastName) {
+    public void setLastName(String lastName) {
         this.lastName = lastName;
     }
-    
+
 }

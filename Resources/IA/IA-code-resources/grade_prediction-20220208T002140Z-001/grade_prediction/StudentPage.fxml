@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.chart.CategoryAxis?>
+<?import javafx.scene.chart.LineChart?>
+<?import javafx.scene.chart.NumberAxis?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.MenuButton?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+
+<AnchorPane id="AnchorPane" prefHeight="600.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="grade_prediction.StudentPageController">
+   <children>
+      <MenuButton fx:id="mb" layoutX="365.0" layoutY="77.0" mnemonicParsing="false" text="Class" />
+      <LineChart fx:id="lc" layoutX="127.0" layoutY="154.0" prefHeight="304.0" prefWidth="546.0">
+        <xAxis>
+          <CategoryAxis side="BOTTOM" />
+        </xAxis>
+        <yAxis>
+          <NumberAxis side="LEFT" />
+        </yAxis>
+      </LineChart>
+      <TextField fx:id="aa" editable="false" layoutX="155.0" layoutY="475.0" prefHeight="19.0" prefWidth="30.0" />
+      <TextField fx:id="ab" editable="false" layoutX="191.0" layoutY="475.0" prefHeight="19.0" prefWidth="30.0" />
+      <TextField fx:id="ac" editable="false" layoutX="228.0" layoutY="475.0" prefHeight="19.0" prefWidth="30.0" />
+      <TextField fx:id="ad" editable="false" layoutX="264.0" layoutY="475.0" prefHeight="19.0" prefWidth="30.0" />
+      <TextField fx:id="ae" editable="false" layoutX="302.0" layoutY="475.0" prefHeight="19.0" prefWidth="30.0" />
+      <TextField fx:id="af" editable="false" layoutX="338.0" layoutY="475.0" prefHeight="19.0" prefWidth="30.0" />
+      <TextField fx:id="ag" editable="false" layoutX="375.0" layoutY="475.0" prefHeight="19.0" prefWidth="30.0" />
+      <TextField fx:id="ah" editable="false" layoutX="411.0" layoutY="475.0" prefHeight="19.0" prefWidth="30.0" />
+      <TextField fx:id="ai" editable="false" layoutX="451.0" layoutY="475.0" prefHeight="19.0" prefWidth="30.0" />
+      <TextField fx:id="aj" editable="false" layoutX="487.0" layoutY="475.0" prefHeight="19.0" prefWidth="30.0" />
+      <TextField fx:id="ak" editable="false" layoutX="524.0" layoutY="475.0" prefHeight="19.0" prefWidth="30.0" />
+      <TextField fx:id="al" editable="false" layoutX="560.0" layoutY="475.0" prefHeight="19.0" prefWidth="30.0" />
+      <TextField fx:id="am" editable="false" layoutX="598.0" layoutY="475.0" prefHeight="19.0" prefWidth="30.0" />
+      <TextField fx:id="an" editable="false" layoutX="634.0" layoutY="475.0" prefHeight="19.0" prefWidth="30.0" />
+      <Button fx:id="back" layoutX="27.0" layoutY="23.0" mnemonicParsing="false" onAction="#back" text="Back" />
+   </children>
+</AnchorPane>
