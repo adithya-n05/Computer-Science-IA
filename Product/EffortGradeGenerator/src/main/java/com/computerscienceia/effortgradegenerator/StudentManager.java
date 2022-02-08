@@ -4,17 +4,14 @@
  */
 package com.computerscienceia.effortgradegenerator;
 
-import java.io.Serializable;
+import java.util.ArrayList;
 
 /**
  *
  * @author adith
  */
-public class Student extends Person implements Serializable{
-
-    public Student(int id, String firstName, String lastName) {
-        super(id, firstName, lastName);
-    }
+public class StudentManager {
+    private static ArrayList<Student> allStudents = new ArrayList<Student>();
     
     
     

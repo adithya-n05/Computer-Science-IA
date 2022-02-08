@@ -14,8 +14,8 @@ import java.util.ArrayList;
 public class Teacher extends Person implements Serializable{
     private ArrayList<Class> classes = new ArrayList<Class>();
 
-    public Teacher(String firstName, String lastName, String ID) {
-        super(ID, firstName, lastName);
+    public Teacher(int id, String firstName, String lastName) {
+        super(id, firstName, lastName);
     }
     
     
