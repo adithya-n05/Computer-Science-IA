@@ -2,7 +2,7 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
-package com.computerscienceia.effortgradegenerator;
+package com.computerscienceia.effortgradegenerator.GUI;
 
 /**
  *
@@ -60,7 +60,6 @@ public class MainPage extends javax.swing.JFrame {
         });
 
         jButton2.setText("Remove Class");
-        jButton2.setActionCommand("Remove Class");
         jButton2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton2ActionPerformed(evt);
