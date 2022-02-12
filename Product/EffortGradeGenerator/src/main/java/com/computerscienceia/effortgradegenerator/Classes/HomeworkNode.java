@@ -65,7 +65,7 @@ public class HomeworkNode implements Serializable{
             Student student = listOfStudents.get(i);
             int id = student.getId();
             this.listOfStudents.add(new ArrayList<>());
-            this.listOfStudents.get(i).add(id, 0);
+            this.listOfStudents.get(i).add(0, id);
         }
         this.homeworkName = homeworkName;
         this.description = description;

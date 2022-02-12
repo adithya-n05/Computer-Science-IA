@@ -91,4 +91,11 @@ public class Class implements Serializable{
         this.isHL = isHL;
     }
     
+    public void addStudent(String firstName, String lastName, int id){
+        Student newStudent = new Student(id, firstName, lastName);
+        this.listOfStudents.add(newStudent);
+        
+        return;
+    }
+    
 }
