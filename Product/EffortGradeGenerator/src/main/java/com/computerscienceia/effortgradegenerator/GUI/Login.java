@@ -4,8 +4,11 @@
  */
 package com.computerscienceia.effortgradegenerator.GUI;
 
-import com.computerscienceia.effortgradegenerator.Classes.ArrayListHelper;
 import com.computerscienceia.effortgradegenerator.Classes.TeacherManager;
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 
 /**
@@ -146,11 +149,25 @@ public class Login extends javax.swing.JFrame {
         if(username.getText().trim().isEmpty() || passwordString.trim().length() == 0 || username.getText().trim().equalsIgnoreCase("Enter your username") || passwordString.trim().equals("Enter your password")){
            JOptionPane.showMessageDialog(null, "Please enter a username and a password");
        }else{
+           try {
+               TeacherManager.load("Effort Grade Generator");
+           } catch (IOException e) {
+           }
+           
             String usernameString = username.getText().trim();
             passwordString = passwordString.trim();
+            for(int i =0; i<TeacherManager.allTeachers.size(); i++){
+            if(TeacherManager.allTeachers.get(i).getUsername().equals(usernameString)){
+                if(TeacherManager.allTeachers.get(i).getPassword().equals(passwordString)){
+                    new MainPage().setVisible(true);
+                }else{
+                    JOptionPane.showMessageDialog(null, "Username and password combination incorrect");
+                }
+            }else{
+                JOptionPane.showMessageDialog(null,"Username and password combination incorrect");
+            }
         }
-        
-        ArrayListHelper.binarySearchTeacher(TeacherManager., WIDTH)
+        }
         
     }//GEN-LAST:event_loginButtonActionPerformed
 
