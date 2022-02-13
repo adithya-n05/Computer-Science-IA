@@ -93,9 +93,24 @@ public class Class implements Serializable{
     
     public void addStudent(String firstName, String lastName, int id){
         Student newStudent = new Student(id, firstName, lastName);
-        this.listOfStudents.add(newStudent);
-        
-        return;
+        listOfStudents.add(newStudent);
+        quarterTests.addStudent(newStudent);
+        semesterExams.addStudent(newStudent);
+        listOfHomeworks.addStudent(newStudent);
+    }
+    
+    public void addStudent(Student newStudent){
+        listOfStudents.add(newStudent);
+        quarterTests.addStudent(newStudent);
+        semesterExams.addStudent(newStudent);
+        listOfHomeworks.addStudent(newStudent);
+    }
+    
+    public void remvoeStudent(Student newStudent){
+        listOfStudents.add(newStudent);
+        quarterTests.addStudent(newStudent);
+        semesterExams.addStudent(newStudent);
+        listOfHomeworks.addStudent(newStudent);
     }
     
 }

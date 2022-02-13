@@ -40,6 +40,23 @@ public class AssessmentLinkedList implements Serializable{
         }
     }
     
+    public void removeAssessment(String assessmentName){
+        if( assessmentName.equals(start.getAssessmentName()) ){
+            start = start.getNext();
+            return;
+        }
+        AssessmentNode temp1 = start;
+        AssessmentNode temp2 = start.getNext();
+        while(temp2 != null){
+            if(temp2.getAssessmentName().equals(assessmentName)){
+                temp1.setNext(temp2.getNext());
+                return;
+            }
+            temp1 = temp1.getNext();
+            temp2 = temp2.getNext();
+        }
+    }
+    
     public void addStudent(Student student){
         AssessmentNode temp = start;
         ArrayList<ArrayList<Double>> listOfStudents;
@@ -50,7 +67,7 @@ public class AssessmentLinkedList implements Serializable{
             studentList.add((double)id);
             listOfStudents.add(studentList);
             ArrayListHelper listHelper = new ArrayListHelper();
-            listHelper.sort(listOfStudents, 0, listOfStudents.size()-1);
+            listHelper.sortDouble(listOfStudents, 0, listOfStudents.size()-1);
             temp.setListOfStudents(listOfStudents);
             temp = temp.getNext();
         }

@@ -48,7 +48,7 @@ public class AssessmentStack implements Serializable{
 		{
 			String assessmentName = top.getAssessmentName();
                         Date assessmentDate = top.getAssessmentDate();
-			top = top.next;
+			top = top.getNext();
                         Map<String, Date> nodeInformation = new HashMap<>();
                         nodeInformation.put(assessmentName, assessmentDate);
 			return nodeInformation;

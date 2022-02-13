@@ -42,6 +42,23 @@ public class HomeworkLinkedList implements Serializable{
 	temp.setNext(newNode);
     }
     
+    public void removeHomework(String homeworkName){
+        if( homeworkName.equals(start.getHomeworkName()) ){
+            start = start.getNext();
+            return;
+        }
+        HomeworkNode temp1 = start;
+        HomeworkNode temp2 = start.getNext();
+        while(temp2 != null){
+            if(temp2.getHomeworkName().equals(homeworkName)){
+                temp1.setNext(temp2.getNext());
+                return;
+            }
+            temp1 = temp1.getNext();
+            temp2 = temp2.getNext();
+        }
+    }
+    
     public void addStudent(Student student){
         HomeworkNode temp = start;
         ArrayList<ArrayList<Integer>> listOfStudents;
@@ -52,7 +69,7 @@ public class HomeworkLinkedList implements Serializable{
             studentList.add(id);
             listOfStudents.add(studentList);
             ArrayListHelper listHelper = new ArrayListHelper();
-            listHelper.sort(listOfStudents, 0, listOfStudents.size()-1);
+            listHelper.sortInt(listOfStudents, 0, listOfStudents.size()-1);
             temp.setListOfStudents(listOfStudents);
             temp = temp.getNext();
         }

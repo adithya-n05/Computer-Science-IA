@@ -16,7 +16,7 @@ public class AssessmentNode implements Serializable{
     private ArrayList<ArrayList<Double>> listOfStudents;
     private String assessmentName; 
     private Date assessmentDate;
-    AssessmentNode next;
+    private AssessmentNode next;
 	
     public AssessmentNode(ArrayList<Student> listOfStudents, String assessmentName, Date assessmentDate){
         for(int i =0; i<listOfStudents.size(); i++){
