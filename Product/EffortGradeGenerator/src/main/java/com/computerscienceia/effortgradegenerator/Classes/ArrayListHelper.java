@@ -11,7 +11,11 @@ import java.util.ArrayList;
  * @author adith
  */
 public class ArrayListHelper {
-    public static int partition(ArrayList<ArrayList<Integer>> arrayinput, int low, int high)
+
+    public ArrayListHelper() {
+    }
+    
+    public int partition(ArrayList<ArrayList<Integer>> arrayinput, int low, int high)
     {
         int pivot = arrayinput.get(high).get(0); 
         int i = (low-1);
@@ -33,7 +37,7 @@ public class ArrayListHelper {
         return i+1;
     }
   
-    public static void sort(ArrayList<ArrayList<Integer>> arrayinput, int low, int high)
+    public void sort(ArrayList<ArrayList<Integer>> arrayinput, int low, int high)
     {
         if (low < high)
         {
