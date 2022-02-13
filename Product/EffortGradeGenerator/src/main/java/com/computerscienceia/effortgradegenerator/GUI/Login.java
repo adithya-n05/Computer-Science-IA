@@ -156,19 +156,19 @@ public class Login extends javax.swing.JFrame {
            
             String usernameString = username.getText().trim();
             passwordString = passwordString.trim();
+            boolean mainPageLoaded = false;
             for(int i =0; i<TeacherManager.allTeachers.size(); i++){
             if(TeacherManager.allTeachers.get(i).getUsername().equals(usernameString)){
                 if(TeacherManager.allTeachers.get(i).getPassword().equals(passwordString)){
                     new MainPage().setVisible(true);
-                }else{
-                    JOptionPane.showMessageDialog(null, "Username and password combination incorrect");
+                    mainPageLoaded = true;
                 }
-            }else{
-                JOptionPane.showMessageDialog(null,"Username and password combination incorrect");
+            }
+            }
+            if(mainPageLoaded == false){
+                JOptionPane.showMessageDialog(null, "Username and password combination incorrect");
             }
         }
-        }
-        
     }//GEN-LAST:event_loginButtonActionPerformed
 
     /**
