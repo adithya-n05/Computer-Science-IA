@@ -51,7 +51,8 @@ public class HomeworkLinkedList implements Serializable{
             ArrayList<Integer> studentList = new ArrayList<>();
             studentList.add(id);
             listOfStudents.add(studentList);
-            ArrayListHelper.sort(listOfStudents, 0, listOfStudents.size()-1);
+            ArrayListHelper listHelper = new ArrayListHelper();
+            listHelper.sort(listOfStudents, 0, listOfStudents.size()-1);
             temp.setListOfStudents(listOfStudents);
             temp = temp.getNext();
         }
