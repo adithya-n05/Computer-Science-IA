@@ -31,7 +31,6 @@ public class AssessmentLinkedList implements Serializable{
         AssessmentNode newAssessmentNode = new AssessmentNode(listOfStudents, assessmentName, assessmentDate);
         if (isEmpty()) {
             start = newAssessmentNode;
-            return;
         }else{
            AssessmentNode temp = start;
             while (temp.hasNext()) {
@@ -40,4 +39,21 @@ public class AssessmentLinkedList implements Serializable{
             temp.setNext(newAssessmentNode);
         }
     }
+    
+    public void addStudent(Student student){
+        AssessmentNode temp = start;
+        ArrayList<ArrayList<Double>> listOfStudents;
+	while(temp != null){
+            listOfStudents = temp.getListOfStudents();
+            int id = student.getId();
+            ArrayList<Double> studentList = new ArrayList<>();
+            studentList.add((double)id);
+            listOfStudents.add(studentList);
+            ArrayListHelper listHelper = new ArrayListHelper();
+            listHelper.sort(listOfStudents, 0, listOfStudents.size()-1);
+            temp.setListOfStudents(listOfStudents);
+            temp = temp.getNext();
+        }
+    }
+
 }

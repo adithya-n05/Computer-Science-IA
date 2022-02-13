@@ -34,6 +34,14 @@ public class AssessmentNode implements Serializable{
         next = null;
     }
 
+    public ArrayList<ArrayList<Double>> getListOfStudents() {
+        return listOfStudents;
+    }
+
+    public void setListOfStudents(ArrayList<ArrayList<Double>> listOfStudents) {
+        this.listOfStudents = listOfStudents;
+    }
+
     public String getAssessmentName() {
         return assessmentName;
     }
