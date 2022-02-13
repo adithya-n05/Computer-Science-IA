@@ -106,11 +106,11 @@ public class Class implements Serializable{
         listOfHomeworks.addStudent(newStudent);
     }
     
-    public void remvoeStudent(Student newStudent){
-        listOfStudents.add(newStudent);
-        quarterTests.addStudent(newStudent);
-        semesterExams.addStudent(newStudent);
-        listOfHomeworks.addStudent(newStudent);
+    public void remvoeStudent(Student removalStudent){
+        listOfStudents.remove(removalStudent);
+        quarterTests.removeStudent(removalStudent);
+        semesterExams.removeStudent(removalStudent);
+        listOfHomeworks.removeStudent(removalStudent);
     }
     
 }

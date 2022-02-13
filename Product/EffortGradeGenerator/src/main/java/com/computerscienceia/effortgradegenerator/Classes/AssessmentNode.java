@@ -65,12 +65,8 @@ public class AssessmentNode implements Serializable{
     public void setNext(AssessmentNode next) {
         this.next = next;
     }
-	
-	public boolean hasNext()
-	{
-		if(next == null)
-			return false;
-		else
-			return true;
-	}
+    
+    public boolean hasNext(){
+        return next != null;
+    }
 }

@@ -66,10 +66,21 @@ public class AssessmentLinkedList implements Serializable{
             ArrayList<Double> studentList = new ArrayList<>();
             studentList.add((double)id);
             listOfStudents.add(studentList);
-            ArrayListHelper listHelper = new ArrayListHelper();
-            listHelper.sortDouble(listOfStudents, 0, listOfStudents.size()-1);
+            ArrayListHelper.sortDouble(listOfStudents, 0, listOfStudents.size()-1);
             temp.setListOfStudents(listOfStudents);
             temp = temp.getNext();
+        }
+    }
+    
+    public void removeStudent(Student student){
+        AssessmentNode temp = start;
+        ArrayList<ArrayList<Double>> listOfStudents;
+        while(temp!=null){
+            listOfStudents = temp.getListOfStudents();
+            int id = student.getId();
+            int location = ArrayListHelper.binarySearchDouble(listOfStudents, id);
+            listOfStudents.remove(location);
+            temp.setListOfStudents(listOfStudents);
         }
     }
 

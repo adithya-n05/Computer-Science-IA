@@ -4,18 +4,19 @@
  */
 package com.computerscienceia.effortgradegenerator.Classes;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
 /**
  *
  * @author adith
  */
-public class ArrayListHelper {
+public class ArrayListHelper implements Serializable{
 
     public ArrayListHelper() {
     }
     
-    public int partitionInt(ArrayList<ArrayList<Integer>> arrayinput, int low, int high)
+    public static int partitionInt(ArrayList<ArrayList<Integer>> arrayinput, int low, int high)
     {
         int pivot = arrayinput.get(high).get(0); 
         int i = (low-1);
@@ -37,7 +38,7 @@ public class ArrayListHelper {
         return i+1;
     }
     
-    public int partitionDouble(ArrayList<ArrayList<Double>> arrayinput, int low, int high)
+    public static int partitionDouble(ArrayList<ArrayList<Double>> arrayinput, int low, int high)
     {
         double pivot = arrayinput.get(high).get(0); 
         int i = (low-1);
@@ -59,7 +60,7 @@ public class ArrayListHelper {
         return i+1;
     }
   
-    public void sortInt(ArrayList<ArrayList<Integer>> arrayinput, int low, int high)
+    public static void sortInt(ArrayList<ArrayList<Integer>> arrayinput, int low, int high)
     {
         if (low < high)
         {
@@ -69,7 +70,7 @@ public class ArrayListHelper {
         }
     }
     
-    public void sortDouble(ArrayList<ArrayList<Double>> arrayinput, int low, int high)
+    public static void sortDouble(ArrayList<ArrayList<Double>> arrayinput, int low, int high)
     {
         if (low < high)
         {
@@ -77,6 +78,50 @@ public class ArrayListHelper {
             sortDouble(arrayinput, low, pi-1);
             sortDouble(arrayinput, pi+1, high);
         }
+    }
+    
+    public static int binarySearchInt(ArrayList<ArrayList<Integer>> inputArray, int id) {
+        boolean found = false;
+        int low = 0;
+        int high = inputArray.size() - 1;
+        int location = -1;
+        int index;
+        while (low <= high && found == false) {
+            index = ( low + high ) / 2;
+            if (id == inputArray.get(index).get(0)) {
+                found = true;
+                location = index;
+            } else {
+                if (id < inputArray.get(index).get(0)){
+                    high = index - 1;
+                } else {
+                    low = index + 1;
+                }
+            }
+        }
+        return location;
+    }
+    
+    public static int binarySearchDouble(ArrayList<ArrayList<Double>> inputArray, int id) {
+        boolean found = false;
+        int low = 0;
+        int high = inputArray.size() - 1;
+        int location = -1;
+        int index;
+        while (low <= high && found == false) {
+            index = ( low + high ) / 2;
+            if (id == inputArray.get(index).get(0)) {
+                found = true;
+                location = index;
+            } else {
+                if (id < inputArray.get(index).get(0)){
+                    high = index - 1;
+                } else {
+                    low = index + 1;
+                }
+            }
+        }
+        return location;
     }
 
 }
