@@ -48,9 +48,6 @@ public class AddAssessment extends javax.swing.JFrame {
 
         jLabel1.setText("Assessment topic(s);");
 
-        jDateChooser1.setMaxSelectableDate(new java.util.Date(1893430887000L));
-        jDateChooser1.setMinSelectableDate(new java.util.Date(1577811687000L));
-
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -85,7 +82,7 @@ public class AddAssessment extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel3)
                     .addComponent(jDateChooser1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
+                .addGap(14, 14, 14)
                 .addComponent(jButton1)
                 .addContainerGap(46, Short.MAX_VALUE))
         );

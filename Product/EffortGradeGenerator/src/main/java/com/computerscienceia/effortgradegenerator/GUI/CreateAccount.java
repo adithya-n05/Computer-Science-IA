@@ -4,7 +4,13 @@
  */
 package com.computerscienceia.effortgradegenerator.GUI;
 
+import com.computerscienceia.effortgradegenerator.Classes.ArrayListHelper;
+import com.computerscienceia.effortgradegenerator.Classes.Teacher;
+import com.computerscienceia.effortgradegenerator.Classes.TeacherManager;
+import java.awt.Window;
+import java.io.IOException;
 import javax.swing.JOptionPane;
+import javax.swing.SwingUtilities;
 
 /**
  *
@@ -87,6 +93,11 @@ public class CreateAccount extends javax.swing.JFrame {
                 firstNameActionPerformed(evt);
             }
         });
+        firstName.addPropertyChangeListener(new java.beans.PropertyChangeListener() {
+            public void propertyChange(java.beans.PropertyChangeEvent evt) {
+                firstNamePropertyChange(evt);
+            }
+        });
 
         jLabel6.setText("Last name:");
 
@@ -120,7 +131,7 @@ public class CreateAccount extends javax.swing.JFrame {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(215, Short.MAX_VALUE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jLabel1)
                 .addGap(207, 207, 207))
             .addGroup(layout.createSequentialGroup()
@@ -133,7 +144,7 @@ public class CreateAccount extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
-                                .addComponent(firstName, javax.swing.GroupLayout.PREFERRED_SIZE, 209, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(firstName)
                                 .addGap(45, 45, 45)
                                 .addComponent(jLabel7)
                                 .addGap(18, 18, 18)
@@ -157,7 +168,7 @@ public class CreateAccount extends javax.swing.JFrame {
                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                                 .addComponent(createAccount)
                                 .addGap(212, 212, 212)))))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGap(51, 51, 51))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -203,6 +214,44 @@ public class CreateAccount extends javax.swing.JFrame {
     if(username.getText().trim().isEmpty()|| firstName.getText().trim().isEmpty()||lastName.getText().trim().isEmpty()||id.getText().trim().isEmpty()||password.getText().trim().isEmpty()||confirmPassword.getText().trim().isEmpty()){
         JOptionPane.showMessageDialog(null, "Please complete all fields");
     }
+    String idChecker = id.getText();
+    if(idChecker.equals("Your School ID")){
+        JOptionPane.showMessageDialog(null, "Please enter an ID");
+    }
+    int idNumber = Integer.parseInt(id.getText());
+    int location = ArrayListHelper.binarySearchTeacher(TeacherManager.allTeachers, idNumber);
+    if(location != -1){
+        JOptionPane.showMessageDialog(null,"ID already exists, please login to your existing account");
+        return;
+    }
+    
+    String usernameString = username.getText();
+    Teacher teacherChecker;
+    boolean usernameExists = false;
+    for(int i = 0; i<TeacherManager.allTeachers.size(); i++){
+        teacherChecker = TeacherManager.allTeachers.get(i);
+        if(teacherChecker.getUsername().equals(usernameString)){
+            JOptionPane.showMessageDialog(null,"Username already exists, please try a different username");
+            return;
+        }
+    }
+    
+    String firstNameString = firstName.getText();
+    String lastNameString = lastName.getText();
+    String passwordString = password.getText();
+    String confirmPasswordString = confirmPassword.getText();
+    
+    if(!passwordString.equals(confirmPasswordString)){
+        JOptionPane.showMessageDialog(null, "Passwords do not match. Please reconfirm your password.");
+    }
+    Teacher newTeacher = new Teacher(usernameString, passwordString, idNumber, firstNameString, lastNameString);
+    TeacherManager.addTeacher(newTeacher);
+    try {
+        TeacherManager.save("Effort Grade Generator");
+    } catch (IOException e) {
+    }
+    this.dispose();
+
          
     }//GEN-LAST:event_createAccountActionPerformed
 
@@ -234,6 +283,10 @@ public class CreateAccount extends javax.swing.JFrame {
         }
         
     }//GEN-LAST:event_idKeyTyped
+
+    private void firstNamePropertyChange(java.beans.PropertyChangeEvent evt) {//GEN-FIRST:event_firstNamePropertyChange
+        // TODO add your handling code here:
+    }//GEN-LAST:event_firstNamePropertyChange
 
     /**
      * @param args the command line arguments

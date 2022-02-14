@@ -19,7 +19,7 @@ import java.util.ArrayList;
  */
 public class TeacherManager implements Serializable{
     public static ArrayList<Teacher> allTeachers = new ArrayList<>();
-
+    
     public static ArrayList<Teacher> getAllTeachers() {
         return allTeachers;
     }
@@ -33,10 +33,10 @@ public class TeacherManager implements Serializable{
         ArrayListHelper.sortTeacher(allTeachers, 0, allTeachers.size()-1);
     }
     
-    public static void save(String fileName, ArrayList<Teacher> teacherList) throws IOException{
+    public static void save(String fileName) throws IOException{
         FileOutputStream saverFOS = new FileOutputStream(fileName+".ser");
         ObjectOutputStream saveOOS = new ObjectOutputStream(saverFOS);
-        saveOOS.writeObject(teacherList);
+        saveOOS.writeObject(allTeachers);
         saveOOS.close();
         saverFOS.close();
     }

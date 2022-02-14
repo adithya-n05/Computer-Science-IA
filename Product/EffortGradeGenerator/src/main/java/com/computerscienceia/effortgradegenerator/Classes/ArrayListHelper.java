@@ -11,10 +11,7 @@ import java.util.ArrayList;
  *
  * @author adith
  */
-public class ArrayListHelper implements Serializable{
-
-    public ArrayListHelper() {
-    }
+public class ArrayListHelper{
     
     public static int partitionInt(ArrayList<ArrayList<Integer>> arrayinput, int low, int high)
     {

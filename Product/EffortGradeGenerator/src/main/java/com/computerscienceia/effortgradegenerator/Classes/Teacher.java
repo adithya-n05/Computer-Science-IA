@@ -50,6 +50,18 @@ public class Teacher extends Person implements Serializable{
         this.classes = classes;
     }
     
+    public void addClass(Class classObject){
+    classes.add(classObject);
+    }
+    
+    public void removeClass(Class classObject){
+        for(int i =0; i<classes.size(); i++){
+            if(classes.get(i).getClassName().equals(classObject.getClassName())){
+                classes.remove(i);
+            }
+        }
+    }
+    
     
     
 }

@@ -16,7 +16,6 @@ public class Class implements Serializable{
     private AssessmentLinkedList semesterExams;
     private ArrayList<Student> listOfStudents;
     private String className;
-    private int classID;
     private String subject;
     private boolean isHL;
 
@@ -59,15 +58,7 @@ public class Class implements Serializable{
     public void setClassName(String className) {
         this.className = className;
     }
-
-    public int getClassID() {
-        return classID;
-    }
-
-    public void setClassID(int classID) {
-        this.classID = classID;
-    }
-
+    
     public String getSubject() {
         return subject;
     }
@@ -84,9 +75,11 @@ public class Class implements Serializable{
         this.isHL = isHL;
     }
 
-    public Class(String className, int classID, String subject, boolean isHL) {
+    public Class() {
+    }
+
+    public Class(String className, String subject, boolean isHL) {
         this.className = className;
-        this.classID = classID;
         this.subject = subject;
         this.isHL = isHL;
     }

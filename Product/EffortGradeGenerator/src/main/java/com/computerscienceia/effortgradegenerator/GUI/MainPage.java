@@ -4,6 +4,15 @@
  */
 package com.computerscienceia.effortgradegenerator.GUI;
 
+
+import com.computerscienceia.effortgradegenerator.Classes.Class;
+import com.computerscienceia.effortgradegenerator.Classes.Teacher;
+import com.computerscienceia.effortgradegenerator.Classes.TeacherManager;
+import com.computerscienceia.effortgradegenerator.Classes.ListInitialization;
+import java.io.IOException;
+import java.util.ArrayList;
+import javax.swing.JOptionPane;
+
 /**
  *
  * @author adith
@@ -29,13 +38,13 @@ public class MainPage extends javax.swing.JFrame {
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         jScrollPane2 = new javax.swing.JScrollPane();
-        jList1 = new javax.swing.JList<>();
-        jButton1 = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
+        listOfClasses = new javax.swing.JList<>();
+        addClass = new javax.swing.JButton();
+        removeClass = new javax.swing.JButton();
         jLabel3 = new javax.swing.JLabel();
-        jButton3 = new javax.swing.JButton();
-        jLabel4 = new javax.swing.JLabel();
-        jButton4 = new javax.swing.JButton();
+        signedInName = new javax.swing.JLabel();
+        manageClass = new javax.swing.JButton();
+        Refresh = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Effort Grade Manager");
@@ -46,37 +55,42 @@ public class MainPage extends javax.swing.JFrame {
 
         jLabel2.setText("Classes:");
 
-        jList1.setModel(new javax.swing.AbstractListModel<String>() {
-            String[] strings = { "Item 1", "Item 2", "Item 3", "Item 4", "Item 5" };
+        listOfClasses.setModel(new javax.swing.AbstractListModel<String>() {
+            String[] strings = ListInitialization.listOfClassesAsStrings();
             public int getSize() { return strings.length; }
             public String getElementAt(int i) { return strings[i]; }
         });
-        jScrollPane2.setViewportView(jList1);
+        jScrollPane2.setViewportView(listOfClasses);
 
-        jButton1.setText("Add a Class");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        addClass.setText("Add a Class");
+        addClass.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                addClassActionPerformed(evt);
             }
         });
 
-        jButton2.setText("Remove Class");
-        jButton2.addActionListener(new java.awt.event.ActionListener() {
+        removeClass.setText("Remove Class");
+        removeClass.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton2ActionPerformed(evt);
+                removeClassActionPerformed(evt);
             }
         });
 
         jLabel3.setText("Signed in as:");
 
-        jButton3.setText("Manage Account");
+        signedInName.setText(EffortGradeGenerator.primaryTeacher.getFirstName() + " " + EffortGradeGenerator.primaryTeacher.getLastName());
 
-        jLabel4.setText("Erin Baker");
-
-        jButton4.setText("Manage Class");
-        jButton4.addActionListener(new java.awt.event.ActionListener() {
+        manageClass.setText("Manage Class");
+        manageClass.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton4ActionPerformed(evt);
+                manageClassActionPerformed(evt);
+            }
+        });
+
+        Refresh.setText("Refresh");
+        Refresh.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                RefreshActionPerformed(evt);
             }
         });
 
@@ -97,18 +111,18 @@ public class MainPage extends javax.swing.JFrame {
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 247, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 109, Short.MAX_VALUE)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jButton4, javax.swing.GroupLayout.PREFERRED_SIZE, 103, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jButton2)
-                            .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 103, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(removeClass, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(manageClass)
+                            .addComponent(addClass, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                         .addGap(84, 84, 84))))
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jLabel3)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jLabel4)
+                .addComponent(signedInName)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jButton3)
+                .addComponent(Refresh)
                 .addContainerGap())
         );
         layout.setVerticalGroup(
@@ -122,37 +136,72 @@ public class MainPage extends javax.swing.JFrame {
                     .addGroup(layout.createSequentialGroup()
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 242, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 25, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 19, Short.MAX_VALUE)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel3)
-                            .addComponent(jLabel4)
-                            .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 16, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(signedInName)
+                            .addComponent(Refresh))
                         .addContainerGap())
                     .addGroup(layout.createSequentialGroup()
                         .addGap(63, 63, 63)
-                        .addComponent(jButton1)
+                        .addComponent(addClass)
                         .addGap(18, 18, 18)
-                        .addComponent(jButton2)
+                        .addComponent(removeClass)
                         .addGap(18, 18, 18)
-                        .addComponent(jButton4)
+                        .addComponent(manageClass)
                         .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
         );
 
         pack();
+        setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jButton1ActionPerformed
+    private void addClassActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addClassActionPerformed
+        new AddClass().setVisible(true);
+    }//GEN-LAST:event_addClassActionPerformed
 
-    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jButton2ActionPerformed
+    private void removeClassActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_removeClassActionPerformed
+       ArrayList<Class> listOfClassesList = EffortGradeGenerator.primaryTeacher.getClasses();
+       if(listOfClasses.isSelectionEmpty()){
+           JOptionPane.showMessageDialog(null,"Please select a class");
+       }
+       String selectedClassName = listOfClasses.getSelectedValue();
+       for(int i =0; i<listOfClassesList.size(); i++){
+           if(listOfClassesList.get(i).getClassName().equals(selectedClassName)){
+               listOfClassesList.remove(i);
+               EffortGradeGenerator.primaryTeacher.setClasses(listOfClassesList);
+           }
+       }
+        try {
+            TeacherManager.save("Effort Grade Generator");
+        } catch (IOException e) {
+        }
+        this.dispose();
+        new MainPage().setVisible(true);
+    }//GEN-LAST:event_removeClassActionPerformed
 
-    private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jButton4ActionPerformed
+    private void manageClassActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_manageClassActionPerformed
+        Class classObject = new Class();
+        ArrayList<Class> listOfClassesList = EffortGradeGenerator.primaryTeacher.getClasses();
+        String selectedClassName = listOfClasses.getSelectedValue();
+        if(listOfClasses.isSelectionEmpty()){
+           JOptionPane.showMessageDialog(null,"Please select a class");
+       }
+        for(int i =0; i<listOfClassesList.size(); i++){
+           if(listOfClassesList.get(i).getClassName().equals(selectedClassName)){
+               classObject = listOfClassesList.get(i);
+           }
+       }
+        EffortGradeGenerator.primaryClass = classObject;
+        new ClassManager().setVisible(true);
+    }//GEN-LAST:event_manageClassActionPerformed
 
+    private void RefreshActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_RefreshActionPerformed
+        this.dispose();
+        new MainPage().setVisible(true);
+    }//GEN-LAST:event_RefreshActionPerformed
+
+    
     /**
      * @param args the command line arguments
      */
@@ -189,15 +238,15 @@ public class MainPage extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
-    private javax.swing.JButton jButton3;
-    private javax.swing.JButton jButton4;
+    private javax.swing.JButton Refresh;
+    private javax.swing.JButton addClass;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
-    private javax.swing.JLabel jLabel4;
-    private javax.swing.JList<String> jList1;
     private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JList<String> listOfClasses;
+    private javax.swing.JButton manageClass;
+    private javax.swing.JButton removeClass;
+    private javax.swing.JLabel signedInName;
     // End of variables declaration//GEN-END:variables
 }
