@@ -30,15 +30,16 @@ public class ClassManager extends javax.swing.JFrame {
 
         jLabel3 = new javax.swing.JLabel();
         signedInName = new javax.swing.JLabel();
-        jButton3 = new javax.swing.JButton();
+        refresh = new javax.swing.JButton();
         jTabbedPane2 = new javax.swing.JTabbedPane();
         jPanel1 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
         listOfStudents = new javax.swing.JList<>();
         jLabel2 = new javax.swing.JLabel();
-        jButton1 = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
-        jButton5 = new javax.swing.JButton();
+        addStudent = new javax.swing.JButton();
+        removeStudent = new javax.swing.JButton();
+        generateEffort = new javax.swing.JButton();
+        addNewStudent = new javax.swing.JButton();
         jPanel2 = new javax.swing.JPanel();
         jScrollPane2 = new javax.swing.JScrollPane();
         jList2 = new javax.swing.JList<>();
@@ -65,7 +66,12 @@ public class ClassManager extends javax.swing.JFrame {
         signedInName.setText(EffortGradeGenerator.primaryTeacher.getFirstName() + " " + EffortGradeGenerator.primaryTeacher.getLastName()
         );
 
-        jButton3.setText("Manage Account");
+        refresh.setText("Refresh");
+        refresh.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                refreshActionPerformed(evt);
+            }
+        });
 
         listOfStudents.setModel(new javax.swing.AbstractListModel<String>() {
             String[] strings = ListInitialization.listOfStudentsAsStrings();
@@ -76,25 +82,32 @@ public class ClassManager extends javax.swing.JFrame {
 
         jLabel2.setText("Students:");
 
-        jButton1.setText("Add a Student");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        addStudent.setText("Add an existing Student");
+        addStudent.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                addStudentActionPerformed(evt);
             }
         });
 
-        jButton2.setText("Remove Student");
-        jButton2.addActionListener(new java.awt.event.ActionListener() {
+        removeStudent.setText("Remove Student");
+        removeStudent.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton2ActionPerformed(evt);
+                removeStudentActionPerformed(evt);
             }
         });
 
-        jButton5.setText("Generate Effort Grade for Student");
-        jButton5.setToolTipText("");
-        jButton5.addActionListener(new java.awt.event.ActionListener() {
+        generateEffort.setText("Generate Effort Grade for Student");
+        generateEffort.setToolTipText("");
+        generateEffort.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton5ActionPerformed(evt);
+                generateEffortActionPerformed(evt);
+            }
+        });
+
+        addNewStudent.setText("Add a new Student");
+        addNewStudent.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                addNewStudentActionPerformed(evt);
             }
         });
 
@@ -107,12 +120,13 @@ public class ClassManager extends javax.swing.JFrame {
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(96, 96, 96)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(jButton2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jButton1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                            .addComponent(removeStudent, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(addStudent, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(addNewStudent, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(51, 51, 51)
-                        .addComponent(jButton5)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 150, Short.MAX_VALUE)
+                        .addGap(70, 70, 70)
+                        .addComponent(generateEffort)))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 131, Short.MAX_VALUE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 262, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel2))
@@ -127,13 +141,15 @@ public class ClassManager extends javax.swing.JFrame {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 302, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(94, 94, 94)
-                        .addComponent(jButton1)
+                        .addGap(53, 53, 53)
+                        .addComponent(addNewStudent)
                         .addGap(18, 18, 18)
-                        .addComponent(jButton2)
+                        .addComponent(addStudent)
                         .addGap(18, 18, 18)
-                        .addComponent(jButton5)))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addComponent(removeStudent)
+                        .addGap(18, 18, 18)
+                        .addComponent(generateEffort)))
+                .addContainerGap(29, Short.MAX_VALUE))
         );
 
         jTabbedPane2.addTab("Students", jPanel1);
@@ -274,7 +290,7 @@ public class ClassManager extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(signedInName)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jButton3)
+                        .addComponent(refresh)
                         .addContainerGap())
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jLabel1)
@@ -296,7 +312,7 @@ public class ClassManager extends javax.swing.JFrame {
                 .addComponent(jTabbedPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 405, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 16, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(refresh, javax.swing.GroupLayout.PREFERRED_SIZE, 16, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(signedInName)
                     .addComponent(jLabel3))
                 .addContainerGap())
@@ -310,21 +326,30 @@ public class ClassManager extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_jButton6ActionPerformed
 
-    private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
+    private void generateEffortActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_generateEffortActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jButton5ActionPerformed
+    }//GEN-LAST:event_generateEffortActionPerformed
 
-    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+    private void removeStudentActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_removeStudentActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jButton2ActionPerformed
+    }//GEN-LAST:event_removeStudentActionPerformed
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jButton1ActionPerformed
+    private void addStudentActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addStudentActionPerformed
+        new AddExistingStudent().setVisible(true);
+    }//GEN-LAST:event_addStudentActionPerformed
 
     private void jButton12ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton12ActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jButton12ActionPerformed
+
+    private void addNewStudentActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addNewStudentActionPerformed
+        new AddNewStudent().setVisible(true);
+    }//GEN-LAST:event_addNewStudentActionPerformed
+
+    private void refreshActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_refreshActionPerformed
+        this.dispose();
+        new ClassManager().setVisible(true);
+    }//GEN-LAST:event_refreshActionPerformed
 
     /**
      * @param args the command line arguments
@@ -362,14 +387,13 @@ public class ClassManager extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton1;
+    private javax.swing.JButton addNewStudent;
+    private javax.swing.JButton addStudent;
+    private javax.swing.JButton generateEffort;
     private javax.swing.JButton jButton11;
     private javax.swing.JButton jButton12;
     private javax.swing.JButton jButton13;
-    private javax.swing.JButton jButton2;
-    private javax.swing.JButton jButton3;
     private javax.swing.JButton jButton4;
-    private javax.swing.JButton jButton5;
     private javax.swing.JButton jButton6;
     private javax.swing.JButton jButton7;
     private javax.swing.JLabel jLabel1;
@@ -389,6 +413,8 @@ public class ClassManager extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JTabbedPane jTabbedPane2;
     private javax.swing.JList<String> listOfStudents;
+    private javax.swing.JButton refresh;
+    private javax.swing.JButton removeStudent;
     private javax.swing.JLabel signedInName;
     // End of variables declaration//GEN-END:variables
 }

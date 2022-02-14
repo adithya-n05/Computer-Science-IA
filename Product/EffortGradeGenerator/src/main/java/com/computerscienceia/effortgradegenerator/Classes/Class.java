@@ -12,7 +12,7 @@ import java.util.ArrayList;
  */
 public class Class implements Serializable{
     private HomeworkLinkedList listOfHomeworks;
-    private  AssessmentLinkedList quarterTests;
+    private AssessmentLinkedList quarterTests;
     private AssessmentLinkedList semesterExams;
     private ArrayList<Student> listOfStudents;
     private String className;
@@ -86,20 +86,48 @@ public class Class implements Serializable{
     
     public void addStudent(String firstName, String lastName, int id){
         Student newStudent = new Student(id, firstName, lastName);
+        if(listOfStudents == null){
+            listOfStudents = new ArrayList<>();
+        }
+        if(quarterTests == null){
+            quarterTests = new AssessmentLinkedList();
+        }
+        if(semesterExams == null){
+            semesterExams = new AssessmentLinkedList();
+        }
+        if(listOfHomeworks == null){
+            listOfHomeworks = new HomeworkLinkedList();
+        }
+        if(StudentManager.listOfAllStudents == null){
+            StudentManager.listOfAllStudents = new ArrayList<>();
+        }
         listOfStudents.add(newStudent);
         quarterTests.addStudent(newStudent);
         semesterExams.addStudent(newStudent);
         listOfHomeworks.addStudent(newStudent);
+        StudentManager.listOfAllStudents.add(newStudent);
     }
     
     public void addStudent(Student newStudent){
+        if(listOfStudents == null){
+            listOfStudents = new ArrayList<>();
+        }
+        if(quarterTests == null){
+            quarterTests = new AssessmentLinkedList();
+        }
+        if(semesterExams == null){
+            semesterExams = new AssessmentLinkedList();
+        }
+        if(listOfHomeworks == null){
+            listOfHomeworks = new HomeworkLinkedList();
+        }
         listOfStudents.add(newStudent);
         quarterTests.addStudent(newStudent);
         semesterExams.addStudent(newStudent);
         listOfHomeworks.addStudent(newStudent);
     }
     
-    public void remvoeStudent(Student removalStudent){
+    public void removeStudent(Student removalStudent){
         listOfStudents.remove(removalStudent);
         quarterTests.removeStudent(removalStudent);
         semesterExams.removeStudent(removalStudent);
