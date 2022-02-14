@@ -26,6 +26,16 @@ public class AssessmentLinkedList implements Serializable{
     public boolean isEmpty(){
         return start == null;
     }
+    
+    public int length(){
+        int length = 0;
+        AssessmentNode temp = start;
+            while (temp.hasNext()) {
+                temp = temp.getNext();
+                length++;
+            }
+        return length;
+    }
 	
     public void addAssessment(ArrayList<Student> listOfStudents, Date assessmentDate, String assessmentName){
         AssessmentNode newAssessmentNode = new AssessmentNode(listOfStudents, assessmentName, assessmentDate);

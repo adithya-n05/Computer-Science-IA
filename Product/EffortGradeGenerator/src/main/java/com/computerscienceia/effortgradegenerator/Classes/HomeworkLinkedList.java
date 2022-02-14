@@ -27,6 +27,16 @@ public class HomeworkLinkedList implements Serializable{
         return start == null;
     }
     
+    public int length(){
+        int length = 0;
+        HomeworkNode temp = start;
+            while (temp.hasNext()) {
+                temp = temp.getNext();
+                length++;
+            }
+        return length;
+    }
+    
     public void append(ArrayList<Student> listOfStudents, String HomeworkName, Date dueDate, String description)
     {	
         HomeworkNode newNode = new HomeworkNode(listOfStudents, HomeworkName, description, dueDate);

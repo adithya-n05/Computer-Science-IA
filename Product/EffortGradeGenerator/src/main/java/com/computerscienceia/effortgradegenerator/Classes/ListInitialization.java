@@ -15,8 +15,14 @@ public class ListInitialization {
     public static String[] listOfClassesAsStrings(){
        ArrayList<Class> listOfClasses = EffortGradeGenerator.primaryTeacher.getClasses();
        String[] listOfClassesAsStrings = new String[listOfClasses.size()];
+       String HLAdder = "";
        for(int i =0; i<listOfClasses.size(); i++){
-           listOfClassesAsStrings[i] = listOfClasses.get(i).getClassName();
+           if(listOfClasses.get(i).isIsHL()){
+               HLAdder = "HL";
+           }else{
+               HLAdder = "SL";
+           }
+           listOfClassesAsStrings[i] = listOfClasses.get(i).getClassName() + " " + HLAdder;
        }
        return listOfClassesAsStrings;
     }
@@ -38,5 +44,74 @@ public class ListInitialization {
        }
        return listOfStudentsStrings;
        }     
+    }
+    
+    public static String[] listOfQuarterAssessmentsAsStrings(){
+       Class mainClass = EffortGradeGenerator.primaryClass;
+       AssessmentLinkedList listOfTests = mainClass.getQuarterTests();
+       int size =0;
+       if(listOfTests == null){
+           size = 1;
+           String[] listOfStudentsStringsBlank = new String[size];
+           return listOfStudentsStringsBlank;
+       }else{
+           size = listOfTests.length();
+           String[] listOfStudentsStrings = new String[size];
+           AssessmentNode temp = listOfTests.getStart();
+           int i =0;
+            while (temp.hasNext()) {
+                listOfStudentsStrings[i] = temp.getAssessmentName();
+                temp = temp.getNext();
+                i++;
+            }
+            return listOfStudentsStrings;
+
+       }
+    }
+    
+    public static String[] listOfSemesterExamsAsStrings(){
+       Class mainClass = EffortGradeGenerator.primaryClass;
+       AssessmentLinkedList listOfTests = mainClass.getSemesterExams();
+       int size =0;
+       if(listOfTests == null){
+           size = 1;
+           String[] listOfStudentsStringsBlank = new String[size];
+           return listOfStudentsStringsBlank;
+       }else{
+           size = listOfTests.length();
+           String[] listOfStudentsStrings = new String[size];
+           AssessmentNode temp = listOfTests.getStart();
+           int i =0;
+            while (temp.hasNext()) {
+                listOfStudentsStrings[i] = temp.getAssessmentName();
+                temp = temp.getNext();
+                i++;
+            }
+            return listOfStudentsStrings;
+
+       }
+    }
+    
+    public static String[] listOfHomeworksAsStrings(){
+       Class mainClass = EffortGradeGenerator.primaryClass;
+       HomeworkLinkedList listOfTests = mainClass.getListOfHomeworks();
+       int size =0;
+       if(listOfTests == null){
+           size = 1;
+           String[] listOfStudentsStringsBlank = new String[size];
+           return listOfStudentsStringsBlank;
+       }else{
+           size = listOfTests.length();
+           String[] listOfStudentsStrings = new String[size];
+           HomeworkNode temp = listOfTests.getStart();
+           int i =0;
+            while (temp.hasNext()) {
+                listOfStudentsStrings[i] = temp.getHomeworkName();
+                temp = temp.getNext();
+                i++;
+            }
+            return listOfStudentsStrings;
+
+       }
     }
 }
