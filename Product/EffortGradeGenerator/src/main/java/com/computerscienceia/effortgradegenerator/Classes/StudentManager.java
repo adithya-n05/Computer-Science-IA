@@ -3,6 +3,7 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
 package com.computerscienceia.effortgradegenerator.Classes;
+import java.io.Serializable;
 import java.util.ArrayList;
 
 
@@ -10,7 +11,7 @@ import java.util.ArrayList;
  *
  * @author adithyanarayanan
  */
-public class StudentManager {
+public class StudentManager implements Serializable{
     public static ArrayList<Student> listOfAllStudents = new ArrayList<>();
     
     public static String[] generateStringOfStudents(){
@@ -23,7 +24,7 @@ public class StudentManager {
         }else{
             listOfStudents = new String[listOfAllStudents.size()];
             for(int i = 0; i<listOfAllStudents.size(); i++){
-            listOfStudents[i] = listOfAllStudents.get(i).getFirstName() + " " + listOfAllStudents.get(i).getLastName();
+            listOfStudents[i] = listOfAllStudents.get(i).getFirstName() + " " + listOfAllStudents.get(i).getLastName() + " " + listOfAllStudents.get(i).getId();
             }
             return listOfStudents;
         }

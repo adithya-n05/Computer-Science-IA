@@ -5,6 +5,11 @@
 package com.computerscienceia.effortgradegenerator.GUI;
 
 import com.computerscienceia.effortgradegenerator.Classes.ListInitialization;
+import com.computerscienceia.effortgradegenerator.Classes.Student;
+import com.computerscienceia.effortgradegenerator.Classes.TeacherManager;
+import java.io.IOException;
+import java.util.ArrayList;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -275,7 +280,7 @@ public class ClassManager extends javax.swing.JFrame {
         jLabel5.setText("Class:");
 
         jLabel6.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
-        jLabel6.setText("ClassName");
+        jLabel6.setText(EffortGradeGenerator.primaryClass.getClassName());
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -331,7 +336,28 @@ public class ClassManager extends javax.swing.JFrame {
     }//GEN-LAST:event_generateEffortActionPerformed
 
     private void removeStudentActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_removeStudentActionPerformed
-        // TODO add your handling code here:
+        if(listOfStudents.isSelectionEmpty()){
+           JOptionPane.showMessageDialog(null,"Please select a class");
+       }
+        String studentName = listOfStudents.getSelectedValue();
+        String[] _arr = studentName.split("\\s");
+        String studentFirstName = _arr[0];
+        String studentLastName = _arr[1];
+        int id = Integer.parseInt(_arr[2]);
+        studentName = studentName.replaceAll("\\s.*", "");
+        ArrayList<Student> listOfStudentsClass = EffortGradeGenerator.primaryClass.getListOfStudents();
+        for(int i =0; i<listOfStudentsClass.size(); i++){
+            if(listOfStudentsClass.get(i).getFirstName().equals(studentFirstName) && listOfStudentsClass.get(i).getLastName().equals(studentLastName) && listOfStudentsClass.get(i).getId() == id){
+                Student removalObject = listOfStudentsClass.get(i);
+                EffortGradeGenerator.primaryClass.removeStudent(removalObject);
+            }
+        }
+        try {
+            TeacherManager.save("Effort Grade Generator");
+        } catch (IOException e) {
+        }
+        this.dispose();
+        new ClassManager().setVisible(true);
     }//GEN-LAST:event_removeStudentActionPerformed
 
     private void addStudentActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addStudentActionPerformed

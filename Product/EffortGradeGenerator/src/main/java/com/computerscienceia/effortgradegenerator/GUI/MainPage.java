@@ -186,7 +186,7 @@ public class MainPage extends javax.swing.JFrame {
         String selectedClassName = listOfClasses.getSelectedValue();
         if(listOfClasses.isSelectionEmpty()){
            JOptionPane.showMessageDialog(null,"Please select a class");
-       }
+       }else{
         for(int i =0; i<listOfClassesList.size(); i++){
            if(listOfClassesList.get(i).getClassName().equals(selectedClassName)){
                classObject = listOfClassesList.get(i);
@@ -194,6 +194,7 @@ public class MainPage extends javax.swing.JFrame {
        }
         EffortGradeGenerator.primaryClass = classObject;
         new ClassManager().setVisible(true);
+        }
     }//GEN-LAST:event_manageClassActionPerformed
 
     private void RefreshActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_RefreshActionPerformed

@@ -6,6 +6,10 @@ package com.computerscienceia.effortgradegenerator.GUI;
 
 import com.computerscienceia.effortgradegenerator.Classes.StudentManager;
 import com.computerscienceia.effortgradegenerator.Classes.Student;
+import com.computerscienceia.effortgradegenerator.Classes.TeacherManager;
+import java.io.IOException;
+import java.util.ArrayList;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -87,7 +91,29 @@ public class AddExistingStudent extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void submitActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_submitActionPerformed
-        selectedStudent.getSelectedItem();
+        String newStudentString = (String)selectedStudent.getSelectedItem();
+        String[] _arr = newStudentString.split("\\s");
+        String studentFirstName = _arr[0];
+        String studentLastName = _arr[1];
+        int id = Integer.parseInt(_arr[2]);
+        ArrayList<Student> listOfAllStudents = StudentManager.listOfAllStudents;
+        ArrayList<Student> listOfStudentsInClass = EffortGradeGenerator.primaryClass.getListOfStudents();
+        for(int i =0; i<listOfStudentsInClass.size(); i++){
+            if(listOfStudentsInClass.get(i).getFirstName().equals(studentFirstName) && listOfStudentsInClass.get(i).getLastName().equals(studentLastName) && listOfStudentsInClass.get(i).getId() == id){
+                JOptionPane.showMessageDialog(null, "Student is already in class, please select another student");
+            }
+        }
+        for(int i = 0; i<listOfAllStudents.size(); i++){
+            if(listOfAllStudents.get(i).getFirstName().equals(studentFirstName) && listOfAllStudents.get(i).getLastName().equals(studentLastName) && listOfAllStudents.get(i).getId() == id){
+                Student additionObject = listOfAllStudents.get(i);
+                EffortGradeGenerator.primaryClass.addStudent(additionObject);
+            }
+        }
+        try {
+            TeacherManager.save("Effort Grade Generator");
+        } catch (IOException e) {
+        }
+        this.dispose();
     }//GEN-LAST:event_submitActionPerformed
 
     /**

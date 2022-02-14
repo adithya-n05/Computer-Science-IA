@@ -33,7 +33,7 @@ public class ListInitialization {
            size = listOfStudents.size();
            String[] listOfStudentsStrings = new String[size];
        for(int i =0; i<size; i++){
-           listOfStudentsStrings[i] = listOfStudents.get(i).getFirstName() + " " + listOfStudents.get(i).getLastName();
+           listOfStudentsStrings[i] = listOfStudents.get(i).getFirstName() + " " + listOfStudents.get(i).getLastName() + " " + listOfStudents.get(i).getId();
            
        }
        return listOfStudentsStrings;
