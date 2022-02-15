@@ -109,7 +109,7 @@ public class EffortGradeGeneration extends javax.swing.JFrame {
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addGap(0, 0, Short.MAX_VALUE)
                 .addComponent(jButton2)
-                .addGap(126, 126, 126))
+                .addGap(145, 145, 145))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)

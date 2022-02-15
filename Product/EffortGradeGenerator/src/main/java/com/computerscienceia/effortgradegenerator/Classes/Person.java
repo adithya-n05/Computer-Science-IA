@@ -11,24 +11,6 @@ public class Person implements Serializable{
     private int id;
     private String firstName;
     private String lastName;
-    private transient String password;
-    private transient String username;
-
-    public String getPassword() {
-        return password;
-    }
-
-    public void setPassword(String password) {
-        this.password = password;
-    }
-
-    public String getUsername() {
-        return username;
-    }
-
-    public void setUsername(String username) {
-        this.username = username;
-    }
 
     public Person(int id, String firstName, String lastName) {
         this.id = id;

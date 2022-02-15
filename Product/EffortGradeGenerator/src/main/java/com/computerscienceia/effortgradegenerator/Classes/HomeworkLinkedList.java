@@ -51,13 +51,11 @@ public class HomeworkLinkedList implements Serializable{
             return;
 	}
 	HomeworkNode temp = start;
-	while( temp.hasNext() )
+	while( temp != null )
 	{	temp = temp.getNext();
 	}
 	temp.setNext(newNode);
-        for(int i =0; i<EffortGradeGenerator.primaryClass.getListOfStudents().size(); i++){
-            EffortGradeGenerator.primaryClass.getListOfStudents().get(i).getHomeworkTracker().add(temp)
-        }
+
     }
     
     public void removeHomework(String homeworkName){
@@ -85,6 +83,7 @@ public class HomeworkLinkedList implements Serializable{
             int id = student.getId();
             ArrayList<Integer> studentList = new ArrayList<>();
             studentList.add(id);
+            studentList.add(0);
             listOfStudents.add(studentList);
             ArrayListHelper.sortInt(listOfStudents, 0, listOfStudents.size()-1);
             temp.setListOfStudents(listOfStudents);

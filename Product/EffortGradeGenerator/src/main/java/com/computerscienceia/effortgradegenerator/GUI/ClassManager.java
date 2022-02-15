@@ -501,7 +501,11 @@ public class ClassManager extends javax.swing.JFrame {
     }//GEN-LAST:event_addHomeworkActionPerformed
 
     private void markHomeworkActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_markHomeworkActionPerformed
-        new MarkHomework().setVisible(true);
+        if(listOfHomeworks.isSelectionEmpty()){
+           JOptionPane.showMessageDialog(null,"Please select a homework");
+        }else{
+            new MarkHomework().setVisible(true);
+        }
     }//GEN-LAST:event_markHomeworkActionPerformed
 
     private void addQuarterAssessmentActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addQuarterAssessmentActionPerformed
