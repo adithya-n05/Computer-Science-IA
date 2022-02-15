@@ -4,6 +4,8 @@
  */
 package com.computerscienceia.effortgradegenerator.GUI;
 
+import com.computerscienceia.effortgradegenerator.Classes.DateHelper;
+
 /**
  *
  * @author adith
@@ -54,9 +56,9 @@ public class MarkAssessment extends javax.swing.JFrame {
 
         jLabel1.setText("Assessment date:");
 
-        jLabel2.setText("Assessment topic");
+        jLabel2.setText(EffortGradeGenerator.primaryAssessment.getAssessmentName());
 
-        jLabel6.setText("Assessment date");
+        jLabel6.setText(DateHelper.dateToString(EffortGradeGenerator.primaryAssessment.getAssessmentDate()));
 
         jList2.setModel(new javax.swing.AbstractListModel<String>() {
             String[] strings = { "Item 1", "Item 2", "Item 3", "Item 4", "Item 5" };
@@ -117,6 +119,7 @@ public class MarkAssessment extends javax.swing.JFrame {
         );
 
         pack();
+        setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed

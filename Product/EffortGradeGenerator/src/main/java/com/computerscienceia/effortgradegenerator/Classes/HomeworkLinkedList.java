@@ -4,6 +4,7 @@
  */
 package com.computerscienceia.effortgradegenerator.Classes;
 
+import com.computerscienceia.effortgradegenerator.GUI.EffortGradeGenerator;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Date;
@@ -26,18 +27,22 @@ public class HomeworkLinkedList implements Serializable{
     public boolean isEmpty(){
         return start == null;
     }
+
+    public HomeworkLinkedList() {
+        this.start = null;
+    }
     
     public int length(){
         int length = 0;
         HomeworkNode temp = start;
-            while (temp.hasNext()) {
-                temp = temp.getNext();
+            while (temp != null) {
                 length++;
+                temp = temp.getNext();
             }
         return length;
     }
     
-    public void append(ArrayList<Student> listOfStudents, String HomeworkName, Date dueDate, String description)
+    public void addHomework(ArrayList<Student> listOfStudents, String HomeworkName, Date dueDate, String description)
     {	
         HomeworkNode newNode = new HomeworkNode(listOfStudents, HomeworkName, description, dueDate);
 	if( isEmpty() )
@@ -50,6 +55,9 @@ public class HomeworkLinkedList implements Serializable{
 	{	temp = temp.getNext();
 	}
 	temp.setNext(newNode);
+        for(int i =0; i<EffortGradeGenerator.primaryClass.getListOfStudents().size(); i++){
+            EffortGradeGenerator.primaryClass.getListOfStudents().get(i).getHomeworkTracker().add(temp)
+        }
     }
     
     public void removeHomework(String homeworkName){

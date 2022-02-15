@@ -5,6 +5,7 @@
 package com.computerscienceia.effortgradegenerator.GUI;
 
 
+import com.computerscienceia.effortgradegenerator.Classes.ArrayListHelper;
 import com.computerscienceia.effortgradegenerator.Classes.Class;
 import com.computerscienceia.effortgradegenerator.Classes.Teacher;
 import com.computerscienceia.effortgradegenerator.Classes.TeacherManager;
@@ -166,6 +167,8 @@ public class MainPage extends javax.swing.JFrame {
            JOptionPane.showMessageDialog(null,"Please select a class");
        }
        String selectedClassName = listOfClasses.getSelectedValue();
+       String[] _arr = selectedClassName.split("\\s");
+       selectedClassName = _arr[0];
        for(int i =0; i<listOfClassesList.size(); i++){
            if(listOfClassesList.get(i).getClassName().equals(selectedClassName)){
                listOfClassesList.remove(i);
@@ -181,9 +184,22 @@ public class MainPage extends javax.swing.JFrame {
     }//GEN-LAST:event_removeClassActionPerformed
 
     private void manageClassActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_manageClassActionPerformed
+        try {
+            TeacherManager.load("Effort Grade Generator");
+        } catch (IOException e) {
+        }
+        int id = EffortGradeGenerator.primaryTeacher.getId();
+        int location = ArrayListHelper.binarySearchTeacher(TeacherManager.allTeachers, id); 
+        EffortGradeGenerator.primaryTeacher = TeacherManager.allTeachers.get(location);
         Class classObject = new Class();
         ArrayList<Class> listOfClassesList = EffortGradeGenerator.primaryTeacher.getClasses();
         String selectedClassName = listOfClasses.getSelectedValue();
+        String[] _arr = selectedClassName.split("\\s");
+        selectedClassName = _arr[0];
+        for(int i =1; i<_arr.length-1; i++){
+            selectedClassName += " " + _arr[i];
+        }
+        System.out.println(selectedClassName);
         if(listOfClasses.isSelectionEmpty()){
            JOptionPane.showMessageDialog(null,"Please select a class");
        }else{
@@ -191,7 +207,7 @@ public class MainPage extends javax.swing.JFrame {
            if(listOfClassesList.get(i).getClassName().equals(selectedClassName)){
                classObject = listOfClassesList.get(i);
            }
-       }
+        }
         EffortGradeGenerator.primaryClass = classObject;
         new ClassManager().setVisible(true);
         }

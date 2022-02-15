@@ -11,10 +11,10 @@ import java.util.ArrayList;
  * @author adith
  */
 public class Class implements Serializable{
-    private HomeworkLinkedList listOfHomeworks;
-    private AssessmentLinkedList quarterTests;
-    private AssessmentLinkedList semesterExams;
-    private ArrayList<Student> listOfStudents;
+    private HomeworkLinkedList listOfHomeworks = new HomeworkLinkedList();
+    private AssessmentLinkedList quarterTests = new AssessmentLinkedList();
+    private AssessmentLinkedList semesterExams = new AssessmentLinkedList();
+    private ArrayList<Student> listOfStudents = new ArrayList<>();
     private String className;
     private String subject;
     private boolean isHL;
@@ -75,6 +75,10 @@ public class Class implements Serializable{
         this.isHL = isHL;
     }
 
+    public void initialiseLinkedList(HomeworkNode newNode){
+        this.listOfHomeworks.setStart(newNode);
+    }
+    
     public Class() {
     }
 
@@ -86,45 +90,31 @@ public class Class implements Serializable{
     
     public void addStudent(String firstName, String lastName, int id){
         Student newStudent = new Student(id, firstName, lastName);
-        if(listOfStudents == null){
-            listOfStudents = new ArrayList<>();
+        if(quarterTests != null){
+            this.quarterTests.addStudent(newStudent);
         }
-        if(quarterTests == null){
-            quarterTests = new AssessmentLinkedList();
+        if(semesterExams != null){
+            this.semesterExams.addStudent(newStudent);
         }
-        if(semesterExams == null){
-            semesterExams = new AssessmentLinkedList();
+        if(listOfHomeworks != null){
+            this.listOfHomeworks.addStudent(newStudent);
         }
-        if(listOfHomeworks == null){
-            listOfHomeworks = new HomeworkLinkedList();
-        }
-        if(StudentManager.listOfAllStudents == null){
-            StudentManager.listOfAllStudents = new ArrayList<>();
-        }
-        listOfStudents.add(newStudent);
-        quarterTests.addStudent(newStudent);
-        semesterExams.addStudent(newStudent);
-        listOfHomeworks.addStudent(newStudent);
+        this.listOfStudents.add(newStudent);
         StudentManager.listOfAllStudents.add(newStudent);
     }
     
     public void addStudent(Student newStudent){
-        if(listOfStudents == null){
-            listOfStudents = new ArrayList<>();
+        if(quarterTests != null){
+            this.quarterTests.addStudent(newStudent);
         }
-        if(quarterTests == null){
-            quarterTests = new AssessmentLinkedList();
+        if(semesterExams != null){
+            this.semesterExams.addStudent(newStudent);
         }
-        if(semesterExams == null){
-            semesterExams = new AssessmentLinkedList();
+        if(listOfHomeworks != null){
+            this.listOfHomeworks.addStudent(newStudent);
         }
-        if(listOfHomeworks == null){
-            listOfHomeworks = new HomeworkLinkedList();
-        }
-        listOfStudents.add(newStudent);
-        quarterTests.addStudent(newStudent);
-        semesterExams.addStudent(newStudent);
-        listOfHomeworks.addStudent(newStudent);
+        this.listOfStudents.add(newStudent);
+        StudentManager.listOfAllStudents.add(newStudent);
     }
     
     public void removeStudent(Student removalStudent){

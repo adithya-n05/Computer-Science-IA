@@ -4,6 +4,7 @@
  */
 package com.computerscienceia.effortgradegenerator.GUI;
 
+import com.computerscienceia.effortgradegenerator.Classes.HomeworkNode;
 import com.computerscienceia.effortgradegenerator.Classes.ListInitialization;
 import com.computerscienceia.effortgradegenerator.Classes.Student;
 import com.computerscienceia.effortgradegenerator.Classes.TeacherManager;
@@ -47,25 +48,25 @@ public class ClassManager extends javax.swing.JFrame {
         addNewStudent = new javax.swing.JButton();
         jPanel2 = new javax.swing.JPanel();
         jScrollPane2 = new javax.swing.JScrollPane();
-        jList2 = new javax.swing.JList<>();
+        listOfHomeworks = new javax.swing.JList<>();
         jLabel7 = new javax.swing.JLabel();
         addHomework = new javax.swing.JButton();
         removeHomework = new javax.swing.JButton();
         markHomework = new javax.swing.JButton();
         jPanel4 = new javax.swing.JPanel();
         jScrollPane3 = new javax.swing.JScrollPane();
-        jList4 = new javax.swing.JList<>();
+        listOfQuarterTests = new javax.swing.JList<>();
         jLabel9 = new javax.swing.JLabel();
-        addAssessment = new javax.swing.JButton();
-        removeAssessment = new javax.swing.JButton();
+        addQuarterAssessment = new javax.swing.JButton();
+        removeQuarterAssessment = new javax.swing.JButton();
         markAssessment = new javax.swing.JButton();
         jPanel5 = new javax.swing.JPanel();
         jScrollPane4 = new javax.swing.JScrollPane();
-        jList5 = new javax.swing.JList<>();
+        listOfSemesterExams = new javax.swing.JList<>();
         jLabel10 = new javax.swing.JLabel();
-        addAssessment1 = new javax.swing.JButton();
-        removeAssessment1 = new javax.swing.JButton();
-        markAssessment1 = new javax.swing.JButton();
+        addSemesterExam = new javax.swing.JButton();
+        removeSemesterExam = new javax.swing.JButton();
+        markSemesterExam = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
@@ -166,12 +167,12 @@ public class ClassManager extends javax.swing.JFrame {
 
         semesterExams.addTab("Students", jPanel1);
 
-        jList2.setModel(new javax.swing.AbstractListModel<String>() {
+        listOfHomeworks.setModel(new javax.swing.AbstractListModel<String>() {
             String[] strings = ListInitialization.listOfHomeworksAsStrings();
             public int getSize() { return strings.length; }
             public String getElementAt(int i) { return strings[i]; }
         });
-        jScrollPane2.setViewportView(jList2);
+        jScrollPane2.setViewportView(listOfHomeworks);
 
         jLabel7.setText("Homeworks:");
 
@@ -190,6 +191,11 @@ public class ClassManager extends javax.swing.JFrame {
         });
 
         markHomework.setText("Mark Homework");
+        markHomework.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                markHomeworkActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -227,21 +233,26 @@ public class ClassManager extends javax.swing.JFrame {
 
         semesterExams.addTab("Homework", jPanel2);
 
-        jList4.setModel(new javax.swing.AbstractListModel<String>() {
+        listOfQuarterTests.setModel(new javax.swing.AbstractListModel<String>() {
             String[] strings = ListInitialization.listOfQuarterAssessmentsAsStrings();
             public int getSize() { return strings.length; }
             public String getElementAt(int i) { return strings[i]; }
         });
-        jScrollPane3.setViewportView(jList4);
+        jScrollPane3.setViewportView(listOfQuarterTests);
 
         jLabel9.setText("Assessments:");
 
-        addAssessment.setText("Add Assessment");
-
-        removeAssessment.setText("Remove Assessment");
-        removeAssessment.addActionListener(new java.awt.event.ActionListener() {
+        addQuarterAssessment.setText("Add Assessment");
+        addQuarterAssessment.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                removeAssessmentActionPerformed(evt);
+                addQuarterAssessmentActionPerformed(evt);
+            }
+        });
+
+        removeQuarterAssessment.setText("Remove Assessment");
+        removeQuarterAssessment.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                removeQuarterAssessmentActionPerformed(evt);
             }
         });
 
@@ -260,9 +271,9 @@ public class ClassManager extends javax.swing.JFrame {
                 .addContainerGap(16, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel4Layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(addAssessment)
+                .addComponent(addQuarterAssessment)
                 .addGap(18, 18, 18)
-                .addComponent(removeAssessment)
+                .addComponent(removeQuarterAssessment)
                 .addGap(18, 18, 18)
                 .addComponent(markAssessment)
                 .addGap(144, 144, 144))
@@ -272,8 +283,8 @@ public class ClassManager extends javax.swing.JFrame {
             .addGroup(jPanel4Layout.createSequentialGroup()
                 .addGap(17, 17, 17)
                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(addAssessment)
-                    .addComponent(removeAssessment)
+                    .addComponent(addQuarterAssessment)
+                    .addComponent(removeQuarterAssessment)
                     .addComponent(markAssessment))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jLabel9)
@@ -284,26 +295,31 @@ public class ClassManager extends javax.swing.JFrame {
 
         semesterExams.addTab("Quarter Tests", jPanel4);
 
-        jList5.setModel(new javax.swing.AbstractListModel<String>() {
+        listOfSemesterExams.setModel(new javax.swing.AbstractListModel<String>() {
             String[] strings = ListInitialization.listOfSemesterExamsAsStrings();
             public int getSize() { return strings.length; }
             public String getElementAt(int i) { return strings[i]; }
         });
-        jScrollPane4.setViewportView(jList5);
+        jScrollPane4.setViewportView(listOfSemesterExams);
 
         jLabel10.setText("Assessments:");
 
-        addAssessment1.setText("Add Assessment");
-
-        removeAssessment1.setText("Remove Assessment");
-        removeAssessment1.addActionListener(new java.awt.event.ActionListener() {
+        addSemesterExam.setText("Add Assessment");
+        addSemesterExam.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                removeAssessment1ActionPerformed(evt);
+                addSemesterExamActionPerformed(evt);
             }
         });
 
-        markAssessment1.setText("Mark Assessment");
-        markAssessment1.setToolTipText("");
+        removeSemesterExam.setText("Remove Assessment");
+        removeSemesterExam.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                removeSemesterExamActionPerformed(evt);
+            }
+        });
+
+        markSemesterExam.setText("Mark Assessment");
+        markSemesterExam.setToolTipText("");
 
         javax.swing.GroupLayout jPanel5Layout = new javax.swing.GroupLayout(jPanel5);
         jPanel5.setLayout(jPanel5Layout);
@@ -317,11 +333,11 @@ public class ClassManager extends javax.swing.JFrame {
                 .addContainerGap(16, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel5Layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(addAssessment1)
+                .addComponent(addSemesterExam)
                 .addGap(18, 18, 18)
-                .addComponent(removeAssessment1)
+                .addComponent(removeSemesterExam)
                 .addGap(18, 18, 18)
-                .addComponent(markAssessment1)
+                .addComponent(markSemesterExam)
                 .addGap(144, 144, 144))
         );
         jPanel5Layout.setVerticalGroup(
@@ -329,9 +345,9 @@ public class ClassManager extends javax.swing.JFrame {
             .addGroup(jPanel5Layout.createSequentialGroup()
                 .addGap(17, 17, 17)
                 .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(addAssessment1)
-                    .addComponent(removeAssessment1)
-                    .addComponent(markAssessment1))
+                    .addComponent(addSemesterExam)
+                    .addComponent(removeSemesterExam)
+                    .addComponent(markSemesterExam))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jLabel10)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -401,12 +417,32 @@ public class ClassManager extends javax.swing.JFrame {
         new ClassManager().setVisible(true);
     }//GEN-LAST:event_refreshActionPerformed
 
-    private void removeAssessmentActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_removeAssessmentActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_removeAssessmentActionPerformed
+    private void removeQuarterAssessmentActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_removeQuarterAssessmentActionPerformed
+        if(listOfHomeworks.isSelectionEmpty()){
+           JOptionPane.showMessageDialog(null,"Please select an assessment");
+       }
+        String examName = listOfQuarterTests.getSelectedValue();
+        EffortGradeGenerator.primaryClass.getQuarterTests().removeAssessment(examName);
+        try {
+            TeacherManager.save("Effort Grade Generator");
+        } catch (IOException e) {
+        }
+        this.dispose();
+        new ClassManager().setVisible(true);
+    }//GEN-LAST:event_removeQuarterAssessmentActionPerformed
 
     private void removeHomeworkActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_removeHomeworkActionPerformed
-        // TODO add your handling code here:
+        if(listOfHomeworks.isSelectionEmpty()){
+           JOptionPane.showMessageDialog(null,"Please select a homework");
+       }
+        String homeworkName = listOfHomeworks.getSelectedValue();
+        EffortGradeGenerator.primaryClass.getListOfHomeworks().removeHomework(homeworkName);
+        try {
+            TeacherManager.save("Effort Grade Generator");
+        } catch (IOException e) {
+        }
+        this.dispose();
+        new ClassManager().setVisible(true);
     }//GEN-LAST:event_removeHomeworkActionPerformed
 
     private void addNewStudentActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addNewStudentActionPerformed
@@ -446,13 +482,35 @@ public class ClassManager extends javax.swing.JFrame {
         new AddExistingStudent().setVisible(true);
     }//GEN-LAST:event_addStudentActionPerformed
 
-    private void removeAssessment1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_removeAssessment1ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_removeAssessment1ActionPerformed
+    private void removeSemesterExamActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_removeSemesterExamActionPerformed
+        if(listOfSemesterExams.isSelectionEmpty()){
+           JOptionPane.showMessageDialog(null,"Please select an assessment");
+       }
+        String examName = listOfSemesterExams.getSelectedValue();
+        EffortGradeGenerator.primaryClass.getSemesterExams().removeAssessment(examName);
+        try {
+            TeacherManager.save("Effort Grade Generator");
+        } catch (IOException e) {
+        }
+        this.dispose();
+        new ClassManager().setVisible(true);
+    }//GEN-LAST:event_removeSemesterExamActionPerformed
 
     private void addHomeworkActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addHomeworkActionPerformed
         new AddHomework().setVisible(true);
     }//GEN-LAST:event_addHomeworkActionPerformed
+
+    private void markHomeworkActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_markHomeworkActionPerformed
+        new MarkHomework().setVisible(true);
+    }//GEN-LAST:event_markHomeworkActionPerformed
+
+    private void addQuarterAssessmentActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addQuarterAssessmentActionPerformed
+        new AddQuarterAssessment().setVisible(true);
+    }//GEN-LAST:event_addQuarterAssessmentActionPerformed
+
+    private void addSemesterExamActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addSemesterExamActionPerformed
+        new AddSemesterExam().setVisible(true);
+    }//GEN-LAST:event_addSemesterExamActionPerformed
 
     /**
      * @param args the command line arguments
@@ -490,10 +548,10 @@ public class ClassManager extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton addAssessment;
-    private javax.swing.JButton addAssessment1;
     private javax.swing.JButton addHomework;
     private javax.swing.JButton addNewStudent;
+    private javax.swing.JButton addQuarterAssessment;
+    private javax.swing.JButton addSemesterExam;
     private javax.swing.JButton addStudent;
     private javax.swing.JButton generateEffort;
     private javax.swing.JLabel jLabel1;
@@ -504,9 +562,6 @@ public class ClassManager extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel9;
-    private javax.swing.JList<String> jList2;
-    private javax.swing.JList<String> jList4;
-    private javax.swing.JList<String> jList5;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel4;
@@ -515,14 +570,17 @@ public class ClassManager extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JScrollPane jScrollPane4;
+    private javax.swing.JList<String> listOfHomeworks;
+    private javax.swing.JList<String> listOfQuarterTests;
+    private javax.swing.JList<String> listOfSemesterExams;
     private javax.swing.JList<String> listOfStudents;
     private javax.swing.JButton markAssessment;
-    private javax.swing.JButton markAssessment1;
     private javax.swing.JButton markHomework;
+    private javax.swing.JButton markSemesterExam;
     private javax.swing.JButton refresh;
-    private javax.swing.JButton removeAssessment;
-    private javax.swing.JButton removeAssessment1;
     private javax.swing.JButton removeHomework;
+    private javax.swing.JButton removeQuarterAssessment;
+    private javax.swing.JButton removeSemesterExam;
     private javax.swing.JButton removeStudent;
     private javax.swing.JTabbedPane semesterExams;
     private javax.swing.JLabel signedInName;

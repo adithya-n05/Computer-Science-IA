@@ -4,7 +4,15 @@
  */
 package com.computerscienceia.effortgradegenerator.GUI;
 
+import com.computerscienceia.effortgradegenerator.Classes.ArrayListHelper;
+import com.computerscienceia.effortgradegenerator.Classes.HomeworkLinkedList;
+import java.util.Date;
 import javax.swing.JOptionPane;
+import jdk.jfr.Description;
+import com.computerscienceia.effortgradegenerator.Classes.HomeworkNode;
+import com.computerscienceia.effortgradegenerator.Classes.ListInitialization;
+import com.computerscienceia.effortgradegenerator.Classes.TeacherManager;
+import java.io.IOException;
 
 /**
  *
@@ -29,24 +37,24 @@ public class AddHomework extends javax.swing.JFrame {
     private void initComponents() {
 
         jLabel3 = new javax.swing.JLabel();
-        jButton1 = new javax.swing.JButton();
+        submit = new javax.swing.JButton();
         jLabel4 = new javax.swing.JLabel();
         jLabel1 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTextArea1 = new javax.swing.JTextArea();
+        description = new javax.swing.JTextArea();
         jLabel5 = new javax.swing.JLabel();
-        jTextField3 = new javax.swing.JTextField();
-        jDateChooser1 = new com.toedter.calendar.JDateChooser();
+        homeworkName = new javax.swing.JTextField();
+        dueDate = new com.toedter.calendar.JDateChooser();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Add a new homework");
 
         jLabel3.setText("Description:");
 
-        jButton1.setText("Submit");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        submit.setText("Submit");
+        submit.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                submitActionPerformed(evt);
             }
         });
 
@@ -56,21 +64,21 @@ public class AddHomework extends javax.swing.JFrame {
 
         jLabel1.setText("Due date:");
 
-        jTextArea1.setColumns(20);
-        jTextArea1.setRows(5);
-        jScrollPane1.setViewportView(jTextArea1);
+        description.setColumns(20);
+        description.setRows(5);
+        jScrollPane1.setViewportView(description);
 
         jLabel5.setText("Homework title:");
 
-        jTextField3.setText("Name of homework");
-        jTextField3.addActionListener(new java.awt.event.ActionListener() {
+        homeworkName.setText("Name of Homework");
+        homeworkName.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextField3ActionPerformed(evt);
+                homeworkNameActionPerformed(evt);
             }
         });
 
-        jDateChooser1.setMaxSelectableDate(new java.util.Date(1893430916000L));
-        jDateChooser1.setMinSelectableDate(new java.util.Date(1577811716000L));
+        dueDate.setMaxSelectableDate(new java.util.Date(1893430916000L));
+        dueDate.setMinSelectableDate(new java.util.Date(1577811716000L));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -86,17 +94,17 @@ public class AddHomework extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                .addComponent(jButton1)
+                                .addComponent(submit)
                                 .addGap(261, 261, 261))
                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                                     .addComponent(jLabel4)
                                     .addGroup(layout.createSequentialGroup()
-                                        .addComponent(jDateChooser1, javax.swing.GroupLayout.PREFERRED_SIZE, 175, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addComponent(dueDate, javax.swing.GroupLayout.PREFERRED_SIZE, 175, javax.swing.GroupLayout.PREFERRED_SIZE)
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                         .addComponent(jLabel5)))
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(jTextField3, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+                                .addComponent(homeworkName, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE)))))
                 .addContainerGap(29, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -110,29 +118,47 @@ public class AddHomework extends javax.swing.JFrame {
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel1)
                             .addComponent(jLabel5)
-                            .addComponent(jTextField3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(homeworkName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(18, 18, 18)
                         .addComponent(jLabel3)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 307, Short.MAX_VALUE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jButton1)
+                        .addComponent(submit)
                         .addGap(16, 16, 16))
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(jDateChooser1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(dueDate, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
         );
 
         pack();
+        setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jButton1ActionPerformed
+    private void submitActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_submitActionPerformed
+        Date dueDateDate = dueDate.getDate();
+        if(dueDateDate == null){
+            JOptionPane.showMessageDialog(null,"No date chosen for due date. Please choose a due date for the homework.");
+        }else{
+            String homeworkNameString = homeworkName.getText();
+            String homeworkDescriptionString = description.getText();
+            if(EffortGradeGenerator.primaryClass.getListOfHomeworks().isEmpty()){
+                HomeworkNode newHomeworkNode = new HomeworkNode(EffortGradeGenerator.primaryClass.getListOfStudents(), homeworkNameString, homeworkDescriptionString, dueDateDate);
+                EffortGradeGenerator.primaryClass.getListOfHomeworks().setStart(newHomeworkNode);
+            }else{
+                EffortGradeGenerator.primaryClass.getListOfHomeworks().addHomework(EffortGradeGenerator.primaryClass.getListOfStudents(), homeworkNameString, dueDateDate, homeworkDescriptionString);
+            }
+        }
+            try {
+                TeacherManager.save("Effort Grade Generator");
+            } catch (IOException e) {
+            }
+            this.dispose();
+    }//GEN-LAST:event_submitActionPerformed
 
-    private void jTextField3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField3ActionPerformed
+    private void homeworkNameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_homeworkNameActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jTextField3ActionPerformed
+    }//GEN-LAST:event_homeworkNameActionPerformed
 
     /**
      * @param args the command line arguments
@@ -170,14 +196,14 @@ public class AddHomework extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton1;
-    private com.toedter.calendar.JDateChooser jDateChooser1;
+    private javax.swing.JTextArea description;
+    private com.toedter.calendar.JDateChooser dueDate;
+    private javax.swing.JTextField homeworkName;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTextArea jTextArea1;
-    private javax.swing.JTextField jTextField3;
+    private javax.swing.JButton submit;
     // End of variables declaration//GEN-END:variables
 }

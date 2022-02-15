@@ -50,7 +50,7 @@ public class ListInitialization {
        Class mainClass = EffortGradeGenerator.primaryClass;
        AssessmentLinkedList listOfTests = mainClass.getQuarterTests();
        int size =0;
-       if(listOfTests == null){
+       if(listOfTests.getStart() == null){
            size = 1;
            String[] listOfStudentsStringsBlank = new String[size];
            return listOfStudentsStringsBlank;
@@ -59,7 +59,7 @@ public class ListInitialization {
            String[] listOfStudentsStrings = new String[size];
            AssessmentNode temp = listOfTests.getStart();
            int i =0;
-            while (temp.hasNext()) {
+            while (temp !=null) {
                 listOfStudentsStrings[i] = temp.getAssessmentName();
                 temp = temp.getNext();
                 i++;
@@ -73,7 +73,7 @@ public class ListInitialization {
        Class mainClass = EffortGradeGenerator.primaryClass;
        AssessmentLinkedList listOfTests = mainClass.getSemesterExams();
        int size =0;
-       if(listOfTests == null){
+       if(listOfTests.getStart() == null){
            size = 1;
            String[] listOfStudentsStringsBlank = new String[size];
            return listOfStudentsStringsBlank;
@@ -82,7 +82,7 @@ public class ListInitialization {
            String[] listOfStudentsStrings = new String[size];
            AssessmentNode temp = listOfTests.getStart();
            int i =0;
-            while (temp.hasNext()) {
+            while (temp != null) {
                 listOfStudentsStrings[i] = temp.getAssessmentName();
                 temp = temp.getNext();
                 i++;
@@ -94,24 +94,36 @@ public class ListInitialization {
     
     public static String[] listOfHomeworksAsStrings(){
        Class mainClass = EffortGradeGenerator.primaryClass;
-       HomeworkLinkedList listOfTests = mainClass.getListOfHomeworks();
+       HomeworkLinkedList listOfHomeworks = mainClass.getListOfHomeworks();
        int size =0;
-       if(listOfTests == null){
+       if(listOfHomeworks.getStart() == null){
            size = 1;
            String[] listOfStudentsStringsBlank = new String[size];
            return listOfStudentsStringsBlank;
        }else{
-           size = listOfTests.length();
+           size = listOfHomeworks.length();
            String[] listOfStudentsStrings = new String[size];
-           HomeworkNode temp = listOfTests.getStart();
+           HomeworkNode temp = listOfHomeworks.getStart();
            int i =0;
-            while (temp.hasNext()) {
-                listOfStudentsStrings[i] = temp.getHomeworkName();
-                temp = temp.getNext();
-                i++;
-            }
-            return listOfStudentsStrings;
+           while (temp != null) {
+               listOfStudentsStrings[i] = temp.getHomeworkName();
+               temp = temp.getNext();
+               i++;
+           }
+           return listOfStudentsStrings;
 
        }
     }
+    
+    public static ArrayList<ArrayList<Integer>> calculateListOfStudentsIntsAndBoolean(ArrayList<Student> listOfStudents){
+        ArrayList<ArrayList<Integer>> listOfStudentsAsInts = new ArrayList<ArrayList<Integer>>();
+        for(int i =0; i<listOfStudents.size(); i++){
+            Student student = listOfStudents.get(i);
+            int id = student.getId();
+            listOfStudentsAsInts.add(new ArrayList<>());
+            listOfStudentsAsInts.get(i).add(0, id);
+        }
+        return listOfStudentsAsInts;
+    }
+    
 }

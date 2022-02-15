@@ -39,7 +39,7 @@ public class AddExistingStudent extends javax.swing.JFrame {
         selectedStudent = new javax.swing.JComboBox<>();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
-        setTitle("Add a new Student");
+        setTitle("Add an existing Student");
 
         submit.setText("Submit");
         submit.addActionListener(new java.awt.event.ActionListener() {
@@ -88,26 +88,30 @@ public class AddExistingStudent extends javax.swing.JFrame {
         );
 
         pack();
+        setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
     private void submitActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_submitActionPerformed
         String newStudentString = (String)selectedStudent.getSelectedItem();
         String[] _arr = newStudentString.split("\\s");
-        String studentFirstName = _arr[0];
-        String studentLastName = _arr[1];
         int id = Integer.parseInt(_arr[2]);
         ArrayList<Student> listOfAllStudents = StudentManager.listOfAllStudents;
         ArrayList<Student> listOfStudentsInClass = EffortGradeGenerator.primaryClass.getListOfStudents();
+        boolean StudentInClass = false;
         for(int i =0; i<listOfStudentsInClass.size(); i++){
-            if(listOfStudentsInClass.get(i).getFirstName().equals(studentFirstName) && listOfStudentsInClass.get(i).getLastName().equals(studentLastName) && listOfStudentsInClass.get(i).getId() == id){
+            if(listOfStudentsInClass.get(i).getId() == id){
                 JOptionPane.showMessageDialog(null, "Student is already in class, please select another student");
+                StudentInClass = true;
+                break;
             }
         }
+        if(!StudentInClass){
         for(int i = 0; i<listOfAllStudents.size(); i++){
-            if(listOfAllStudents.get(i).getFirstName().equals(studentFirstName) && listOfAllStudents.get(i).getLastName().equals(studentLastName) && listOfAllStudents.get(i).getId() == id){
-                Student additionObject = listOfAllStudents.get(i);
+            if(listOfAllStudents.get(i).getId() == id){
+                Student additionObject = new Student(id, listOfAllStudents.get(i).getFirstName(), listOfAllStudents.get(i).getLastName());
                 EffortGradeGenerator.primaryClass.addStudent(additionObject);
             }
+        }
         }
         try {
             TeacherManager.save("Effort Grade Generator");

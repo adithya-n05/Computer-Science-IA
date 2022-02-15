@@ -26,11 +26,15 @@ public class AssessmentLinkedList implements Serializable{
     public boolean isEmpty(){
         return start == null;
     }
+
+    public AssessmentLinkedList() {
+        this.start = null;
+    }
     
     public int length(){
         int length = 0;
         AssessmentNode temp = start;
-            while (temp.hasNext()) {
+            while (temp!=null) {
                 temp = temp.getNext();
                 length++;
             }
