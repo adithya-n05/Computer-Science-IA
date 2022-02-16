@@ -13,7 +13,7 @@ import java.util.ArrayList;
  */
 public class Student extends Person implements Serializable{
     
-    private ArrayList<HomeworkNodeList> homeworkTracker = new ArrayList<HomeworkNodeList>();
+    private HomeworkStack homeworkTracker = new ArrayList<HomeworkNodeList>();
     private ArrayList<String> allEffortGrades =  new ArrayList<String>();
     private ArrayList<Character> effortInfluence = new ArrayList<Character>();
     private AssessmentStack quarterTests = new AssessmentStack();

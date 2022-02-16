@@ -7,6 +7,7 @@ package com.computerscienceia.effortgradegenerator.Classes;
 import java.util.HashMap;
 import java.util.Map;
 import java.io.*;
+import java.util.ArrayList;
 import java.util.Date;
 
 /**
@@ -31,10 +32,30 @@ public class AssessmentStack implements Serializable{
     public AssessmentStack() {
         this.top = null;
     }
+    
+    public void pushEMANode(){
+        if(isEmpty()){
+            this.top = new AssessmentNodeStack(0, "EMANode", new Date(), true);
+        }else{
+            AssessmentNodeStack temp = top;
+            ArrayList<Double> studentScores = new ArrayList<>();
+            while(temp!=null){
+                studentScores.add(temp.getScore());
+                temp=temp.getNext();
+            }
+            ExponentialMovingAverage EMACalculator = new ExponentialMovingAverage();
+            EMACalculator.calculateEMAMultiplier(studentScores);
+            double EMAValue = EMACalculator.calculateEMA(studentScores);
+            AssessmentNodeStack newNode = new AssessmentNodeStack(EMAValue, "EMANode",new Date(), true);
+            newNode.setNext(this.top);
+            this.top.setNext(newNode);
+        }
+    }
 	
     public void addAssessment(Date assessmentDate, String assessmentName)
 	{
-		AssessmentNodeStack newAssessment = new AssessmentNodeStack(1.0, assessmentName, assessmentDate);
+            Map<String, Double> disposableInformation = this.popEMANode();
+            AssessmentNodeStack newAssessment = new AssessmentNodeStack(1.0, assessmentName, assessmentDate, false);
 		if( isEmpty() )
 		{
 			top = newAssessment;
@@ -42,32 +63,52 @@ public class AssessmentStack implements Serializable{
 			newAssessment.setNext(top);
 			top = newAssessment;
 		}
+            this.pushEMANode();
 	}
 	
-    public Map<String, Date> pop()
+    public Map<String, Double> popEMANode()
 	{
 		if( !isEmpty() )
 		{
 			String assessmentName = top.getAssessmentName();
-                        Date assessmentDate = top.getAssessmentDate();
+                        double assessmentScore = top.getScore();
 			top = top.getNext();
-                        Map<String, Date> nodeInformation = new HashMap<>();
-                        nodeInformation.put(assessmentName, assessmentDate);
+                        Map<String, Double> nodeInformation = new HashMap<>();
+                        nodeInformation.put(assessmentName, assessmentScore);
 			return nodeInformation;
 		} else {
-			System.out.println("Stack empty!");
-                        Map<String, Date> nodeInformation = new HashMap<>();
+                        Map<String, Double> nodeInformation = new HashMap<>();
 			return nodeInformation;
 		}
 	}
+    
+    
+    public void removeAssessment(String assessmentNameString){
+        this.popEMANode();
+        AssessmentNodeStack temp1 = top;
+        AssessmentNodeStack temp2 = top.getNext();
+        if(temp1.getAssessmentName().equals(assessmentNameString)){
+            top=top.getNext();
+            this.pushEMANode();
+        }else{
+            while(temp2!=null){
+                if(temp2.getAssessmentName().equals(assessmentNameString)){
+                temp1.setNext(temp2.getNext());
+                this.pushEMANode();
+                return;
+            }
+            temp1 = temp1.getNext();
+            temp2 = temp2.getNext();
+            }
+        }
+    }
 	
-	public Map<String, Date> peek()
+	public Map<String, Double> peekEMAValue()
 	{
                 String assessmentName = top.getAssessmentName();
-                Date assessmentDate = top.getAssessmentDate();
-		Map<String, Date> nodeInformation = new HashMap<>();
-                nodeInformation.put(assessmentName, assessmentDate);
+                Double score = top.getScore();
+		Map<String, Double> nodeInformation = new HashMap<>();
+                nodeInformation.put(assessmentName, score);
                 return nodeInformation;
-                
 	}
 }

@@ -14,11 +14,21 @@ import java.util.Date;
 public class AssessmentNodeStack extends AssessmentNode implements Serializable{
     private double score;
     private AssessmentNodeStack next;
+    private boolean EMANode;
 
-    public AssessmentNodeStack(double score, String assessmentName, Date assessmentDate) {
+    public AssessmentNodeStack(double score, String assessmentName, Date assessmentDate, boolean EMANode) {
         super(assessmentName, assessmentDate);
         this.score = score;
-        this.next = next;
+        this.EMANode = EMANode;
+        this.next = null;
+    }
+
+    public boolean isEMANode() {
+        return EMANode;
+    }
+
+    public void setEMANode(boolean EMANode) {
+        this.EMANode = EMANode;
     }
 
     public double getScore() {
