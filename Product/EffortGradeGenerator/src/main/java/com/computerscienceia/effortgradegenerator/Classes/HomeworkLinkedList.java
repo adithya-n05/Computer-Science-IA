@@ -4,7 +4,6 @@
  */
 package com.computerscienceia.effortgradegenerator.Classes;
 
-import com.computerscienceia.effortgradegenerator.GUI.EffortGradeGenerator;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Date;

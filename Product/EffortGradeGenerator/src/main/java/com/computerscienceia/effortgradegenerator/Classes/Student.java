@@ -13,17 +13,17 @@ import java.util.ArrayList;
  */
 public class Student extends Person implements Serializable{
     
-    private HomeworkStack homeworkTracker = new ArrayList<HomeworkNodeList>();
+    private HomeworkStack homeworkTracker = new HomeworkStack();
     private ArrayList<String> allEffortGrades =  new ArrayList<String>();
     private ArrayList<Character> effortInfluence = new ArrayList<Character>();
     private AssessmentStack quarterTests = new AssessmentStack();
     private AssessmentStack semesterExams = new AssessmentStack();
 
-    public ArrayList<HomeworkNodeList> getHomeworkTracker() {
+    public HomeworkStack getHomeworkTracker() {
         return homeworkTracker;
     }
 
-    public void setHomeworkTracker(ArrayList<HomeworkNodeList> homeworkTracker) {
+    public void setHomeworkTracker(HomeworkStack homeworkTracker) {
         this.homeworkTracker = homeworkTracker;
     }
 

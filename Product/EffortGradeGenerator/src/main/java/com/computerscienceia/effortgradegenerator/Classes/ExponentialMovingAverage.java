@@ -27,7 +27,7 @@ public class ExponentialMovingAverage {
     }
     
     public void calculateEMAMultiplier(ArrayList<Double> scores){
-        this.multiplier=2 / (scores.size()+1);
+        this.multiplier=2.0 / ((double)scores.size()+1.0);
     }
     
     

@@ -30,6 +30,7 @@ public class AddNewStudent extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jTextField1 = new javax.swing.JTextField();
         submit = new javax.swing.JButton();
         jLabel4 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
@@ -38,6 +39,8 @@ public class AddNewStudent extends javax.swing.JFrame {
         jLabel2 = new javax.swing.JLabel();
         firstName = new javax.swing.JTextField();
         studentID = new javax.swing.JTextField();
+
+        jTextField1.setText("jTextField1");
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
@@ -198,6 +201,7 @@ public class AddNewStudent extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
+    private javax.swing.JTextField jTextField1;
     private javax.swing.JTextField lastName;
     private javax.swing.JTextField studentID;
     private javax.swing.JButton submit;

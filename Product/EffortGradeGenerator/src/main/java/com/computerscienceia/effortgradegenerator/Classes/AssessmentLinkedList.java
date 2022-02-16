@@ -79,6 +79,7 @@ public class AssessmentLinkedList implements Serializable{
             int id = student.getId();
             ArrayList<Double> studentList = new ArrayList<>();
             studentList.add((double)id);
+            studentList.add(1.0);
             listOfStudents.add(studentList);
             ArrayListHelper.sortDouble(listOfStudents, 0, listOfStudents.size()-1);
             temp.setListOfStudents(listOfStudents);

@@ -54,7 +54,7 @@ public class AssessmentStack implements Serializable{
 	
     public void addAssessment(Date assessmentDate, String assessmentName)
 	{
-            Map<String, Double> disposableInformation = this.popEMANode();
+            this.popEMANode();
             AssessmentNodeStack newAssessment = new AssessmentNodeStack(1.0, assessmentName, assessmentDate, false);
 		if( isEmpty() )
 		{

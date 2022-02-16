@@ -459,13 +459,11 @@ public class ClassManager extends javax.swing.JFrame {
         }
         String studentName = listOfStudents.getSelectedValue();
         String[] _arr = studentName.split("\\s");
-        String studentFirstName = _arr[0];
-        String studentLastName = _arr[1];
         int id = Integer.parseInt(_arr[2]);
         studentName = studentName.replaceAll("\\s.*", "");
         ArrayList<Student> listOfStudentsClass = EffortGradeGenerator.primaryClass.getListOfStudents();
         for(int i =0; i<listOfStudentsClass.size(); i++){
-            if(listOfStudentsClass.get(i).getFirstName().equals(studentFirstName) && listOfStudentsClass.get(i).getLastName().equals(studentLastName) && listOfStudentsClass.get(i).getId() == id){
+            if(listOfStudentsClass.get(i).getId() == id){
                 Student removalObject = listOfStudentsClass.get(i);
                 EffortGradeGenerator.primaryClass.removeStudent(removalObject);
             }
