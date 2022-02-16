@@ -14,31 +14,33 @@ import java.util.Date;
  * @author adithyanarayanan
  */
 public class AssessmentStack implements Serializable{
-    private AssessmentNode top;
+    private AssessmentNodeStack top;
 
-    public AssessmentNode getTop() {
+    public AssessmentNodeStack getTop() {
         return top;
     }
 
-    public void setTop(AssessmentNode top) {
+    public void setTop(AssessmentNodeStack top) {
         this.top = top;
     }
  
     public boolean isEmpty(){
         return top == null;
     }
+
+    public AssessmentStack() {
+        this.top = null;
+    }
 	
-    public void push(Date assessmentDate, String assessmentName)
+    public void addAssessment(Date assessmentDate, String assessmentName)
 	{
-		AssessmentNode newQuarterTestNode = new AssessmentNode();
-		newQuarterTestNode.setAssessmentDate(assessmentDate);
-                newQuarterTestNode.setAssessmentName(assessmentName);
+		AssessmentNodeStack newAssessment = new AssessmentNodeStack(1.0, assessmentName, assessmentDate);
 		if( isEmpty() )
 		{
-			top = newQuarterTestNode;
+			top = newAssessment;
 		} else {
-			newQuarterTestNode.setNext(top);
-			top = newQuarterTestNode;
+			newAssessment.setNext(top);
+			top = newAssessment;
 		}
 	}
 	

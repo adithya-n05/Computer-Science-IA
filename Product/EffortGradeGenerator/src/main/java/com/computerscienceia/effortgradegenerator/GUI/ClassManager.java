@@ -4,7 +4,7 @@
  */
 package com.computerscienceia.effortgradegenerator.GUI;
 
-import com.computerscienceia.effortgradegenerator.Classes.HomeworkNode;
+import com.computerscienceia.effortgradegenerator.Classes.HomeworkNodeList;
 import com.computerscienceia.effortgradegenerator.Classes.ListInitialization;
 import com.computerscienceia.effortgradegenerator.Classes.Student;
 import com.computerscienceia.effortgradegenerator.Classes.TeacherManager;

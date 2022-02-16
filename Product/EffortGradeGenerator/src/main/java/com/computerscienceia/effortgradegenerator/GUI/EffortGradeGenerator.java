@@ -4,11 +4,11 @@
  */
 package com.computerscienceia.effortgradegenerator.GUI;
 
-import com.computerscienceia.effortgradegenerator.Classes.AssessmentNode;
+import com.computerscienceia.effortgradegenerator.Classes.AssessmentNodeList;
 import com.computerscienceia.effortgradegenerator.Classes.Teacher;
 import com.computerscienceia.effortgradegenerator.Classes.TeacherManager;
 import com.computerscienceia.effortgradegenerator.Classes.Class;
-import com.computerscienceia.effortgradegenerator.Classes.HomeworkNode;
+import com.computerscienceia.effortgradegenerator.Classes.HomeworkNodeList;
 import java.io.IOException;
 
 /**
@@ -18,8 +18,8 @@ import java.io.IOException;
 public class EffortGradeGenerator {
     public static Teacher primaryTeacher;
     public static Class primaryClass;
-    public static AssessmentNode primaryAssessment;
-    public static HomeworkNode primaryHomework;
+    public static AssessmentNodeList primaryAssessment;
+    public static HomeworkNodeList primaryHomework;
     
     public static void main(String[] args){
         try {

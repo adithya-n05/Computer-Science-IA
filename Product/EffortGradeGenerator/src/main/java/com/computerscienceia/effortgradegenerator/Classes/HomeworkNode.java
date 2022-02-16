@@ -4,29 +4,16 @@
  */
 package com.computerscienceia.effortgradegenerator.Classes;
 
-import java.io.Serializable;
-import java.util.ArrayList;
 import java.util.Date;
 
 /**
  *
- * @author adithyanarayanan
+ * @author adith
  */
-public class HomeworkNode implements Serializable{
-    
-    private ArrayList<ArrayList<Integer>> listOfStudents;
+public class HomeworkNode {
     private String homeworkName;
     private String description;
     private Date dueDate;
-    private HomeworkNode next;
-
-    public ArrayList<ArrayList<Integer>> getListOfStudents() {
-        return listOfStudents;
-    }
-
-    public void setListOfStudents(ArrayList<ArrayList<Integer>> listOfStudents) {
-        this.listOfStudents = listOfStudents;
-    }
 
     public String getHomeworkName() {
         return homeworkName;
@@ -52,30 +39,10 @@ public class HomeworkNode implements Serializable{
         this.dueDate = dueDate;
     }
 
-    public HomeworkNode getNext() {
-        return next;
-    }
-
-    public void setNext(HomeworkNode next) {
-        this.next = next;
-    }
-
-    public HomeworkNode(ArrayList<Student> listOfStudents, String homeworkName, String description, Date dueDate) {
-        for(int i =0; i<listOfStudents.size(); i++){
-            Student student = listOfStudents.get(i);
-            int id = student.getId();
-            this.listOfStudents.add(new ArrayList<>());
-            this.listOfStudents.get(i).add(0, id);
-        }
+    public HomeworkNode(String homeworkName, String description, Date dueDate) {
         this.homeworkName = homeworkName;
         this.description = description;
         this.dueDate = dueDate;
-        this.next = null;
     }
-    
-    public boolean hasNext(){
-        return next == null;
-    }
-    
-    
+
 }

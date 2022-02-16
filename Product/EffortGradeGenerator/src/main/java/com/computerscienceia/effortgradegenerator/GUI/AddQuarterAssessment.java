@@ -4,7 +4,7 @@
  */
 package com.computerscienceia.effortgradegenerator.GUI;
 
-import com.computerscienceia.effortgradegenerator.Classes.AssessmentNode;
+import com.computerscienceia.effortgradegenerator.Classes.AssessmentNodeList;
 import com.computerscienceia.effortgradegenerator.Classes.TeacherManager;
 import java.io.IOException;
 import java.util.Date;
@@ -109,7 +109,7 @@ public class AddQuarterAssessment extends javax.swing.JFrame {
         }else{
             String assessmentNameString = assessmentName.getText();
             if(EffortGradeGenerator.primaryClass.getQuarterTests().isEmpty()){
-                AssessmentNode newAssessmentNode = new AssessmentNode(EffortGradeGenerator.primaryClass.getListOfStudents(), assessmentNameString, dueDateDate);
+                AssessmentNodeList newAssessmentNode = new AssessmentNodeList(EffortGradeGenerator.primaryClass.getListOfStudents(), assessmentNameString, dueDateDate);
                 EffortGradeGenerator.primaryClass.getQuarterTests().setStart(newAssessmentNode);
             }else{
                 EffortGradeGenerator.primaryClass.getQuarterTests().addAssessment(EffortGradeGenerator.primaryClass.getListOfStudents(), dueDateDate, assessmentNameString);

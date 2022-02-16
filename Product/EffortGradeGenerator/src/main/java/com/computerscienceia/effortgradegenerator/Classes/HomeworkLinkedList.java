@@ -14,13 +14,13 @@ import java.util.Date;
  * @author adithyanarayanan
  */
 public class HomeworkLinkedList implements Serializable{
-    private HomeworkNode start;
+    private HomeworkNodeList start;
 
-    public HomeworkNode getStart() {
+    public HomeworkNodeList getStart() {
         return start;
     }
 
-    public void setStart(HomeworkNode start) {
+    public void setStart(HomeworkNodeList start) {
         this.start = start;
     }
     
@@ -34,7 +34,7 @@ public class HomeworkLinkedList implements Serializable{
     
     public int length(){
         int length = 0;
-        HomeworkNode temp = start;
+        HomeworkNodeList temp = start;
             while (temp != null) {
                 length++;
                 temp = temp.getNext();
@@ -44,13 +44,13 @@ public class HomeworkLinkedList implements Serializable{
     
     public void addHomework(ArrayList<Student> listOfStudents, String HomeworkName, Date dueDate, String description)
     {	
-        HomeworkNode newNode = new HomeworkNode(listOfStudents, HomeworkName, description, dueDate);
+        HomeworkNodeList newNode = new HomeworkNodeList(listOfStudents, HomeworkName, description, dueDate);
 	if( isEmpty() )
 	{   
             start = newNode;
             return;
 	}
-	HomeworkNode temp = start;
+	HomeworkNodeList temp = start;
 	while( temp != null )
 	{	temp = temp.getNext();
 	}
@@ -63,8 +63,8 @@ public class HomeworkLinkedList implements Serializable{
             start = start.getNext();
             return;
         }
-        HomeworkNode temp1 = start;
-        HomeworkNode temp2 = start.getNext();
+        HomeworkNodeList temp1 = start;
+        HomeworkNodeList temp2 = start.getNext();
         while(temp2 != null){
             if(temp2.getHomeworkName().equals(homeworkName)){
                 temp1.setNext(temp2.getNext());
@@ -76,7 +76,7 @@ public class HomeworkLinkedList implements Serializable{
     }
     
     public void addStudent(Student student){
-        HomeworkNode temp = start;
+        HomeworkNodeList temp = start;
         ArrayList<ArrayList<Integer>> listOfStudents;
 	while(temp != null){
             listOfStudents = temp.getListOfStudents();
@@ -92,7 +92,7 @@ public class HomeworkLinkedList implements Serializable{
     }
 
     public void removeStudent(Student student){
-        HomeworkNode temp = start;
+        HomeworkNodeList temp = start;
         ArrayList<ArrayList<Integer>> listOfStudents;
         while(temp!=null){
             listOfStudents = temp.getListOfStudents();

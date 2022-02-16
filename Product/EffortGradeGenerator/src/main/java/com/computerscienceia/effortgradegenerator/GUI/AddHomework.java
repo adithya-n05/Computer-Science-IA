@@ -9,7 +9,7 @@ import com.computerscienceia.effortgradegenerator.Classes.HomeworkLinkedList;
 import java.util.Date;
 import javax.swing.JOptionPane;
 import jdk.jfr.Description;
-import com.computerscienceia.effortgradegenerator.Classes.HomeworkNode;
+import com.computerscienceia.effortgradegenerator.Classes.HomeworkNodeList;
 import com.computerscienceia.effortgradegenerator.Classes.ListInitialization;
 import com.computerscienceia.effortgradegenerator.Classes.TeacherManager;
 import java.io.IOException;
@@ -143,7 +143,7 @@ public class AddHomework extends javax.swing.JFrame {
             String homeworkNameString = homeworkName.getText();
             String homeworkDescriptionString = description.getText();
             if(EffortGradeGenerator.primaryClass.getListOfHomeworks().isEmpty()){
-                HomeworkNode newHomeworkNode = new HomeworkNode(EffortGradeGenerator.primaryClass.getListOfStudents(), homeworkNameString, homeworkDescriptionString, dueDateDate);
+                HomeworkNodeList newHomeworkNode = new HomeworkNodeList(EffortGradeGenerator.primaryClass.getListOfStudents(), homeworkNameString, homeworkDescriptionString, dueDateDate);
                 EffortGradeGenerator.primaryClass.getListOfHomeworks().setStart(newHomeworkNode);
             }else{
                 EffortGradeGenerator.primaryClass.getListOfHomeworks().addHomework(EffortGradeGenerator.primaryClass.getListOfStudents(), homeworkNameString, dueDateDate, homeworkDescriptionString);

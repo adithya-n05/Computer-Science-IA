@@ -75,7 +75,7 @@ public class Class implements Serializable{
         this.isHL = isHL;
     }
 
-    public void initialiseLinkedList(HomeworkNode newNode){
+    public void initialiseLinkedList(HomeworkNodeList newNode){
         this.listOfHomeworks.setStart(newNode);
     }
     

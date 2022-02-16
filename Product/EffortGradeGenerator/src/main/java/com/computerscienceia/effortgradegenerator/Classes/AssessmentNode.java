@@ -4,43 +4,15 @@
  */
 package com.computerscienceia.effortgradegenerator.Classes;
 
-import java.io.Serializable;
-import java.util.ArrayList;
 import java.util.Date;
 
 /**
  *
- * @author adithyanarayanan
+ * @author adith
  */
-public class AssessmentNode implements Serializable{
-    private ArrayList<ArrayList<Double>> listOfStudents;
+public class AssessmentNode {
     private String assessmentName; 
     private Date assessmentDate;
-    private AssessmentNode next;
-	
-    public AssessmentNode(ArrayList<Student> listOfStudents, String assessmentName, Date assessmentDate){
-        for(int i =0; i<listOfStudents.size(); i++){
-            Student student = listOfStudents.get(i);
-            int id = student.getId();
-            this.listOfStudents.add(new ArrayList<>());
-            this.listOfStudents.get(i).add(id, 1.0);
-        }
-        this.assessmentName = assessmentName;
-        this.assessmentDate = assessmentDate;
-	next = null;
-    }
-    
-    public AssessmentNode(){
-        next = null;
-    }
-
-    public ArrayList<ArrayList<Double>> getListOfStudents() {
-        return listOfStudents;
-    }
-
-    public void setListOfStudents(ArrayList<ArrayList<Double>> listOfStudents) {
-        this.listOfStudents = listOfStudents;
-    }
 
     public String getAssessmentName() {
         return assessmentName;
@@ -58,15 +30,8 @@ public class AssessmentNode implements Serializable{
         this.assessmentDate = assessmentDate;
     }
 
-    public AssessmentNode getNext() {
-        return next;
-    }
-
-    public void setNext(AssessmentNode next) {
-        this.next = next;
-    }
-    
-    public boolean hasNext(){
-        return next != null;
+    public AssessmentNode(String assessmentName, Date assessmentDate) {
+        this.assessmentName = assessmentName;
+        this.assessmentDate = assessmentDate;
     }
 }

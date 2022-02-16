@@ -13,13 +13,13 @@ import java.util.Date;
  * @author adithyanarayanan
  */
 public class AssessmentLinkedList implements Serializable{
-    private AssessmentNode start;
+    private AssessmentNodeList start;
 
-    public AssessmentNode getStart(){
+    public AssessmentNodeList getStart(){
         return start;
     }
 
-    public void setStart(AssessmentNode start){
+    public void setStart(AssessmentNodeList start){
         this.start = start;
     }
  
@@ -33,7 +33,7 @@ public class AssessmentLinkedList implements Serializable{
     
     public int length(){
         int length = 0;
-        AssessmentNode temp = start;
+        AssessmentNodeList temp = start;
             while (temp!=null) {
                 temp = temp.getNext();
                 length++;
@@ -42,11 +42,11 @@ public class AssessmentLinkedList implements Serializable{
     }
 	
     public void addAssessment(ArrayList<Student> listOfStudents, Date assessmentDate, String assessmentName){
-        AssessmentNode newAssessmentNode = new AssessmentNode(listOfStudents, assessmentName, assessmentDate);
+        AssessmentNodeList newAssessmentNode = new AssessmentNodeList(listOfStudents, assessmentName, assessmentDate);
         if (isEmpty()) {
             start = newAssessmentNode;
         }else{
-           AssessmentNode temp = start;
+           AssessmentNodeList temp = start;
             while (temp.hasNext()) {
                 temp = temp.getNext();
             }
@@ -59,8 +59,8 @@ public class AssessmentLinkedList implements Serializable{
             start = start.getNext();
             return;
         }
-        AssessmentNode temp1 = start;
-        AssessmentNode temp2 = start.getNext();
+        AssessmentNodeList temp1 = start;
+        AssessmentNodeList temp2 = start.getNext();
         while(temp2 != null){
             if(temp2.getAssessmentName().equals(assessmentName)){
                 temp1.setNext(temp2.getNext());
@@ -72,7 +72,7 @@ public class AssessmentLinkedList implements Serializable{
     }
     
     public void addStudent(Student student){
-        AssessmentNode temp = start;
+        AssessmentNodeList temp = start;
         ArrayList<ArrayList<Double>> listOfStudents;
 	while(temp != null){
             listOfStudents = temp.getListOfStudents();
@@ -87,7 +87,7 @@ public class AssessmentLinkedList implements Serializable{
     }
     
     public void removeStudent(Student student){
-        AssessmentNode temp = start;
+        AssessmentNodeList temp = start;
         ArrayList<ArrayList<Double>> listOfStudents;
         while(temp!=null){
             listOfStudents = temp.getListOfStudents();

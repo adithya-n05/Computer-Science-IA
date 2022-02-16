@@ -57,7 +57,7 @@ public class ListInitialization {
        }else{
            size = listOfTests.length();
            String[] listOfStudentsStrings = new String[size];
-           AssessmentNode temp = listOfTests.getStart();
+           AssessmentNodeList temp = listOfTests.getStart();
            int i =0;
             while (temp !=null) {
                 listOfStudentsStrings[i] = temp.getAssessmentName();
@@ -80,7 +80,7 @@ public class ListInitialization {
        }else{
            size = listOfTests.length();
            String[] listOfStudentsStrings = new String[size];
-           AssessmentNode temp = listOfTests.getStart();
+           AssessmentNodeList temp = listOfTests.getStart();
            int i =0;
             while (temp != null) {
                 listOfStudentsStrings[i] = temp.getAssessmentName();
@@ -103,7 +103,7 @@ public class ListInitialization {
        }else{
            size = listOfHomeworks.length();
            String[] listOfStudentsStrings = new String[size];
-           HomeworkNode temp = listOfHomeworks.getStart();
+           HomeworkNodeList temp = listOfHomeworks.getStart();
            int i =0;
            while (temp != null) {
                listOfStudentsStrings[i] = temp.getHomeworkName();
