@@ -43,7 +43,12 @@ public class AddSemesterExam extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Add a new assessment");
 
-        assessmentName.setText("Enter the name of the class");
+        assessmentName.setText("Enter the topic");
+        assessmentName.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                assessmentNameActionPerformed(evt);
+            }
+        });
 
         jLabel3.setText("Assessment date:");
 
@@ -117,6 +122,10 @@ public class AddSemesterExam extends javax.swing.JFrame {
             }
             this.dispose();
     }//GEN-LAST:event_submitActionPerformed
+
+    private void assessmentNameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_assessmentNameActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_assessmentNameActionPerformed
 
     /**
      * @param args the command line arguments

@@ -9,6 +9,7 @@ import com.computerscienceia.effortgradegenerator.Classes.Teacher;
 import com.computerscienceia.effortgradegenerator.Classes.TeacherManager;
 import com.computerscienceia.effortgradegenerator.Classes.Class;
 import com.computerscienceia.effortgradegenerator.Classes.HomeworkNodeList;
+import com.computerscienceia.effortgradegenerator.Classes.Student;
 import java.io.IOException;
 
 /**
@@ -18,7 +19,9 @@ import java.io.IOException;
 public class EffortGradeGenerator {
     public static Teacher primaryTeacher;
     public static Class primaryClass;
-    public static String primaryAssessment;
+    public static Student primaryStudent;
+    public static String primaryQuarterTest;
+    public static String primarySemesterExam;
     public static String primaryHomework;
     
     public static void main(String[] args){

@@ -46,6 +46,63 @@ public class ListInitialization {
        }     
     }
     
+    public static String[] listOfStudentsAsStringsHomework(){
+       Class mainClass = EffortGradeGenerator.primaryClass;
+       ArrayList<Student> listOfStudents = mainClass.getListOfStudents();
+       int size =0;
+       if(listOfStudents.size() == 0){
+           size = 1;
+           String[] listOfStudentsStringsBlank = new String[size];
+           return listOfStudentsStringsBlank;
+       }else{
+           size = listOfStudents.size();
+           String[] listOfStudentsStrings = new String[size];
+       for(int i =0; i<size; i++){
+           listOfStudentsStrings[i] = listOfStudents.get(i).getFirstName() + " " + listOfStudents.get(i).getLastName() + " " + listOfStudents.get(i).getId() + " - " + listOfStudents.get(i).getHomeworkTracker().getHomeworkcompleted(EffortGradeGenerator.primaryHomework);
+           
+       }
+       return listOfStudentsStrings;
+       }     
+    }
+    
+    public static String[] listOfStudentsAsStringsQuarterAssessment(){
+       Class mainClass = EffortGradeGenerator.primaryClass;
+       ArrayList<Student> listOfStudents = mainClass.getListOfStudents();
+       int size =0;
+       if(listOfStudents.size() == 0){
+           size = 1;
+           String[] listOfStudentsStringsBlank = new String[size];
+           return listOfStudentsStringsBlank;
+       }else{
+           size = listOfStudents.size();
+           String[] listOfStudentsStrings = new String[size];
+       for(int i =0; i<size; i++){
+           listOfStudentsStrings[i] = listOfStudents.get(i).getFirstName() + " " + listOfStudents.get(i).getLastName() + " " + listOfStudents.get(i).getId() + " - " + listOfStudents.get(i).getQuarterTests().getAssessmentScore(EffortGradeGenerator.primaryQuarterTest);
+           
+       }
+       return listOfStudentsStrings;
+       }     
+    }
+    
+    public static String[] listOfStudentsAsStringsSemesterExam(){
+       Class mainClass = EffortGradeGenerator.primaryClass;
+       ArrayList<Student> listOfStudents = mainClass.getListOfStudents();
+       int size =0;
+       if(listOfStudents.size() == 0){
+           size = 1;
+           String[] listOfStudentsStringsBlank = new String[size];
+           return listOfStudentsStringsBlank;
+       }else{
+           size = listOfStudents.size();
+           String[] listOfStudentsStrings = new String[size];
+       for(int i =0; i<size; i++){
+           listOfStudentsStrings[i] = listOfStudents.get(i).getFirstName() + " " + listOfStudents.get(i).getLastName() + " " + listOfStudents.get(i).getId() + " - " + listOfStudents.get(i).getSemesterExams().getAssessmentScore(EffortGradeGenerator.primarySemesterExam);
+           
+       }
+       return listOfStudentsStrings;
+       }     
+    }
+    
     public static String[] listOfQuarterAssessmentsAsStrings(){
        Class mainClass = EffortGradeGenerator.primaryClass;
        AssessmentLinkedList listOfTests = mainClass.getQuarterTests();

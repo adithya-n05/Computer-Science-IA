@@ -111,6 +111,7 @@ public class AssessmentLinkedList implements Serializable{
                     }
                 }
             }
+            temp = temp.getNext();
         }
     }
 

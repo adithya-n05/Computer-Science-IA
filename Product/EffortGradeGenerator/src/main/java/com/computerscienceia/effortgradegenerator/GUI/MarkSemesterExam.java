@@ -5,17 +5,22 @@
 package com.computerscienceia.effortgradegenerator.GUI;
 
 import com.computerscienceia.effortgradegenerator.Classes.DateHelper;
+import com.computerscienceia.effortgradegenerator.Classes.TeacherManager;
+import com.computerscienceia.effortgradegenerator.Classes.ListInitialization;
+import java.io.IOException;
+import com.computerscienceia.effortgradegenerator.Classes.AssessmentSearcher;
+import javax.swing.JOptionPane;
 
 /**
  *
  * @author adith
  */
-public class MarkAssessment extends javax.swing.JFrame {
+public class MarkSemesterExam extends javax.swing.JFrame {
 
     /**
      * Creates new form MarkAssessment
      */
-    public MarkAssessment() {
+    public MarkSemesterExam() {
         initComponents();
     }
 
@@ -35,7 +40,7 @@ public class MarkAssessment extends javax.swing.JFrame {
         jLabel2 = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jList2 = new javax.swing.JList<>();
+        students = new javax.swing.JList<>();
         jLabel3 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
@@ -56,16 +61,16 @@ public class MarkAssessment extends javax.swing.JFrame {
 
         jLabel1.setText("Assessment date:");
 
-        jLabel2.setText(EffortGradeGenerator.primaryAssessment);
+        jLabel2.setText(EffortGradeGenerator.primarySemesterExam);
 
-        jLabel6.setText("test");
+        jLabel6.setText(AssessmentSearcher.semsesterExamDate(EffortGradeGenerator.primarySemesterExam));
 
-        jList2.setModel(new javax.swing.AbstractListModel<String>() {
-            String[] strings = { "Item 1", "Item 2", "Item 3", "Item 4", "Item 5" };
+        students.setModel(new javax.swing.AbstractListModel<String>() {
+            String[] strings = ListInitialization.listOfStudentsAsStringsSemesterExam();
             public int getSize() { return strings.length; }
             public String getElementAt(int i) { return strings[i]; }
         });
-        jScrollPane1.setViewportView(jList2);
+        jScrollPane1.setViewportView(students);
 
         jLabel3.setText("Student selection:");
 
@@ -123,7 +128,28 @@ public class MarkAssessment extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-        // TODO add your handling code here:
+        if(students.isSelectionEmpty()){
+          JOptionPane.showMessageDialog(null, "Please select a student first");
+      }else{
+        double score = Double.parseDouble(JOptionPane.showInputDialog("Please input a score for the student"));
+        String studentID = students.getSelectedValue();
+          String[] _arr = studentID.split("\\s");
+          int id = Integer.parseInt(_arr[2]);
+          String semesterExamString = EffortGradeGenerator.primarySemesterExam;
+          EffortGradeGenerator.primaryClass.getSemesterExams().markAssessment(semesterExamString, id, score);
+          for(int i =0; i<EffortGradeGenerator.primaryClass.getListOfStudents().size(); i++){
+              if(EffortGradeGenerator.primaryClass.getListOfStudents().get(i).getId() == id){
+                  EffortGradeGenerator.primaryClass.getListOfStudents().get(i).getSemesterExams().markAssessment(semesterExamString, score);
+              }
+          }
+
+        try {
+                TeacherManager.save("Effort Grade Generator");
+            } catch (IOException e) {
+            }
+        this.dispose();
+        new MarkSemesterExam().setVisible(true);
+        }
     }//GEN-LAST:event_jButton2ActionPerformed
 
     /**
@@ -143,20 +169,23 @@ public class MarkAssessment extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(MarkAssessment.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(MarkSemesterExam.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(MarkAssessment.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(MarkSemesterExam.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(MarkAssessment.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(MarkSemesterExam.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(MarkAssessment.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(MarkSemesterExam.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
         //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new MarkAssessment().setVisible(true);
+                new MarkSemesterExam().setVisible(true);
             }
         });
     }
@@ -169,7 +198,7 @@ public class MarkAssessment extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
-    private javax.swing.JList<String> jList2;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JList<String> students;
     // End of variables declaration//GEN-END:variables
 }

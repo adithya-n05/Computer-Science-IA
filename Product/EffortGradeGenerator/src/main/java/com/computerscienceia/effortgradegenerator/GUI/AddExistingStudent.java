@@ -95,7 +95,6 @@ public class AddExistingStudent extends javax.swing.JFrame {
         String newStudentString = (String)selectedStudent.getSelectedItem();
         String[] _arr = newStudentString.split("\\s");
         int id = Integer.parseInt(_arr[2]);
-        ArrayList<Student> listOfAllStudents = StudentManager.listOfAllStudents;
         ArrayList<Student> listOfStudentsInClass = EffortGradeGenerator.primaryClass.getListOfStudents();
         boolean StudentInClass = false;
         for(int i =0; i<listOfStudentsInClass.size(); i++){
@@ -105,11 +104,7 @@ public class AddExistingStudent extends javax.swing.JFrame {
             }
         }
         if(!StudentInClass){
-        for(int i = 0; i<listOfAllStudents.size(); i++){
-            if(listOfAllStudents.get(i).getId() == id){
-                EffortGradeGenerator.primaryClass.addStudent(listOfAllStudents.get(i).getFirstName(), listOfAllStudents.get(i).getLastName(), id);
-            }
-        }
+                EffortGradeGenerator.primaryClass.addStudent(_arr[0], _arr[1], id);
         }
         try {
             TeacherManager.save("Effort Grade Generator");

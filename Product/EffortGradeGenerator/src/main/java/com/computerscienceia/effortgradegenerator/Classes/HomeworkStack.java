@@ -95,6 +95,24 @@ public class HomeworkStack implements Serializable{
 		}
 	}
     
+    public void markHomework(String homeworkName, int completed){
+        popCompletionNode();
+        boolean completionboolean = false;
+        if(completed == 0){
+            completionboolean = false;
+        }else{
+            completionboolean = true;
+        }
+        HomeworkNodeStack temp = top;
+        while(temp!=null){
+            if(temp.getHomeworkName().equals(homeworkName)){
+                temp.setCompleted(completionboolean);
+            }
+            temp = temp.getNext();
+        }
+        pushCompletionRateNode();
+    }
+    
     
     public HomeworkNodeStack popNode()
 	{
@@ -124,6 +142,7 @@ public class HomeworkStack implements Serializable{
         HomeworkStack tempStack = new HomeworkStack();
         tempStack.popCompletionNode();
         HomeworkNodeStack temp = top;
+        HomeworkNodeStack temp2;
         if(top.getHomeworkName().equals(homeworkNameString)){
             top=top.getNext();
             this.pushCompletionRateNode();
@@ -132,19 +151,20 @@ public class HomeworkStack implements Serializable{
             while(temp!=null){
                 if(temp.getHomeworkName().equals(homeworkNameString)){
                     transferHomework = this.popNode();
+                    tempStack.pushNode(transferHomework);
                     temp = temp.getNext();
-                    break;
                 }else{
                     transferHomework = this.popNode();
                     tempStack.pushNode(transferHomework);
                     temp=temp.getNext();
                 }
             }
-            temp = tempStack.getTop();
-            while(temp !=null){
+            temp2 = tempStack.getTop();
+            while(temp2 !=null){
                 transferHomework = tempStack.popNode();
                 this.pushNode(transferHomework);
                 tempStack.setTop(tempStack.getTop().getNext());
+                temp2 = temp2.getNext();
             }
             this.pushCompletionRateNode();
         }
@@ -158,6 +178,24 @@ public class HomeworkStack implements Serializable{
                 nodeInformation.put(homeworkName, score);
                 return nodeInformation;
 	}
+        
+    public String getHomeworkcompleted(String homeworkNameString){
+        HomeworkNodeStack temp = top;
+        boolean completed = false;
+        while(temp!=null){
+            if (temp.getHomeworkName().equals(homeworkNameString)){
+                completed = temp.isCompleted();
+            }
+            temp = temp.getNext();
+        }
+        String completedString = "";
+        if(completed == true){
+            completedString = "Completed";
+        }else{
+            completedString = "Incomplete";
+        }
+        return completedString;
+    }
     
     
 }

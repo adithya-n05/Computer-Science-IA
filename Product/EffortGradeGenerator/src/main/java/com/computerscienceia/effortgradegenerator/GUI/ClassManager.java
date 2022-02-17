@@ -258,6 +258,11 @@ public class ClassManager extends javax.swing.JFrame {
 
         markAssessment.setText("Mark Assessment");
         markAssessment.setToolTipText("");
+        markAssessment.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                markAssessmentActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
         jPanel4.setLayout(jPanel4Layout);
@@ -320,6 +325,11 @@ public class ClassManager extends javax.swing.JFrame {
 
         markSemesterExam.setText("Mark Assessment");
         markSemesterExam.setToolTipText("");
+        markSemesterExam.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                markSemesterExamActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel5Layout = new javax.swing.GroupLayout(jPanel5);
         jPanel5.setLayout(jPanel5Layout);
@@ -420,7 +430,7 @@ public class ClassManager extends javax.swing.JFrame {
     private void removeQuarterAssessmentActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_removeQuarterAssessmentActionPerformed
         if(listOfQuarterTests.isSelectionEmpty()){
            JOptionPane.showMessageDialog(null,"Please select an assessment");
-       }
+       }else{
         String examName = listOfQuarterTests.getSelectedValue();
         EffortGradeGenerator.primaryClass.removeQuarterTest(examName);
         try {
@@ -429,6 +439,7 @@ public class ClassManager extends javax.swing.JFrame {
         }
         this.dispose();
         new ClassManager().setVisible(true);
+        }
     }//GEN-LAST:event_removeQuarterAssessmentActionPerformed
 
     private void removeHomeworkActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_removeHomeworkActionPerformed
@@ -451,7 +462,21 @@ public class ClassManager extends javax.swing.JFrame {
     }//GEN-LAST:event_addNewStudentActionPerformed
 
     private void generateEffortActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_generateEffortActionPerformed
-        // TODO add your handling code here:
+        if(listOfStudents.isSelectionEmpty()){
+            JOptionPane.showMessageDialog(null,"Please select a student");
+        }else{
+            String studentName = (String)listOfStudents.getSelectedValue();
+            String[] _arr = studentName.split("\\s");
+             int id = Integer.parseInt(_arr[2]);
+            ArrayList<Student> listOfStudentsClass = EffortGradeGenerator.primaryClass.getListOfStudents();
+            for(int i =0; i<listOfStudentsClass.size(); i++){
+            if(listOfStudentsClass.get(i).getId() == id){
+                EffortGradeGenerator.primaryStudent = listOfStudentsClass.get(i);
+            }
+            }
+            new EffortGradeGeneration().setVisible(true);
+        }
+        
     }//GEN-LAST:event_generateEffortActionPerformed
 
     private void removeStudentActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_removeStudentActionPerformed
@@ -517,6 +542,26 @@ public class ClassManager extends javax.swing.JFrame {
     private void addSemesterExamActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addSemesterExamActionPerformed
         new AddSemesterExam().setVisible(true);
     }//GEN-LAST:event_addSemesterExamActionPerformed
+
+    private void markAssessmentActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_markAssessmentActionPerformed
+      if(listOfQuarterTests.isSelectionEmpty()){
+           JOptionPane.showMessageDialog(null,"Please select an assessment");
+        }else{
+            String assessmentName = listOfQuarterTests.getSelectedValue();
+            EffortGradeGenerator.primaryQuarterTest = assessmentName;
+            new MarkQuarterAssessment().setVisible(true);
+        }
+    }//GEN-LAST:event_markAssessmentActionPerformed
+
+    private void markSemesterExamActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_markSemesterExamActionPerformed
+        if(listOfSemesterExams.isSelectionEmpty()){
+           JOptionPane.showMessageDialog(null,"Please select an assessment");
+        }else{
+            String assessmentName = listOfSemesterExams.getSelectedValue();
+            EffortGradeGenerator.primarySemesterExam = assessmentName;
+            new MarkSemesterExam().setVisible(true);
+        }
+    }//GEN-LAST:event_markSemesterExamActionPerformed
 
     /**
      * @param args the command line arguments

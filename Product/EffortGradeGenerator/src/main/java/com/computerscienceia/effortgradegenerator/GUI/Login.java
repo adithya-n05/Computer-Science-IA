@@ -69,7 +69,6 @@ public class Login extends javax.swing.JFrame {
             }
         });
 
-        password.setText("Enter your password");
         password.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 passwordActionPerformed(evt);
@@ -146,21 +145,21 @@ public class Login extends javax.swing.JFrame {
     }//GEN-LAST:event_passwordActionPerformed
 
     private void loginButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_loginButtonActionPerformed
-       char[] passwordArray = password.getPassword();
+        if(username.getText().trim().isEmpty() || username.getText().trim().equals("Enter your username") || password.getPassword().length == 0){
+           JOptionPane.showMessageDialog(null, "Please enter a username and a password");
+       }else{
+        char[] passwordArray = password.getPassword();
        String passwordString = "";
        for(int i =0; i<passwordArray.length; i++){
            passwordString += passwordArray[i];
        }
-        if(username.getText().trim().isEmpty() || passwordString.trim().isEmpty() || username.getText().trim().equalsIgnoreCase("Enter your username") || passwordString.trim().equals("Enter your password")){
-           JOptionPane.showMessageDialog(null, "Please enter a username and a password");
-       }else{
             String usernameString = username.getText().trim();
             passwordString = passwordString.trim();
             boolean mainPageLoaded = false;
             if(TeacherManager.allTeachers.size()==0){
                 JOptionPane.showMessageDialog(null, "No accounts have been created yet, please create a new account");
                 return;
-            }
+            }else{
             for(int i =0; i<TeacherManager.allTeachers.size(); i++){
             if(TeacherManager.allTeachers.get(i).getUsername().equals(usernameString)){
                 if(TeacherManager.allTeachers.get(i).getPassword().equals(passwordString)){
@@ -169,6 +168,7 @@ public class Login extends javax.swing.JFrame {
                     mainPageLoaded = true;
                     this.dispose();
                 }
+            }
             }
             }
             if(mainPageLoaded == false){

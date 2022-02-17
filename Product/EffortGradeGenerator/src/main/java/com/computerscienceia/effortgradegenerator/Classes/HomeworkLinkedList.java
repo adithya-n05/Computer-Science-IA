@@ -50,7 +50,7 @@ public class HomeworkLinkedList implements Serializable{
             return;
 	}
 	HomeworkNodeList temp = start;
-	while( temp != null )
+	while( temp.getNext() != null )
 	{	temp = temp.getNext();
 	}
 	temp.setNext(newNode);
@@ -114,6 +114,7 @@ public class HomeworkLinkedList implements Serializable{
                     }
                 }
             }
+            temp=temp.getNext();
         }
     }
     

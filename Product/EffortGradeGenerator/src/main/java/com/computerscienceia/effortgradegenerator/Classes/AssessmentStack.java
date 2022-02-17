@@ -111,6 +111,7 @@ public class AssessmentStack implements Serializable{
         AssessmentStack tempStack = new AssessmentStack();
         tempStack.popEMANode();
         AssessmentNodeStack temp = top;
+        AssessmentNodeStack temp2;
         if(temp.getAssessmentName().equals(assessmentNameString)){
             top=top.getNext();
             this.pushEMANode();
@@ -119,6 +120,7 @@ public class AssessmentStack implements Serializable{
             while(temp!=null){
                 if(temp.getAssessmentName().equals(assessmentNameString)){
                     transferAssessment = this.popNode();
+                    tempStack.pushNode(transferAssessment);
                     temp = temp.getNext();
                     break;
                 }else{
@@ -127,11 +129,12 @@ public class AssessmentStack implements Serializable{
                     temp=temp.getNext();
                 }
             }
-            temp = tempStack.getTop();
-            while(temp !=null){
+            temp2 = tempStack.getTop();
+            while(temp2 !=null){
                 transferAssessment = tempStack.popNode();
                 this.pushNode(transferAssessment);
                 tempStack.setTop(tempStack.getTop().getNext());
+                temp2 = temp2.getNext();
             }
             this.pushEMANode();
         }
@@ -145,4 +148,42 @@ public class AssessmentStack implements Serializable{
                 nodeInformation.put(assessmentName, score);
                 return nodeInformation;
 	}
+        
+        public void markAssessment(String assessmentName, double scoreachieved){
+        popEMANode();
+        AssessmentNodeStack temp = top;
+        while(temp!=null){
+            if(temp.getAssessmentName().equals(assessmentName)){
+                temp.setScore(scoreachieved);
+            }
+            temp = temp.getNext();
+        }
+        pushEMANode();
+    }
+        
+        public String getAssessmentScore(String assessmentNameString){
+        AssessmentNodeStack temp = top;
+        double scoreAchieved = 0.0;
+        while(temp!=null){
+            if (temp.getAssessmentName().equals(assessmentNameString)){
+                scoreAchieved = temp.getScore();
+            }
+            temp = temp.getNext();
+        }
+        String scoreString = "" + scoreAchieved;
+        return scoreString;
+    }
+        
+        public void printStack(){
+        if(isEmpty()){
+            System.out.println("Stack is empty");
+        }else{
+            AssessmentNodeStack temp = top;
+            while(temp!=null){
+                System.out.println(temp.getAssessmentName());
+                temp=temp.getNext();
+            }
+        }
+    }
+
 }

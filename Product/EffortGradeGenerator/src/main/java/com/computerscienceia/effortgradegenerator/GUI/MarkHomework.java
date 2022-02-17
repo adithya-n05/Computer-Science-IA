@@ -6,6 +6,8 @@ package com.computerscienceia.effortgradegenerator.GUI;
 
 import com.computerscienceia.effortgradegenerator.Classes.HomeworkSearcher;
 import com.computerscienceia.effortgradegenerator.Classes.ListInitialization;
+import com.computerscienceia.effortgradegenerator.Classes.TeacherManager;
+import java.io.IOException;
 import javax.swing.JOptionPane;
 
 
@@ -39,7 +41,7 @@ public class MarkHomework extends javax.swing.JFrame {
         jLabel6 = new javax.swing.JLabel();
         jLabel7 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
-        Students = new javax.swing.JList<>();
+        students = new javax.swing.JList<>();
         jLabel8 = new javax.swing.JLabel();
         jButton1 = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
@@ -63,12 +65,12 @@ public class MarkHomework extends javax.swing.JFrame {
 
         jLabel7.setText(HomeworkSearcher.getHomeworkDescription(EffortGradeGenerator.primaryHomework));
 
-        Students.setModel(new javax.swing.AbstractListModel<String>() {
-            String[] strings = ListInitialization.listOfStudentsAsStrings();
+        students.setModel(new javax.swing.AbstractListModel<String>() {
+            String[] strings = ListInitialization.listOfStudentsAsStringsHomework();
             public int getSize() { return strings.length; }
             public String getElementAt(int i) { return strings[i]; }
         });
-        jScrollPane1.setViewportView(Students);
+        jScrollPane1.setViewportView(students);
 
         jLabel8.setText("Student selection:");
 
@@ -153,14 +155,48 @@ public class MarkHomework extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-        // TODO add your handling code here:
+        if(students.isSelectionEmpty()){
+          JOptionPane.showMessageDialog(null, "Please select a student first");
+      }else{
+          String studentID = students.getSelectedValue();
+          String[] _arr = studentID.split("\\s");
+          int id = Integer.parseInt(_arr[2]);
+          String homeworkNameString = EffortGradeGenerator.primaryHomework;
+          EffortGradeGenerator.primaryClass.getListOfHomeworks().markHomework(homeworkNameString, id, 0);
+          for(int i =0; i<EffortGradeGenerator.primaryClass.getListOfStudents().size(); i++){
+              if(EffortGradeGenerator.primaryClass.getListOfStudents().get(i).getId() == id){
+                  EffortGradeGenerator.primaryClass.getListOfStudents().get(i).getHomeworkTracker().markHomework(homeworkNameString, 0);
+              }
+          }
+            try {
+                TeacherManager.save("Effort Grade Generator");
+            } catch (IOException e) {
+            }
+          this.dispose();
+          new MarkHomework().setVisible(true);
+      }                                      
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-      if(Students.isSelectionEmpty()){
+      if(students.isSelectionEmpty()){
           JOptionPane.showMessageDialog(null, "Please select a student first");
       }else{
-          String studentName = 
+          String studentID = students.getSelectedValue();
+          String[] _arr = studentID.split("\\s");
+          int id = Integer.parseInt(_arr[2]);
+          String homeworkNameString = EffortGradeGenerator.primaryHomework;
+          EffortGradeGenerator.primaryClass.getListOfHomeworks().markHomework(homeworkNameString, id, 1);
+          for(int i =0; i<EffortGradeGenerator.primaryClass.getListOfStudents().size(); i++){
+              if(EffortGradeGenerator.primaryClass.getListOfStudents().get(i).getId() == id){
+                  EffortGradeGenerator.primaryClass.getListOfStudents().get(i).getHomeworkTracker().markHomework(homeworkNameString, 1);
+              }
+          }
+          try {
+                TeacherManager.save("Effort Grade Generator");
+            } catch (IOException e) {
+            }
+          this.dispose();
+          new MarkHomework().setVisible(true);
       }
     }//GEN-LAST:event_jButton1ActionPerformed
 
@@ -200,7 +236,6 @@ public class MarkHomework extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JList<String> Students;
     private javax.swing.JLabel homeworkName;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
@@ -212,5 +247,6 @@ public class MarkHomework extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JList<String> students;
     // End of variables declaration//GEN-END:variables
 }

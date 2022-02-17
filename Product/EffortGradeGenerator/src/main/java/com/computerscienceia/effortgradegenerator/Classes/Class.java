@@ -176,6 +176,7 @@ public class Class implements Serializable{
     public void addQuarterAssessment(String assessmentName, Date assessmentDate){
         for(int i=0; i<listOfStudents.size();i++){
             listOfStudents.get(i).getQuarterTests().addAssessment(assessmentDate, assessmentName);
+            listOfStudents.get(i).getQuarterTests().printStack();
         }
         quarterTests.addAssessment(listOfStudents, assessmentDate, assessmentName);
     }
@@ -183,6 +184,7 @@ public class Class implements Serializable{
     public void addSemesterExam(String assessmentName, Date assessmentDate){
         for(int i=0; i<listOfStudents.size();i++){
             listOfStudents.get(i).getSemesterExams().addAssessment(assessmentDate, assessmentName);
+            listOfStudents.get(i).getSemesterExams().printStack();
         }
         semesterExams.addAssessment(listOfStudents, assessmentDate, assessmentName);
     }
