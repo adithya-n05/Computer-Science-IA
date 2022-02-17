@@ -31,6 +31,7 @@ public class AssessmentStack implements Serializable{
 
     public AssessmentStack() {
         this.top = null;
+        pushEMANode();
     }
     
     public void pushEMANode(){
@@ -82,25 +83,57 @@ public class AssessmentStack implements Serializable{
 		}
 	}
     
+     public AssessmentNodeStack popNode()
+	{
+		if( !isEmpty() )
+		{
+                    AssessmentNodeStack transferAssessment = new AssessmentNodeStack(top.getScore(), top.getAssessmentName(), top.getAssessmentDate(), top.isEMANode());
+                    top = top.getNext();
+                    return transferAssessment;
+		} else {
+                        AssessmentNodeStack transferAssessment1 = new AssessmentNodeStack(1.0, "No Assessments in Stack", new Date(), false);
+			return transferAssessment1;
+		}
+	}
+     
+     public void pushNode(AssessmentNodeStack pushNode){
+        if(isEmpty()){
+            this.top = pushNode;
+        }else{
+            pushNode.setNext(this.top);
+            this.top.setNext(pushNode);
+        }
+    }
+    
     
     public void removeAssessment(String assessmentNameString){
         this.popEMANode();
-        AssessmentNodeStack temp1 = top;
-        AssessmentNodeStack temp2 = top.getNext();
-        if(temp1.getAssessmentName().equals(assessmentNameString)){
+        AssessmentStack tempStack = new AssessmentStack();
+        AssessmentNodeStack temp = top;
+        if(temp.getAssessmentName().equals(assessmentNameString)){
             top=top.getNext();
             this.pushEMANode();
         }else{
-            while(temp2!=null){
-                if(temp2.getAssessmentName().equals(assessmentNameString)){
-                temp1.setNext(temp2.getNext());
-                this.pushEMANode();
-                return;
+            AssessmentNodeStack transferAssessment;
+            while(temp!=null){
+                if(temp.getAssessmentName().equals(assessmentNameString)){
+                    transferAssessment = this.popNode();
+                    temp = temp.getNext();
+                    break;
+                }else{
+                    transferAssessment = this.popNode();
+                    tempStack.pushNode(transferAssessment);
+                    temp=temp.getNext();
+                }
             }
-            temp1 = temp1.getNext();
-            temp2 = temp2.getNext();
+            temp = tempStack.getTop();
+            while(temp !=null){
+                transferAssessment = tempStack.popNode();
+                this.pushNode(transferAssessment);
+                tempStack.setTop(tempStack.getTop().getNext());
             }
         }
+        this.pushEMANode();
     }
 	
 	public Map<String, Double> peekEMAValue()

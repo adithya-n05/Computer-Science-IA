@@ -13,7 +13,7 @@ import java.util.Date;
  * @author adithyanarayanan
  */
 public class AssessmentNodeList extends AssessmentNode implements Serializable{
-    private ArrayList<ArrayList<Double>> listOfStudents;
+    private ArrayList<ArrayList<Double>> listOfStudents = new ArrayList<>();
     private AssessmentNodeList next;
 	
     public AssessmentNodeList(ArrayList<Student> listOfStudents, String assessmentName, Date assessmentDate){

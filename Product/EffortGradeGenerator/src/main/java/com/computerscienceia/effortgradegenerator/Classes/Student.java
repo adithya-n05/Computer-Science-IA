@@ -12,13 +12,12 @@ import java.util.ArrayList;
  * @author adith
  */
 public class Student extends Person implements Serializable{
-    
     private HomeworkStack homeworkTracker = new HomeworkStack();
     private ArrayList<String> allEffortGrades =  new ArrayList<String>();
     private ArrayList<Character> effortInfluence = new ArrayList<Character>();
     private AssessmentStack quarterTests = new AssessmentStack();
     private AssessmentStack semesterExams = new AssessmentStack();
-
+    
     public HomeworkStack getHomeworkTracker() {
         return homeworkTracker;
     }

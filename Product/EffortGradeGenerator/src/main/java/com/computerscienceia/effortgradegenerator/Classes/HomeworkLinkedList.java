@@ -76,7 +76,7 @@ public class HomeworkLinkedList implements Serializable{
     
     public void addStudent(Student student){
         HomeworkNodeList temp = start;
-        ArrayList<ArrayList<Integer>> listOfStudents;
+        ArrayList<ArrayList<Integer>> listOfStudents = new ArrayList<>();;
 	while(temp != null){
             listOfStudents = temp.getListOfStudents();
             int id = student.getId();

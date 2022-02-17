@@ -109,12 +109,7 @@ public class AddSemesterExam extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(null,"No date chosen for due date. Please choose a due date for the homework.");
         }else{
             String assessmentNameString = assessmentName.getText();
-            if(EffortGradeGenerator.primaryClass.getSemesterExams().isEmpty()){
-                AssessmentNodeList newAssessmentNode = new AssessmentNodeList(EffortGradeGenerator.primaryClass.getListOfStudents(), assessmentNameString, dueDateDate);
-                EffortGradeGenerator.primaryClass.getSemesterExams().setStart(newAssessmentNode);
-            }else{
-                EffortGradeGenerator.primaryClass.getSemesterExams().addAssessment(EffortGradeGenerator.primaryClass.getListOfStudents(), dueDateDate, assessmentNameString);
-            }
+            EffortGradeGenerator.primaryClass.addSemesterExam(assessmentNameString, dueDateDate);
         }
             try {
                 TeacherManager.save("Effort Grade Generator");

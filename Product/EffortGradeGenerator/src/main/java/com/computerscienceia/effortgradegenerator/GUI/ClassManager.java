@@ -422,7 +422,7 @@ public class ClassManager extends javax.swing.JFrame {
            JOptionPane.showMessageDialog(null,"Please select an assessment");
        }
         String examName = listOfQuarterTests.getSelectedValue();
-        EffortGradeGenerator.primaryClass.getQuarterTests().removeAssessment(examName);
+        EffortGradeGenerator.primaryClass.removeQuarterTest(examName);
         try {
             TeacherManager.save("Effort Grade Generator");
         } catch (IOException e) {
@@ -434,9 +434,10 @@ public class ClassManager extends javax.swing.JFrame {
     private void removeHomeworkActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_removeHomeworkActionPerformed
         if(listOfHomeworks.isSelectionEmpty()){
            JOptionPane.showMessageDialog(null,"Please select a homework");
-       }
-        String homeworkName = listOfHomeworks.getSelectedValue();
-        EffortGradeGenerator.primaryClass.getListOfHomeworks().removeHomework(homeworkName);
+       }else{
+        String homeworkName = (String)listOfHomeworks.getSelectedValue();
+        EffortGradeGenerator.primaryClass.removeHomework(homeworkName);
+        }
         try {
             TeacherManager.save("Effort Grade Generator");
         } catch (IOException e) {
@@ -456,17 +457,17 @@ public class ClassManager extends javax.swing.JFrame {
     private void removeStudentActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_removeStudentActionPerformed
         if(listOfStudents.isSelectionEmpty()){
             JOptionPane.showMessageDialog(null,"Please select a class");
-        }
+        }else{
         String studentName = listOfStudents.getSelectedValue();
         String[] _arr = studentName.split("\\s");
         int id = Integer.parseInt(_arr[2]);
-        studentName = studentName.replaceAll("\\s.*", "");
         ArrayList<Student> listOfStudentsClass = EffortGradeGenerator.primaryClass.getListOfStudents();
         for(int i =0; i<listOfStudentsClass.size(); i++){
             if(listOfStudentsClass.get(i).getId() == id){
                 Student removalObject = listOfStudentsClass.get(i);
                 EffortGradeGenerator.primaryClass.removeStudent(removalObject);
             }
+        }
         }
         try {
             TeacherManager.save("Effort Grade Generator");
@@ -485,7 +486,7 @@ public class ClassManager extends javax.swing.JFrame {
            JOptionPane.showMessageDialog(null,"Please select an assessment");
        }
         String examName = listOfSemesterExams.getSelectedValue();
-        EffortGradeGenerator.primaryClass.getSemesterExams().removeAssessment(examName);
+        EffortGradeGenerator.primaryClass.removeSemesterExam(examName);
         try {
             TeacherManager.save("Effort Grade Generator");
         } catch (IOException e) {

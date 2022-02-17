@@ -73,8 +73,8 @@ public class AssessmentLinkedList implements Serializable{
     
     public void addStudent(Student student){
         AssessmentNodeList temp = start;
-        ArrayList<ArrayList<Double>> listOfStudents;
-	while(temp != null){
+        ArrayList<ArrayList<Double>> listOfStudents = new ArrayList<>();
+        while(temp != null){
             listOfStudents = temp.getListOfStudents();
             int id = student.getId();
             ArrayList<Double> studentList = new ArrayList<>();

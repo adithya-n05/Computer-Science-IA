@@ -27,6 +27,7 @@ public class HomeworkStack implements Serializable{
     
     public HomeworkStack() {
         this.top = null;
+        pushCompletionRateNode();
     }
     
     public boolean isEmpty(){
@@ -35,7 +36,7 @@ public class HomeworkStack implements Serializable{
     
     public void pushCompletionRateNode(){
         if(isEmpty()){
-            this.top = new HomeworkNodeStack(false, true, 0.0, "completionRateNode", "None", new Date());
+            top = new HomeworkNodeStack(false, true, 0.0, "completionRateNode", "None", new Date());
         }else{
             HomeworkNodeStack temp = top;
             ArrayList<Boolean> completedList = new ArrayList<>();
@@ -44,15 +45,15 @@ public class HomeworkStack implements Serializable{
                 temp=temp.getNext();
             }
             double percentCompletion = HomeworkPercentageCompletedHelper.calculatePercentageCompleted(completedList);
-            HomeworkNodeStack newNode = new HomeworkNodeStack(false, true, percentCompletion, "completionRateNode", "Nonde", new Date());
-            newNode.setNext(this.top);
-            this.top.setNext(newNode);
+            HomeworkNodeStack newNode = new HomeworkNodeStack(false, true, percentCompletion, "completionRateNode", "None", new Date());
+            newNode.setNext(top);
+            top.setNext(newNode);
         }
     }
 	
     public void addHomework(Date homeworkDueDate, String homeworkName, String descriptionString)
 	{
-            this.popCompletionNode();
+            popCompletionNode();
             HomeworkNodeStack newAssessment = new HomeworkNodeStack(true, true, 0.0, homeworkName, descriptionString, homeworkDueDate);
 		if( isEmpty() )
 		{
@@ -61,7 +62,7 @@ public class HomeworkStack implements Serializable{
 			newAssessment.setNext(top);
 			top = newAssessment;
 		}
-            this.pushCompletionRateNode();
+            pushCompletionRateNode();
 	}
 	
     public Map<String, Double> popCompletionNode()
@@ -81,23 +82,57 @@ public class HomeworkStack implements Serializable{
 	}
     
     
-    public void removeAssessment(String homeworkNameString){
+    public HomeworkNodeStack popNode()
+	{
+		if( !isEmpty() )
+		{
+                    HomeworkNodeStack transferAssessment = new HomeworkNodeStack(top.isCompleted(), top.isPercentageCompletedNode(), top.getPercentageCompleted(), top.getHomeworkName(), top.getDescription(), top.getDueDate());
+                    top = top.getNext();
+                    return transferAssessment;
+		} else {
+                        HomeworkNodeStack transferAssessment1 = new HomeworkNodeStack(false, false, 0.0, "No nodes left in stack", "NA", new Date());
+			return transferAssessment1;
+		}
+	}
+     
+     public void pushNode(HomeworkNodeStack pushNode){
+        if(isEmpty()){
+            this.top = pushNode;
+        }else{
+            pushNode.setNext(this.top);
+            this.top.setNext(pushNode);
+        }
+    }
+    
+    
+    public void removeHomework(String homeworkNameString){
         this.popCompletionNode();
-        HomeworkNodeStack temp1 = top;
-        HomeworkNodeStack temp2 = top.getNext();
-        if(temp1.getHomeworkName().equals(homeworkNameString)){
+        HomeworkStack tempStack = new HomeworkStack();
+        tempStack.popCompletionNode();
+        HomeworkNodeStack temp = top;
+        if(top.getHomeworkName().equals(homeworkNameString)){
             top=top.getNext();
             this.pushCompletionRateNode();
         }else{
-            while(temp2!=null){
-                if(temp2.getHomeworkName().equals(homeworkNameString)){
-                temp1.setNext(temp2.getNext());
-                this.pushCompletionRateNode();
-                return;
+            HomeworkNodeStack transferHomework;
+            while(temp!=null){
+                if(temp.getHomeworkName().equals(homeworkNameString)){
+                    transferHomework = this.popNode();
+                    temp = temp.getNext();
+                    break;
+                }else{
+                    transferHomework = this.popNode();
+                    tempStack.pushNode(transferHomework);
+                    temp=temp.getNext();
+                }
             }
-            temp1 = temp1.getNext();
-            temp2 = temp2.getNext();
+            temp = tempStack.getTop();
+            while(temp !=null){
+                transferHomework = tempStack.popNode();
+                this.pushNode(transferHomework);
+                tempStack.setTop(tempStack.getTop().getNext());
             }
+            this.pushCompletionRateNode();
         }
     }
 	

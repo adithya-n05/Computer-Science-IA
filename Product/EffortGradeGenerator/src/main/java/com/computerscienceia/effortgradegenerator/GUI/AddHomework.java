@@ -142,12 +142,7 @@ public class AddHomework extends javax.swing.JFrame {
         }else{
             String homeworkNameString = homeworkName.getText();
             String homeworkDescriptionString = description.getText();
-            if(EffortGradeGenerator.primaryClass.getListOfHomeworks().isEmpty()){
-                HomeworkNodeList newHomeworkNode = new HomeworkNodeList(EffortGradeGenerator.primaryClass.getListOfStudents(), homeworkNameString, homeworkDescriptionString, dueDateDate);
-                EffortGradeGenerator.primaryClass.getListOfHomeworks().setStart(newHomeworkNode);
-            }else{
-                EffortGradeGenerator.primaryClass.getListOfHomeworks().addHomework(EffortGradeGenerator.primaryClass.getListOfStudents(), homeworkNameString, dueDateDate, homeworkDescriptionString);
-            }
+            EffortGradeGenerator.primaryClass.addHomework(homeworkNameString, homeworkDescriptionString, dueDateDate);
         }
             try {
                 TeacherManager.save("Effort Grade Generator");

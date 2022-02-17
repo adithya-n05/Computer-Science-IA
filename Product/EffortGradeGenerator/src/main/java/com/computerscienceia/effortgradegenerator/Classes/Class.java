@@ -5,6 +5,7 @@
 package com.computerscienceia.effortgradegenerator.Classes;
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.Date;
 
 /**
  *
@@ -99,6 +100,27 @@ public class Class implements Serializable{
         if(listOfHomeworks != null){
             this.listOfHomeworks.addStudent(newStudent);
         }
+        if(!this.quarterTests.isEmpty()){
+        AssessmentNodeList temp = this.quarterTests.getStart();
+        while(temp!=null){
+            newStudent.getQuarterTests().addAssessment(temp.getAssessmentDate(), temp.getAssessmentName());
+            temp=temp.getNext();
+        }
+        }
+        if(!this.semesterExams.isEmpty()){
+        AssessmentNodeList temp1 = this.semesterExams.getStart();
+        while(temp1!=null){
+            newStudent.getSemesterExams().addAssessment(temp1.getAssessmentDate(), temp1.getAssessmentName());
+            temp1=temp1.getNext();
+        }
+        }
+        if(!this.listOfHomeworks.isEmpty()){
+        HomeworkNodeList temp2 = this.listOfHomeworks.getStart();
+        while(temp2!=null){
+            newStudent.getHomeworkTracker().addHomework(temp2.getDueDate(),temp2.getHomeworkName(), temp2.getDescription());
+            temp2=temp2.getNext();
+        }
+        }
         this.listOfStudents.add(newStudent);
         StudentManager.listOfAllStudents.add(newStudent);
     }
@@ -113,15 +135,81 @@ public class Class implements Serializable{
         if(listOfHomeworks != null){
             this.listOfHomeworks.addStudent(newStudent);
         }
+        if(!this.quarterTests.isEmpty()){
+        AssessmentNodeList temp = this.quarterTests.getStart();
+        while(temp!=null){
+            newStudent.getQuarterTests().addAssessment(temp.getAssessmentDate(), temp.getAssessmentName());
+            temp=temp.getNext();
+        }
+        }
+        if(!this.semesterExams.isEmpty()){
+        AssessmentNodeList temp1 = this.semesterExams.getStart();
+        while(temp1!=null){
+            newStudent.getSemesterExams().addAssessment(temp1.getAssessmentDate(), temp1.getAssessmentName());
+            temp1=temp1.getNext();
+        }
+        }
+        if(!this.listOfHomeworks.isEmpty()){
+        HomeworkNodeList temp2 = this.listOfHomeworks.getStart();
+        while(temp2!=null){
+            newStudent.getHomeworkTracker().addHomework(temp2.getDueDate(),temp2.getHomeworkName(), temp2.getDescription());
+            temp2=temp2.getNext();
+        }
+        }
         this.listOfStudents.add(newStudent);
         StudentManager.listOfAllStudents.add(newStudent);
     }
     
     public void removeStudent(Student removalStudent){
-        listOfStudents.remove(removalStudent);
+        for(int i =0; i<listOfStudents.size();i++){
+            if(listOfStudents.get(i).getId() == removalStudent.getId()){
+                listOfStudents.remove(i);
+            }
+        }
         quarterTests.removeStudent(removalStudent);
         semesterExams.removeStudent(removalStudent);
         listOfHomeworks.removeStudent(removalStudent);
     }
     
+    public void addHomework(String homeworkName, String description, Date dueDate){
+        for(int i=0; i<listOfStudents.size();i++){
+            listOfStudents.get(i).getHomeworkTracker().addHomework(dueDate, homeworkName, description);
+        }
+        listOfHomeworks.addHomework(listOfStudents, homeworkName, dueDate, description);
+    }
+    
+    public void addQuarterAssessment(String assessmentName, Date assessmentDate){
+        for(int i=0; i<listOfStudents.size();i++){
+            listOfStudents.get(i).getQuarterTests().addAssessment(assessmentDate, assessmentName);
+        }
+        quarterTests.addAssessment(listOfStudents, assessmentDate, assessmentName);
+    }
+    
+    public void addSemesterExam(String assessmentName, Date assessmentDate){
+        for(int i=0; i<listOfStudents.size();i++){
+            listOfStudents.get(i).getSemesterExams().addAssessment(assessmentDate, assessmentName);
+        }
+        semesterExams.addAssessment(listOfStudents, assessmentDate, assessmentName);
+    }
+    
+    public void removeHomework(String homeworkName){
+        for(int i=0; i<listOfStudents.size();i++){
+            listOfStudents.get(i).getHomeworkTracker().removeHomework(homeworkName);
+        }
+        listOfHomeworks.removeHomework(homeworkName);
+    }
+    
+    public void removeQuarterTest(String assessmentName){
+        for(int i=0; i<listOfStudents.size();i++){
+            listOfStudents.get(i).getQuarterTests().removeAssessment(assessmentName);
+        }
+        quarterTests.removeAssessment(assessmentName);
+    }
+    
+    public void removeSemesterExam(String assessmentName){
+        for(int i=0; i<listOfStudents.size();i++){
+            listOfStudents.get(i).getSemesterExams().removeAssessment(assessmentName);
+        }
+        semesterExams.removeAssessment(assessmentName);
+    }
 }

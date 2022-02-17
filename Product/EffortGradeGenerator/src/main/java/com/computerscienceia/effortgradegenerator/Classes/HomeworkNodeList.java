@@ -14,7 +14,7 @@ import java.util.Date;
  */
 public class HomeworkNodeList extends HomeworkNode implements Serializable{
     
-    private ArrayList<ArrayList<Integer>> listOfStudents;
+    private ArrayList<ArrayList<Integer>> listOfStudents = new ArrayList<>();
     private HomeworkNodeList next;
 
     public ArrayList<ArrayList<Integer>> getListOfStudents() {

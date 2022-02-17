@@ -4,13 +4,14 @@
  */
 package com.computerscienceia.effortgradegenerator.Classes;
 
+import java.io.Serializable;
 import java.util.Date;
 
 /**
  *
  * @author adith
  */
-public class AssessmentNode {
+public class AssessmentNode implements Serializable{
     private String assessmentName; 
     private Date assessmentDate;
 

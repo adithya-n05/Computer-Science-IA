@@ -108,12 +108,7 @@ public class AddQuarterAssessment extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(null,"No date chosen for due date. Please choose a due date for the homework.");
         }else{
             String assessmentNameString = assessmentName.getText();
-            if(EffortGradeGenerator.primaryClass.getQuarterTests().isEmpty()){
-                AssessmentNodeList newAssessmentNode = new AssessmentNodeList(EffortGradeGenerator.primaryClass.getListOfStudents(), assessmentNameString, dueDateDate);
-                EffortGradeGenerator.primaryClass.getQuarterTests().setStart(newAssessmentNode);
-            }else{
-                EffortGradeGenerator.primaryClass.getQuarterTests().addAssessment(EffortGradeGenerator.primaryClass.getListOfStudents(), dueDateDate, assessmentNameString);
-            }
+            EffortGradeGenerator.primaryClass.addQuarterAssessment(assessmentNameString, dueDateDate);       
         }
             try {
                 TeacherManager.save("Effort Grade Generator");
