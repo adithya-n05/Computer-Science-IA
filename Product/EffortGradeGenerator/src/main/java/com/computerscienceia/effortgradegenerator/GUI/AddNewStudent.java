@@ -137,6 +137,7 @@ public class AddNewStudent extends javax.swing.JFrame {
         String lastNameString = lastName.getText();
         int id = Integer.parseInt(studentID.getText());
         EffortGradeGenerator.primaryClass.addStudent(firstNameString, lastNameString, id);
+        EffortGradeGenerator.primaryClass.getListOfStudents().get(0).getHomeworkTracker().printStack();
         try {
             TeacherManager.save("Effort Grade Generator");
         } catch (IOException e) {

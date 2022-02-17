@@ -174,6 +174,7 @@ public class Class implements Serializable{
     public void addHomework(String homeworkName, String description, Date dueDate){
         for(int i=0; i<listOfStudents.size();i++){
             listOfStudents.get(i).getHomeworkTracker().addHomework(dueDate, homeworkName, description);
+            listOfStudents.get(i).getHomeworkTracker().printStack();
         }
         listOfHomeworks.addHomework(listOfStudents, homeworkName, dueDate, description);
     }

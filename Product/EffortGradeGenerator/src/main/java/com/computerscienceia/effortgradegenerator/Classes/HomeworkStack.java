@@ -54,16 +54,30 @@ public class HomeworkStack implements Serializable{
     public void addHomework(Date homeworkDueDate, String homeworkName, String descriptionString)
 	{
             popCompletionNode();
-            HomeworkNodeStack newAssessment = new HomeworkNodeStack(true, true, 0.0, homeworkName, descriptionString, homeworkDueDate);
+            printStack();
+            HomeworkNodeStack temp = top;
+            HomeworkNodeStack newAssessment = new HomeworkNodeStack(false, false, 0.0, homeworkName, descriptionString, homeworkDueDate);
 		if( isEmpty() )
 		{
 			top = newAssessment;
 		} else {
-			newAssessment.setNext(top);
 			top = newAssessment;
+                        newAssessment.setNext(temp);
 		}
             pushCompletionRateNode();
 	}
+    
+    public void printStack(){
+        if(isEmpty()){
+            System.out.println("Stack is empty");
+        }else{
+            HomeworkNodeStack temp = top;
+            while(temp!=null){
+                System.out.println(temp.getHomeworkName());
+                temp=temp.getNext();
+            }
+        }
+    }
 	
     public Map<String, Double> popCompletionNode()
 	{
