@@ -29,7 +29,8 @@ public class EffortGradeCalculator {
             scoreWeighting = 100.0;
         }
         testWeighting = (testWeighting/7.9)*100;
-        finalWeighting = ((0.25) * scoreWeighting) + (0.25 * homeworkCompletionRate) + (0.5*testWeighting);
+        finalWeighting = ((0.25) * scoreWeighting) + (0.25 * homeworkCompletionRate*100) + (0.5*testWeighting);
+        System.out.println(finalWeighting);
         
         String EffortGrade = "U";
         
