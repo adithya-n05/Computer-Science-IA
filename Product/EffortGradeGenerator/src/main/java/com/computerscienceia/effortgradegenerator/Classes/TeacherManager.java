@@ -59,10 +59,11 @@ public class TeacherManager implements Serializable{
             loaderOIS.close();
         }catch(ClassNotFoundException c){
         }
-        File teachersList2 = new File(fileName+"2"+".ser");
+        File teachersList2 = new File(fileName+"1"+".ser");
         if(!teachersList2.exists()){
             teachersList2.createNewFile();
         }
+        
         try{
             FileInputStream loaderFIS = new FileInputStream(fileName+"2"+".ser");
             ObjectInputStream loaderOIS = new ObjectInputStream(loaderFIS);

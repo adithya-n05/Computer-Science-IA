@@ -49,7 +49,7 @@ public class AssessmentStack implements Serializable{
             double EMAValue = EMACalculator.calculateEMA(studentScores);
             AssessmentNodeStack newNode = new AssessmentNodeStack(EMAValue, "EMANode",new Date(), true);
             newNode.setNext(this.top);
-            this.top.setNext(newNode);
+            top = newNode;
         }
     }
 	
@@ -101,7 +101,7 @@ public class AssessmentStack implements Serializable{
             this.top = pushNode;
         }else{
             pushNode.setNext(this.top);
-            this.top.setNext(pushNode);
+            top = pushNode;
         }
     }
     
@@ -109,6 +109,7 @@ public class AssessmentStack implements Serializable{
     public void removeAssessment(String assessmentNameString){
         this.popEMANode();
         AssessmentStack tempStack = new AssessmentStack();
+        tempStack.popEMANode();
         AssessmentNodeStack temp = top;
         if(temp.getAssessmentName().equals(assessmentNameString)){
             top=top.getNext();
@@ -132,8 +133,8 @@ public class AssessmentStack implements Serializable{
                 this.pushNode(transferAssessment);
                 tempStack.setTop(tempStack.getTop().getNext());
             }
+            this.pushEMANode();
         }
-        this.pushEMANode();
     }
 	
 	public Map<String, Double> peekEMAValue()

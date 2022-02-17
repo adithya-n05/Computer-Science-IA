@@ -38,8 +38,10 @@ public class HomeworkNodeList extends HomeworkNode implements Serializable{
         for(int i =0; i<listOfStudents.size(); i++){
             Student student = listOfStudents.get(i);
             int id = student.getId();
-            this.listOfStudents.add(new ArrayList<>());
-            this.listOfStudents.get(i).add(0, id);
+            ArrayList<Integer> newList = new ArrayList<>();
+            newList.add(id);
+            newList.add(0);
+            this.listOfStudents.add(newList);
         }
         this.next = null;
     }

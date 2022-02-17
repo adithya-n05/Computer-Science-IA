@@ -102,14 +102,12 @@ public class AddExistingStudent extends javax.swing.JFrame {
             if(listOfStudentsInClass.get(i).getId() == id){
                 JOptionPane.showMessageDialog(null, "Student is already in class, please select another student");
                 StudentInClass = true;
-                break;
             }
         }
         if(!StudentInClass){
         for(int i = 0; i<listOfAllStudents.size(); i++){
             if(listOfAllStudents.get(i).getId() == id){
-                Student additionObject = new Student(id, listOfAllStudents.get(i).getFirstName(), listOfAllStudents.get(i).getLastName());
-                EffortGradeGenerator.primaryClass.addStudent(additionObject);
+                EffortGradeGenerator.primaryClass.addStudent(listOfAllStudents.get(i).getFirstName(), listOfAllStudents.get(i).getLastName(), id);
             }
         }
         }

@@ -7,6 +7,8 @@ package com.computerscienceia.effortgradegenerator.GUI;
 import com.computerscienceia.effortgradegenerator.Classes.Class;
 import com.computerscienceia.effortgradegenerator.Classes.TeacherManager;
 import com.computerscienceia.effortgradegenerator.Classes.AssessmentLinkedList;
+import com.computerscienceia.effortgradegenerator.Classes.StudentManager;
+import com.computerscienceia.effortgradegenerator.Classes.Student;
 import java.io.IOException;
 /**
  *
@@ -138,6 +140,8 @@ public class AddNewStudent extends javax.swing.JFrame {
         int id = Integer.parseInt(studentID.getText());
         EffortGradeGenerator.primaryClass.addStudent(firstNameString, lastNameString, id);
         EffortGradeGenerator.primaryClass.getListOfStudents().get(0).getHomeworkTracker().printStack();
+        Student newStudent = new Student(id, firstNameString, lastNameString);
+        StudentManager.listOfAllStudents.add(newStudent);
         try {
             TeacherManager.save("Effort Grade Generator");
         } catch (IOException e) {

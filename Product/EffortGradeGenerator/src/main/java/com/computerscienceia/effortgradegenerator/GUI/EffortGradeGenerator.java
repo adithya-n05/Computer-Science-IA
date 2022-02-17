@@ -18,8 +18,8 @@ import java.io.IOException;
 public class EffortGradeGenerator {
     public static Teacher primaryTeacher;
     public static Class primaryClass;
-    public static AssessmentNodeList primaryAssessment;
-    public static HomeworkNodeList primaryHomework;
+    public static String primaryAssessment;
+    public static String primaryHomework;
     
     public static void main(String[] args){
         try {

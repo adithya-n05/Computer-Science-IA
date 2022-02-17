@@ -92,13 +92,29 @@ public class HomeworkLinkedList implements Serializable{
 
     public void removeStudent(Student student){
         HomeworkNodeList temp = start;
-        ArrayList<ArrayList<Integer>> listOfStudents;
+        ArrayList<ArrayList<Integer>> listOfStudents = new ArrayList<>();
         while(temp!=null){
             listOfStudents = temp.getListOfStudents();
             int id = student.getId();
             int location = ArrayListHelper.binarySearchInt(listOfStudents, id);
             listOfStudents.remove(location);
             temp.setListOfStudents(listOfStudents);
+            temp = temp.getNext();
         }
     }
+    
+    public void markHomework(String homeworkName, int id, int completed){
+        HomeworkNodeList temp = start;
+        ArrayList<Integer> AListModification = new ArrayList<>();
+        while(temp!=null){
+            if(temp.getHomeworkName().equals(homeworkName)){
+                for(int i=0; i<temp.getListOfStudents().size(); i++){
+                    if(temp.getListOfStudents().get(i).get(0) == id){
+                        temp.getListOfStudents().get(i).set(1, completed);
+                    }
+                }
+            }
+        }
+    }
+    
 }

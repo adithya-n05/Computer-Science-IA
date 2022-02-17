@@ -4,6 +4,11 @@
  */
 package com.computerscienceia.effortgradegenerator.GUI;
 
+import com.computerscienceia.effortgradegenerator.Classes.HomeworkSearcher;
+import com.computerscienceia.effortgradegenerator.Classes.ListInitialization;
+import javax.swing.JOptionPane;
+
+
 /**
  *
  * @author adith
@@ -30,11 +35,11 @@ public class MarkHomework extends javax.swing.JFrame {
         jLabel4 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
         jLabel1 = new javax.swing.JLabel();
-        jLabel2 = new javax.swing.JLabel();
+        homeworkName = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
         jLabel7 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jList2 = new javax.swing.JList<>();
+        Students = new javax.swing.JList<>();
         jLabel8 = new javax.swing.JLabel();
         jButton1 = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
@@ -52,22 +57,27 @@ public class MarkHomework extends javax.swing.JFrame {
 
         jLabel1.setText("Due date:");
 
-        jLabel2.setText("Homework Title");
+        homeworkName.setText(EffortGradeGenerator.primaryHomework);
 
-        jLabel6.setText("Due Date");
+        jLabel6.setText(HomeworkSearcher.getHomeworkDate(EffortGradeGenerator.primaryHomework));
 
-        jLabel7.setText("Description of Homework");
+        jLabel7.setText(HomeworkSearcher.getHomeworkDescription(EffortGradeGenerator.primaryHomework));
 
-        jList2.setModel(new javax.swing.AbstractListModel<String>() {
-            String[] strings = { "Item 1", "Item 2", "Item 3", "Item 4", "Item 5" };
+        Students.setModel(new javax.swing.AbstractListModel<String>() {
+            String[] strings = ListInitialization.listOfStudentsAsStrings();
             public int getSize() { return strings.length; }
             public String getElementAt(int i) { return strings[i]; }
         });
-        jScrollPane1.setViewportView(jList2);
+        jScrollPane1.setViewportView(Students);
 
         jLabel8.setText("Student selection:");
 
         jButton1.setText("Mark completed");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
 
         jButton2.setText("Unmark completed");
         jButton2.addActionListener(new java.awt.event.ActionListener() {
@@ -93,7 +103,7 @@ public class MarkHomework extends javax.swing.JFrame {
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(jLabel5)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 492, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addComponent(homeworkName, javax.swing.GroupLayout.PREFERRED_SIZE, 492, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(jLabel1)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -118,7 +128,7 @@ public class MarkHomework extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel5)
-                    .addComponent(jLabel2))
+                    .addComponent(homeworkName))
                 .addGap(12, 12, 12)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel1)
@@ -145,6 +155,14 @@ public class MarkHomework extends javax.swing.JFrame {
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jButton2ActionPerformed
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+      if(Students.isSelectionEmpty()){
+          JOptionPane.showMessageDialog(null, "Please select a student first");
+      }else{
+          String studentName = 
+      }
+    }//GEN-LAST:event_jButton1ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -182,17 +200,17 @@ public class MarkHomework extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JList<String> Students;
+    private javax.swing.JLabel homeworkName;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
-    private javax.swing.JList<String> jList2;
     private javax.swing.JScrollPane jScrollPane1;
     // End of variables declaration//GEN-END:variables
 }

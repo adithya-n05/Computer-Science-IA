@@ -42,7 +42,12 @@ public class AddQuarterAssessment extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Add a new assessment");
 
-        assessmentName.setText("Enter the name of the class");
+        assessmentName.setText("Enter the topic");
+        assessmentName.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                assessmentNameActionPerformed(evt);
+            }
+        });
 
         jLabel3.setText("Assessment date:");
 
@@ -58,6 +63,16 @@ public class AddQuarterAssessment extends javax.swing.JFrame {
         jLabel4.setText("Add an assessment");
 
         jLabel1.setText("Assessment topic(s);");
+
+        assessmentDate.addAncestorListener(new javax.swing.event.AncestorListener() {
+            public void ancestorAdded(javax.swing.event.AncestorEvent evt) {
+                assessmentDateAncestorAdded(evt);
+            }
+            public void ancestorMoved(javax.swing.event.AncestorEvent evt) {
+            }
+            public void ancestorRemoved(javax.swing.event.AncestorEvent evt) {
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -116,6 +131,14 @@ public class AddQuarterAssessment extends javax.swing.JFrame {
             }
             this.dispose();
     }//GEN-LAST:event_submitActionPerformed
+
+    private void assessmentNameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_assessmentNameActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_assessmentNameActionPerformed
+
+    private void assessmentDateAncestorAdded(javax.swing.event.AncestorEvent evt) {//GEN-FIRST:event_assessmentDateAncestorAdded
+        // TODO add your handling code here:
+    }//GEN-LAST:event_assessmentDateAncestorAdded
 
     /**
      * @param args the command line arguments

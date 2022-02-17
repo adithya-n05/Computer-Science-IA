@@ -47,22 +47,22 @@ public class HomeworkStack implements Serializable{
             double percentCompletion = HomeworkPercentageCompletedHelper.calculatePercentageCompleted(completedList);
             HomeworkNodeStack newNode = new HomeworkNodeStack(false, true, percentCompletion, "completionRateNode", "None", new Date());
             newNode.setNext(top);
-            top.setNext(newNode);
+            top = newNode;
         }
     }
 	
     public void addHomework(Date homeworkDueDate, String homeworkName, String descriptionString)
 	{
             popCompletionNode();
-            printStack();
             HomeworkNodeStack temp = top;
-            HomeworkNodeStack newAssessment = new HomeworkNodeStack(false, false, 0.0, homeworkName, descriptionString, homeworkDueDate);
+            HomeworkNodeStack newHomework = new HomeworkNodeStack(false, false, 0.0, homeworkName, descriptionString, homeworkDueDate);
 		if( isEmpty() )
 		{
-			top = newAssessment;
+			top = newHomework;
 		} else {
-			top = newAssessment;
-                        newAssessment.setNext(temp);
+                        newHomework.setNext(top);
+			top = newHomework;
+                        
 		}
             pushCompletionRateNode();
 	}

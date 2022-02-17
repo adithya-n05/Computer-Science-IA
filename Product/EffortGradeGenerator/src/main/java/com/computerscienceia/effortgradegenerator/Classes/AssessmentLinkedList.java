@@ -89,13 +89,28 @@ public class AssessmentLinkedList implements Serializable{
     
     public void removeStudent(Student student){
         AssessmentNodeList temp = start;
-        ArrayList<ArrayList<Double>> listOfStudents;
+        ArrayList<ArrayList<Double>> listOfStudents = new ArrayList<>();
         while(temp!=null){
             listOfStudents = temp.getListOfStudents();
             int id = student.getId();
             int location = ArrayListHelper.binarySearchDouble(listOfStudents, id);
             listOfStudents.remove(location);
             temp.setListOfStudents(listOfStudents);
+            temp = temp.getNext();
+        }
+    }
+    
+    public void markAssessment(String homeworkName, int id, double score){
+        AssessmentNodeList temp = start;
+        ArrayList<Integer> AListModification = new ArrayList<>();
+        while(temp!=null){
+            if(temp.getAssessmentName().equals(homeworkName)){
+                for(int i=0; i<temp.getListOfStudents().size(); i++){
+                    if(temp.getListOfStudents().get(i).get(0) == id){
+                        temp.getListOfStudents().get(i).set(1, score);
+                    }
+                }
+            }
         }
     }
 

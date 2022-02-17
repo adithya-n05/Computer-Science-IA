@@ -116,7 +116,7 @@ public class ArrayListHelper{
         int location = -1;
         int index;
         while (low <= high && found == false) {
-            index = ( low + high ) / 2;
+            index = low + ( high - low ) / 2;
             if (id == inputArray.get(index).get(0)) {
                 found = true;
                 location = index;
@@ -139,11 +139,11 @@ public class ArrayListHelper{
         int index;
         while (low <= high && found == false) {
             index = ( low + high ) / 2;
-            if (id == inputArray.get(index).get(0)) {
+            if ((double) id == inputArray.get(index).get(0)) {
                 found = true;
                 location = index;
             } else {
-                if (id < inputArray.get(index).get(0)){
+                if ((double)id < inputArray.get(index).get(0)){
                     high = index - 1;
                 } else {
                     low = index + 1;

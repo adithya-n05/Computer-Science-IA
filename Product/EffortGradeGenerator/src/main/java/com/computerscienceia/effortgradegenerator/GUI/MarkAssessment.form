@@ -111,14 +111,14 @@
     <Component class="javax.swing.JLabel" name="jLabel2">
       <Properties>
         <Property name="text" type="java.lang.String" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
-          <Connection code="EffortGradeGenerator.primaryAssessment.getAssessmentName()" type="code"/>
+          <Connection code="EffortGradeGenerator.primaryAssessment" type="code"/>
         </Property>
       </Properties>
     </Component>
     <Component class="javax.swing.JLabel" name="jLabel6">
       <Properties>
         <Property name="text" type="java.lang.String" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
-          <Connection code="DateHelper.dateToString(EffortGradeGenerator.primaryAssessment.getAssessmentDate())" type="code"/>
+          <Connection code="&quot;test&quot;" type="code"/>
         </Property>
       </Properties>
     </Component>

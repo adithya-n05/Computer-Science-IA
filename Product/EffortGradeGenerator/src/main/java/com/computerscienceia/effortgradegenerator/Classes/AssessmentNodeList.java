@@ -21,8 +21,10 @@ public class AssessmentNodeList extends AssessmentNode implements Serializable{
         for(int i =0; i<listOfStudents.size(); i++){
             Student student = listOfStudents.get(i);
             int id = student.getId();
-            this.listOfStudents.add(new ArrayList<>());
-            this.listOfStudents.get(i).add(id, 1.0);
+            ArrayList<Double> newList = new ArrayList<>();
+            newList.add((double)id);
+            newList.add(1.0);
+            this.listOfStudents.add(newList);
         }
 	next = null;
     }

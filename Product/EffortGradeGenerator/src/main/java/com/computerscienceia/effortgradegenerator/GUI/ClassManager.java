@@ -46,7 +46,7 @@ public class ClassManager extends javax.swing.JFrame {
         removeStudent = new javax.swing.JButton();
         generateEffort = new javax.swing.JButton();
         addNewStudent = new javax.swing.JButton();
-        jPanel2 = new javax.swing.JPanel();
+        Homeworks = new javax.swing.JPanel();
         jScrollPane2 = new javax.swing.JScrollPane();
         listOfHomeworks = new javax.swing.JList<>();
         jLabel7 = new javax.swing.JLabel();
@@ -197,17 +197,17 @@ public class ClassManager extends javax.swing.JFrame {
             }
         });
 
-        javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
-        jPanel2.setLayout(jPanel2Layout);
-        jPanel2Layout.setHorizontalGroup(
-            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel2Layout.createSequentialGroup()
+        javax.swing.GroupLayout HomeworksLayout = new javax.swing.GroupLayout(Homeworks);
+        Homeworks.setLayout(HomeworksLayout);
+        HomeworksLayout.setHorizontalGroup(
+            HomeworksLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(HomeworksLayout.createSequentialGroup()
                 .addGap(20, 20, 20)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(HomeworksLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 658, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel7))
                 .addContainerGap(16, Short.MAX_VALUE))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, HomeworksLayout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(addHomework)
                 .addGap(18, 18, 18)
@@ -216,11 +216,11 @@ public class ClassManager extends javax.swing.JFrame {
                 .addComponent(markHomework)
                 .addGap(144, 144, 144))
         );
-        jPanel2Layout.setVerticalGroup(
-            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel2Layout.createSequentialGroup()
+        HomeworksLayout.setVerticalGroup(
+            HomeworksLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(HomeworksLayout.createSequentialGroup()
                 .addGap(17, 17, 17)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                .addGroup(HomeworksLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(addHomework)
                     .addComponent(removeHomework)
                     .addComponent(markHomework))
@@ -231,7 +231,7 @@ public class ClassManager extends javax.swing.JFrame {
                 .addContainerGap(14, Short.MAX_VALUE))
         );
 
-        semesterExams.addTab("Homework", jPanel2);
+        semesterExams.addTab("Homework", Homeworks);
 
         listOfQuarterTests.setModel(new javax.swing.AbstractListModel<String>() {
             String[] strings = ListInitialization.listOfQuarterAssessmentsAsStrings();
@@ -418,7 +418,7 @@ public class ClassManager extends javax.swing.JFrame {
     }//GEN-LAST:event_refreshActionPerformed
 
     private void removeQuarterAssessmentActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_removeQuarterAssessmentActionPerformed
-        if(listOfHomeworks.isSelectionEmpty()){
+        if(listOfQuarterTests.isSelectionEmpty()){
            JOptionPane.showMessageDialog(null,"Please select an assessment");
        }
         String examName = listOfQuarterTests.getSelectedValue();
@@ -437,13 +437,13 @@ public class ClassManager extends javax.swing.JFrame {
        }else{
         String homeworkName = (String)listOfHomeworks.getSelectedValue();
         EffortGradeGenerator.primaryClass.removeHomework(homeworkName);
+        this.dispose();
+        new ClassManager().setVisible(true);
         }
         try {
             TeacherManager.save("Effort Grade Generator");
         } catch (IOException e) {
         }
-        this.dispose();
-        new ClassManager().setVisible(true);
     }//GEN-LAST:event_removeHomeworkActionPerformed
 
     private void addNewStudentActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addNewStudentActionPerformed
@@ -456,11 +456,12 @@ public class ClassManager extends javax.swing.JFrame {
 
     private void removeStudentActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_removeStudentActionPerformed
         if(listOfStudents.isSelectionEmpty()){
-            JOptionPane.showMessageDialog(null,"Please select a class");
+            JOptionPane.showMessageDialog(null,"Please select a student");
         }else{
-        String studentName = listOfStudents.getSelectedValue();
+        String studentName = (String)listOfStudents.getSelectedValue();
         String[] _arr = studentName.split("\\s");
         int id = Integer.parseInt(_arr[2]);
+        System.out.println(id);
         ArrayList<Student> listOfStudentsClass = EffortGradeGenerator.primaryClass.getListOfStudents();
         for(int i =0; i<listOfStudentsClass.size(); i++){
             if(listOfStudentsClass.get(i).getId() == id){
@@ -503,6 +504,8 @@ public class ClassManager extends javax.swing.JFrame {
         if(listOfHomeworks.isSelectionEmpty()){
            JOptionPane.showMessageDialog(null,"Please select a homework");
         }else{
+            String homeworkNameString = listOfHomeworks.getSelectedValue();
+            EffortGradeGenerator.primaryHomework = homeworkNameString;
             new MarkHomework().setVisible(true);
         }
     }//GEN-LAST:event_markHomeworkActionPerformed
@@ -551,6 +554,7 @@ public class ClassManager extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JPanel Homeworks;
     private javax.swing.JButton addHomework;
     private javax.swing.JButton addNewStudent;
     private javax.swing.JButton addQuarterAssessment;
@@ -566,7 +570,6 @@ public class ClassManager extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;
-    private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel4;
     private javax.swing.JPanel jPanel5;
     private javax.swing.JScrollPane jScrollPane1;

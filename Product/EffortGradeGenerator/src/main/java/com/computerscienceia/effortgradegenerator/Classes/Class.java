@@ -126,15 +126,9 @@ public class Class implements Serializable{
     }
     
     public void addStudent(Student newStudent){
-        if(quarterTests != null){
             this.quarterTests.addStudent(newStudent);
-        }
-        if(semesterExams != null){
             this.semesterExams.addStudent(newStudent);
-        }
-        if(listOfHomeworks != null){
             this.listOfHomeworks.addStudent(newStudent);
-        }
         if(!this.quarterTests.isEmpty()){
         AssessmentNodeList temp = this.quarterTests.getStart();
         while(temp!=null){
@@ -161,7 +155,7 @@ public class Class implements Serializable{
     }
     
     public void removeStudent(Student removalStudent){
-        for(int i =0; i<listOfStudents.size();i++){
+        for(int i =0; i<listOfStudents.size(); i++){
             if(listOfStudents.get(i).getId() == removalStudent.getId()){
                 listOfStudents.remove(i);
             }

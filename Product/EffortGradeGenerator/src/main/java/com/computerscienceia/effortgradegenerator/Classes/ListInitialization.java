@@ -31,7 +31,7 @@ public class ListInitialization {
        Class mainClass = EffortGradeGenerator.primaryClass;
        ArrayList<Student> listOfStudents = mainClass.getListOfStudents();
        int size =0;
-       if(listOfStudents == null){
+       if(listOfStudents.size() == 0){
            size = 1;
            String[] listOfStudentsStringsBlank = new String[size];
            return listOfStudentsStringsBlank;

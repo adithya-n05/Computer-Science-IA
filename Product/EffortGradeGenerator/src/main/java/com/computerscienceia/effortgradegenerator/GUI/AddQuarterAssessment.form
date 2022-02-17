@@ -73,8 +73,11 @@
   <SubComponents>
     <Component class="javax.swing.JTextField" name="assessmentName">
       <Properties>
-        <Property name="text" type="java.lang.String" value="Enter the name of the class"/>
+        <Property name="text" type="java.lang.String" value="Enter the topic"/>
       </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="assessmentNameActionPerformed"/>
+      </Events>
     </Component>
     <Component class="javax.swing.JLabel" name="jLabel3">
       <Properties>
@@ -104,6 +107,9 @@
       </Properties>
     </Component>
     <Component class="com.toedter.calendar.JDateChooser" name="assessmentDate">
+      <Events>
+        <EventHandler event="ancestorAdded" listener="javax.swing.event.AncestorListener" parameters="javax.swing.event.AncestorEvent" handler="assessmentDateAncestorAdded"/>
+      </Events>
     </Component>
   </SubComponents>
 </Form>
