@@ -4,6 +4,7 @@
  */
 package com.computerscienceia.effortgradegenerator.GUI;
 import com.computerscienceia.effortgradegenerator.Classes.EffortGradeCalculator;
+import javax.swing.JOptionPane;
 
 
 /**
@@ -58,7 +59,7 @@ public class EffortGradeGeneration extends javax.swing.JFrame {
 
         jLabel2.setText("Homework completion rate:");
 
-        jLabel3.setText(Double.toString(EffortGradeGenerator.primaryStudent.getHomeworkTracker().peekPercentageCompletedValue().get("completionRateNode")));
+        jLabel3.setText(String.format("%.1f", EffortGradeGenerator.primaryStudent.getHomeworkTracker().peekPercentageCompletedValue().get("completionRateNode")*100.0));
 
         jLabel5.setText("Exponential moving average of test scores:");
 
@@ -87,32 +88,33 @@ public class EffortGradeGeneration extends javax.swing.JFrame {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
+                .addGap(61, 61, 61)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(61, 61, 61)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(jLabel7)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(generatedEffortGrade))
-                            .addGroup(layout.createSequentialGroup()
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                    .addComponent(jLabel2)
-                                    .addComponent(jLabel1)
-                                    .addComponent(jLabel5)
-                                    .addComponent(jButton1))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                    .addComponent(preference)
-                                    .addComponent(jLabel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addComponent(jLabel6, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
-                            .addGroup(layout.createSequentialGroup()
-                                .addGap(36, 36, 36)
-                                .addComponent(jLabel4))))
+                        .addComponent(jLabel7)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(generatedEffortGrade))
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(125, 125, 125)
-                        .addComponent(jButton2)))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(jLabel2)
+                            .addComponent(jLabel1)
+                            .addComponent(jLabel5)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(jButton1)
+                                .addGap(9, 9, 9)))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(preference)
+                            .addComponent(jLabel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jLabel6, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(36, 36, 36)
+                        .addComponent(jLabel4)))
                 .addContainerGap(42, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jButton2)
+                .addGap(136, 136, 136))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -151,7 +153,14 @@ public class EffortGradeGeneration extends javax.swing.JFrame {
     }//GEN-LAST:event_preferenceActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        generatedEffortGrade.setText(EffortGradeCalculator.CalculateEffortGrade(EffortGradeGenerator.primaryStudent.getSemesterExams().peekEMAValue().get("EMANode"), EffortGradeGenerator.primaryStudent.getQuarterTests().peekEMAValue().get("EMANode"), EffortGradeGenerator.primaryStudent.getHomeworkTracker().peekPercentageCompletedValue().get("completionRateNode"), preference.getText()));
+        String effortInfluence = preference.getText();
+        System.out.println(effortInfluence);
+        
+        if(effortInfluence.equals("U") ==false && effortInfluence.equals("S") ==false && effortInfluence.equals("G") == false && effortInfluence.equals("E") == false){
+            JOptionPane.showMessageDialog(null, "Please enter a valid effort score");
+        }else{
+            generatedEffortGrade.setText(EffortGradeCalculator.CalculateEffortGrade(EffortGradeGenerator.primaryStudent.getSemesterExams().peekEMAValue().get("EMANode"), EffortGradeGenerator.primaryStudent.getQuarterTests().peekEMAValue().get("EMANode"), EffortGradeGenerator.primaryStudent.getHomeworkTracker().peekPercentageCompletedValue().get("completionRateNode"), preference.getText()));
+        }
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed

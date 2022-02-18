@@ -9,6 +9,7 @@ import com.computerscienceia.effortgradegenerator.Classes.HomeworkNodeList;
 import com.computerscienceia.effortgradegenerator.Classes.TeacherManager;
 import java.io.IOException;
 import java.util.Date;
+import java.util.GregorianCalendar;
 import javax.swing.JOptionPane;
 
 /**
@@ -110,8 +111,25 @@ public class AddSemesterExam extends javax.swing.JFrame {
 
     private void submitActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_submitActionPerformed
         Date dueDateDate = assessmentDate.getDate();
+        String assessmentString = assessmentName.getText();
+
+        Date startDate = new GregorianCalendar(2022, 0, 0).getTime();
+        Date endDate = new GregorianCalendar(2050, 0, 0).getTime();
         if(dueDateDate == null){
             JOptionPane.showMessageDialog(null,"No date chosen for due date. Please choose a due date for the homework.");
+            return;
+        }else if(dueDateDate.before(startDate) || dueDateDate.after(endDate)){
+            JOptionPane.showMessageDialog(null, "Please enter a date in 2022 or after until 2050");
+            return;
+        }else if(!assessmentName.getText().matches("[A-Za-z0-9]+")){
+            JOptionPane.showMessageDialog(null, "Please enter alphanumeric digits only for the homework name");
+            return;
+        }else if(dueDateDate == null){
+            JOptionPane.showMessageDialog(null,"No date chosen for due date. Please choose a due date for the homework.");
+            return;
+        }else if(assessmentString == null){
+            JOptionPane.showMessageDialog(null, "Please enter a name for the assessmnent");
+            return;
         }else{
             String assessmentNameString = assessmentName.getText();
             EffortGradeGenerator.primaryClass.addSemesterExam(assessmentNameString, dueDateDate);

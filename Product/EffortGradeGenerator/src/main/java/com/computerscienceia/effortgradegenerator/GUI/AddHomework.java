@@ -13,6 +13,7 @@ import com.computerscienceia.effortgradegenerator.Classes.HomeworkNodeList;
 import com.computerscienceia.effortgradegenerator.Classes.ListInitialization;
 import com.computerscienceia.effortgradegenerator.Classes.TeacherManager;
 import java.io.IOException;
+import java.util.GregorianCalendar;
 
 /**
  *
@@ -137,11 +138,24 @@ public class AddHomework extends javax.swing.JFrame {
 
     private void submitActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_submitActionPerformed
         Date dueDateDate = dueDate.getDate();
+        String homeworkNameString = homeworkName.getText();
+        String homeworkDescriptionString = description.getText();
+
+        Date startDate = new GregorianCalendar(2022, 0, 0).getTime();
+        Date endDate = new GregorianCalendar(2050, 0, 0).getTime();
         if(dueDateDate == null){
             JOptionPane.showMessageDialog(null,"No date chosen for due date. Please choose a due date for the homework.");
+            return;
+        }else if(dueDateDate.before(startDate) || dueDateDate.after(endDate)){
+            JOptionPane.showMessageDialog(null, "Please enter a date in 2022 or after until 2050");
+            return;
+        }else if(!homeworkName.getText().matches("[A-Za-z0-9]+")){
+            JOptionPane.showMessageDialog(null, "Please enter alphanumeric digits only for the homework name");
+            return;
+        }else if(!description.getText().matches("[A-Za-z0-9]+")){
+            JOptionPane.showMessageDialog(null,"Please ensure that the description contains only alphanumeric characters");
+            return;
         }else{
-            String homeworkNameString = homeworkName.getText();
-            String homeworkDescriptionString = description.getText();
             EffortGradeGenerator.primaryClass.addHomework(homeworkNameString, homeworkDescriptionString, dueDateDate);
         }
             try {

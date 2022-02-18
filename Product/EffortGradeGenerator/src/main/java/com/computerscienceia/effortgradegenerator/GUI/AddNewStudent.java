@@ -4,12 +4,18 @@
  */
 package com.computerscienceia.effortgradegenerator.GUI;
 
+import com.computerscienceia.effortgradegenerator.Classes.ArrayListHelper;
 import com.computerscienceia.effortgradegenerator.Classes.Class;
 import com.computerscienceia.effortgradegenerator.Classes.TeacherManager;
 import com.computerscienceia.effortgradegenerator.Classes.AssessmentLinkedList;
 import com.computerscienceia.effortgradegenerator.Classes.StudentManager;
 import com.computerscienceia.effortgradegenerator.Classes.Student;
+import com.computerscienceia.effortgradegenerator.Classes.TeacherManager;
+import com.computerscienceia.effortgradegenerator.Classes.ValidationHelper;
 import java.io.IOException;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+import javax.swing.JOptionPane;
 /**
  *
  * @author adithyanarayanan
@@ -135,6 +141,45 @@ public class AddNewStudent extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void submitActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_submitActionPerformed
+        Pattern pattern = Pattern.compile("\\s");
+        Matcher matcher1 = pattern.matcher(firstName.getText());
+        Matcher matcher2 = pattern.matcher(lastName.getText());
+
+        boolean foundFirstName = matcher1.find();
+        boolean foundLastName = matcher2.find();
+        
+        int idNumber = Integer.parseInt(studentID.getText());
+        boolean alreadyInClass = false;
+        for(int i =0; i<EffortGradeGenerator.primaryClass.getListOfStudents().size(); i++){
+           if(EffortGradeGenerator.primaryClass.getListOfStudents().get(i).getId() == idNumber){
+               alreadyInClass = true;
+           } 
+        }
+        if(alreadyInClass == true){
+            JOptionPane.showMessageDialog(null, "Student already in class");
+            return;
+        }else if(firstName.getText().trim().isEmpty()||lastName.getText().trim().isEmpty()||studentID.getText().trim().isEmpty()){
+            JOptionPane.showMessageDialog(null, "Please complete all fields");
+            return;
+        }else if(studentID.getText().equals("Your School ID")){
+            JOptionPane.showMessageDialog(null, "Please enter an ID");
+            return;
+        }else if(idNumber>99999 || idNumber<0){
+            JOptionPane.showMessageDialog(null, "Invalid ID number. Please enter correct ID");
+            return;
+        }else if(firstName.getText().length()<3 || lastName.getText().length()<3){
+            JOptionPane.showMessageDialog(null, "Please ensure last name and first name are longer than 2 characters");
+            return;
+        }else if(foundFirstName == true){
+            JOptionPane.showMessageDialog(null,"Please ensure there are no whitespaces in your first name");
+            return;
+        }else if(foundLastName == true){
+            JOptionPane.showMessageDialog(null,"Please ensure there are no whitespaces in your last name");
+            return;
+        }else if(!ValidationHelper.isAlpha(firstName.getText()) || !ValidationHelper.isAlpha(lastName.getText())){
+            JOptionPane.showMessageDialog(null, "Please only enter alphabets for first name and last name");
+            return;
+        }else{
         String firstNameString = firstName.getText();
         String lastNameString = lastName.getText();
         int id = Integer.parseInt(studentID.getText());
@@ -142,11 +187,13 @@ public class AddNewStudent extends javax.swing.JFrame {
         EffortGradeGenerator.primaryClass.getListOfStudents().get(0).getHomeworkTracker().printStack();
         Student newStudent = new Student(id, firstNameString, lastNameString);
         StudentManager.listOfAllStudents.add(newStudent);
+        }
         try {
             TeacherManager.save("Effort Grade Generator");
         } catch (IOException e) {
         }
         this.dispose();
+        
     }//GEN-LAST:event_submitActionPerformed
 
     private void firstNameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_firstNameActionPerformed

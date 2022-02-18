@@ -35,7 +35,7 @@ public class MarkQuarterAssessment extends javax.swing.JFrame {
 
         jLabel4 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
-        jButton2 = new javax.swing.JButton();
+        setAssessmentScore = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
@@ -52,10 +52,10 @@ public class MarkQuarterAssessment extends javax.swing.JFrame {
 
         jLabel5.setText("Assessment topic:");
 
-        jButton2.setText("Set grade");
-        jButton2.addActionListener(new java.awt.event.ActionListener() {
+        setAssessmentScore.setText("Set grade");
+        setAssessmentScore.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton2ActionPerformed(evt);
+                setAssessmentScoreActionPerformed(evt);
             }
         });
 
@@ -79,27 +79,28 @@ public class MarkQuarterAssessment extends javax.swing.JFrame {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addGap(0, 0, Short.MAX_VALUE)
-                .addComponent(jButton2)
-                .addGap(278, 278, 278))
-            .addGroup(layout.createSequentialGroup()
-                .addGap(26, 26, 26)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel3)
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(jLabel5)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 498, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(jLabel1)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 492, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 600, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(27, Short.MAX_VALUE))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jLabel4)
                 .addGap(231, 231, 231))
+            .addGroup(layout.createSequentialGroup()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(26, 26, 26)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel3)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(jLabel5)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 498, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(jLabel1)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 492, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 600, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(288, 288, 288)
+                        .addComponent(setAssessmentScore)))
+                .addContainerGap(27, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -119,7 +120,7 @@ public class MarkQuarterAssessment extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 272, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jButton2)
+                .addComponent(setAssessmentScore)
                 .addContainerGap(30, Short.MAX_VALUE))
         );
 
@@ -127,30 +128,44 @@ public class MarkQuarterAssessment extends javax.swing.JFrame {
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+    private void setAssessmentScoreActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_setAssessmentScoreActionPerformed
+        String scoreString = "";
+        boolean inputFormat = false;
+        double scoreDouble = 0.0;
         if(students.isSelectionEmpty()){
           JOptionPane.showMessageDialog(null, "Please select a student first");
-      }else{
-        double score = Double.parseDouble(JOptionPane.showInputDialog("Please input a score for the student"));
+        }else{
+            while (inputFormat == false){
+            scoreString = JOptionPane.showInputDialog("Please input a score for the student");
+            if(!scoreString.matches("[.0-9]+")){
+                JOptionPane.showMessageDialog(null, "Please enter a decimal numeric score");
+            }else{
+            inputFormat = true;
+            scoreDouble = Double.parseDouble(scoreString);
+            if(scoreDouble<1.0 || scoreDouble >7.9){
+                JOptionPane.showMessageDialog(null, "Please enter a grade between 1.0 and 7.9");
+                inputFormat = false;
+            }
+            }
+        }
         String studentID = students.getSelectedValue();
           String[] _arr = studentID.split("\\s");
           int id = Integer.parseInt(_arr[2]);
           String quarterTestString = EffortGradeGenerator.primaryQuarterTest;
-          EffortGradeGenerator.primaryClass.getQuarterTests().markAssessment(quarterTestString, id, score);
+          EffortGradeGenerator.primaryClass.getQuarterTests().markAssessment(quarterTestString, id, scoreDouble);
           for(int i =0; i<EffortGradeGenerator.primaryClass.getListOfStudents().size(); i++){
               if(EffortGradeGenerator.primaryClass.getListOfStudents().get(i).getId() == id){
-                  EffortGradeGenerator.primaryClass.getListOfStudents().get(i).getQuarterTests().markAssessment(quarterTestString, score);
+                  EffortGradeGenerator.primaryClass.getListOfStudents().get(i).getQuarterTests().markAssessment(quarterTestString, scoreDouble);
               }
           }
-
+        this.dispose();
+        new MarkQuarterAssessment().setVisible(true);
+    }
         try {
                 TeacherManager.save("Effort Grade Generator");
             } catch (IOException e) {
             }
-        this.dispose();
-        new MarkQuarterAssessment().setVisible(true);
-        }
-    }//GEN-LAST:event_jButton2ActionPerformed
+    }//GEN-LAST:event_setAssessmentScoreActionPerformed
 
     /**
      * @param args the command line arguments
@@ -189,7 +204,6 @@ public class MarkQuarterAssessment extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton2;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
@@ -197,6 +211,7 @@ public class MarkQuarterAssessment extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JButton setAssessmentScore;
     private javax.swing.JList<String> students;
     // End of variables declaration//GEN-END:variables
 }

@@ -128,18 +128,33 @@ public class MarkSemesterExam extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+       String scoreString = "";
+        boolean inputFormat = false;
+        double scoreDouble = 0.0;
         if(students.isSelectionEmpty()){
           JOptionPane.showMessageDialog(null, "Please select a student first");
-      }else{
-        double score = Double.parseDouble(JOptionPane.showInputDialog("Please input a score for the student"));
+        }else{
+            while (inputFormat == false){
+            scoreString = JOptionPane.showInputDialog("Please input a score for the student");
+            if(!scoreString.matches("[.0-9]+")){
+                JOptionPane.showMessageDialog(null, "Please enter a decimal numeric score");
+            }else{
+            inputFormat = true;
+            scoreDouble = Double.parseDouble(scoreString);
+            if(scoreDouble<1.0 || scoreDouble >7.9){
+                JOptionPane.showMessageDialog(null, "Please enter a grade between 1.0 and 7.9");
+                inputFormat = false;
+            }
+            }
+        }
         String studentID = students.getSelectedValue();
           String[] _arr = studentID.split("\\s");
           int id = Integer.parseInt(_arr[2]);
           String semesterExamString = EffortGradeGenerator.primarySemesterExam;
-          EffortGradeGenerator.primaryClass.getSemesterExams().markAssessment(semesterExamString, id, score);
+          EffortGradeGenerator.primaryClass.getSemesterExams().markAssessment(semesterExamString, id, scoreDouble);
           for(int i =0; i<EffortGradeGenerator.primaryClass.getListOfStudents().size(); i++){
               if(EffortGradeGenerator.primaryClass.getListOfStudents().get(i).getId() == id){
-                  EffortGradeGenerator.primaryClass.getListOfStudents().get(i).getSemesterExams().markAssessment(semesterExamString, score);
+                  EffortGradeGenerator.primaryClass.getListOfStudents().get(i).getSemesterExams().markAssessment(semesterExamString, scoreDouble);
               }
           }
 

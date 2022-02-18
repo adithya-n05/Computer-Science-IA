@@ -37,7 +37,7 @@ public class ClassManager extends javax.swing.JFrame {
         jLabel3 = new javax.swing.JLabel();
         signedInName = new javax.swing.JLabel();
         refresh = new javax.swing.JButton();
-        semesterExams = new javax.swing.JTabbedPane();
+        JTabbedPanePane = new javax.swing.JTabbedPane();
         jPanel1 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
         listOfStudents = new javax.swing.JList<>();
@@ -46,6 +46,7 @@ public class ClassManager extends javax.swing.JFrame {
         removeStudent = new javax.swing.JButton();
         generateEffort = new javax.swing.JButton();
         addNewStudent = new javax.swing.JButton();
+        generateEffort1 = new javax.swing.JButton();
         Homeworks = new javax.swing.JPanel();
         jScrollPane2 = new javax.swing.JScrollPane();
         listOfHomeworks = new javax.swing.JList<>();
@@ -124,6 +125,14 @@ public class ClassManager extends javax.swing.JFrame {
             }
         });
 
+        generateEffort1.setText("View Effort Grade History for Student");
+        generateEffort1.setToolTipText("");
+        generateEffort1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                generateEffort1ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -138,8 +147,11 @@ public class ClassManager extends javax.swing.JFrame {
                             .addComponent(addNewStudent, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(70, 70, 70)
-                        .addComponent(generateEffort)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 125, Short.MAX_VALUE)
+                        .addComponent(generateEffort))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(59, 59, 59)
+                        .addComponent(generateEffort1)))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 116, Short.MAX_VALUE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 262, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel2))
@@ -148,9 +160,9 @@ public class ClassManager extends javax.swing.JFrame {
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(12, 12, 12)
+                .addGap(18, 18, 18)
                 .addComponent(jLabel2)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 302, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(jPanel1Layout.createSequentialGroup()
@@ -161,11 +173,13 @@ public class ClassManager extends javax.swing.JFrame {
                         .addGap(18, 18, 18)
                         .addComponent(removeStudent)
                         .addGap(18, 18, 18)
-                        .addComponent(generateEffort)))
+                        .addComponent(generateEffort)
+                        .addGap(18, 18, 18)
+                        .addComponent(generateEffort1)))
                 .addContainerGap(29, Short.MAX_VALUE))
         );
 
-        semesterExams.addTab("Students", jPanel1);
+        JTabbedPanePane.addTab("Students", jPanel1);
 
         listOfHomeworks.setModel(new javax.swing.AbstractListModel<String>() {
             String[] strings = ListInitialization.listOfHomeworksAsStrings();
@@ -202,36 +216,37 @@ public class ClassManager extends javax.swing.JFrame {
         HomeworksLayout.setHorizontalGroup(
             HomeworksLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(HomeworksLayout.createSequentialGroup()
-                .addGap(20, 20, 20)
                 .addGroup(HomeworksLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 658, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel7))
-                .addContainerGap(16, Short.MAX_VALUE))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, HomeworksLayout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(addHomework)
-                .addGap(18, 18, 18)
-                .addComponent(removeHomework)
-                .addGap(18, 18, 18)
-                .addComponent(markHomework)
-                .addGap(144, 144, 144))
+                    .addGroup(HomeworksLayout.createSequentialGroup()
+                        .addGap(20, 20, 20)
+                        .addGroup(HomeworksLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 668, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel7)))
+                    .addGroup(HomeworksLayout.createSequentialGroup()
+                        .addGap(142, 142, 142)
+                        .addComponent(addHomework)
+                        .addGap(18, 18, 18)
+                        .addComponent(removeHomework)
+                        .addGap(18, 18, 18)
+                        .addComponent(markHomework)))
+                .addContainerGap(24, Short.MAX_VALUE))
         );
         HomeworksLayout.setVerticalGroup(
             HomeworksLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(HomeworksLayout.createSequentialGroup()
-                .addGap(17, 17, 17)
+                .addGap(11, 11, 11)
                 .addGroup(HomeworksLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(addHomework)
                     .addComponent(removeHomework)
                     .addComponent(markHomework))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGap(18, 18, 18)
                 .addComponent(jLabel7)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 285, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(14, Short.MAX_VALUE))
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 291, Short.MAX_VALUE)
+                .addContainerGap())
         );
 
-        semesterExams.addTab("Homework", Homeworks);
+        JTabbedPanePane.addTab("Homework", Homeworks);
 
         listOfQuarterTests.setModel(new javax.swing.AbstractListModel<String>() {
             String[] strings = ListInitialization.listOfQuarterAssessmentsAsStrings();
@@ -271,9 +286,9 @@ public class ClassManager extends javax.swing.JFrame {
             .addGroup(jPanel4Layout.createSequentialGroup()
                 .addGap(20, 20, 20)
                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 658, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 669, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel9))
-                .addContainerGap(16, Short.MAX_VALUE))
+                .addContainerGap(23, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel4Layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(addQuarterAssessment)
@@ -281,24 +296,24 @@ public class ClassManager extends javax.swing.JFrame {
                 .addComponent(removeQuarterAssessment)
                 .addGap(18, 18, 18)
                 .addComponent(markAssessment)
-                .addGap(144, 144, 144))
+                .addGap(126, 126, 126))
         );
         jPanel4Layout.setVerticalGroup(
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel4Layout.createSequentialGroup()
-                .addGap(17, 17, 17)
+                .addGap(11, 11, 11)
                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(addQuarterAssessment)
                     .addComponent(removeQuarterAssessment)
                     .addComponent(markAssessment))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGap(18, 18, 18)
                 .addComponent(jLabel9)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 285, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(14, Short.MAX_VALUE))
+                .addComponent(jScrollPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 291, Short.MAX_VALUE)
+                .addContainerGap())
         );
 
-        semesterExams.addTab("Quarter Tests", jPanel4);
+        JTabbedPanePane.addTab("Quarter Tests", jPanel4);
 
         listOfSemesterExams.setModel(new javax.swing.AbstractListModel<String>() {
             String[] strings = ListInitialization.listOfSemesterExamsAsStrings();
@@ -307,7 +322,7 @@ public class ClassManager extends javax.swing.JFrame {
         });
         jScrollPane4.setViewportView(listOfSemesterExams);
 
-        jLabel10.setText("Assessments:");
+        jLabel10.setText("Exams:");
 
         addSemesterExam.setText("Add Assessment");
         addSemesterExam.addActionListener(new java.awt.event.ActionListener() {
@@ -338,9 +353,9 @@ public class ClassManager extends javax.swing.JFrame {
             .addGroup(jPanel5Layout.createSequentialGroup()
                 .addGap(20, 20, 20)
                 .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 658, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 671, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel10))
-                .addContainerGap(16, Short.MAX_VALUE))
+                .addContainerGap(21, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel5Layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(addSemesterExam)
@@ -348,24 +363,24 @@ public class ClassManager extends javax.swing.JFrame {
                 .addComponent(removeSemesterExam)
                 .addGap(18, 18, 18)
                 .addComponent(markSemesterExam)
-                .addGap(144, 144, 144))
+                .addGap(125, 125, 125))
         );
         jPanel5Layout.setVerticalGroup(
             jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel5Layout.createSequentialGroup()
-                .addGap(17, 17, 17)
+                .addGap(11, 11, 11)
                 .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(addSemesterExam)
                     .addComponent(removeSemesterExam)
                     .addComponent(markSemesterExam))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGap(18, 18, 18)
                 .addComponent(jLabel10)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 285, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(14, Short.MAX_VALUE))
+                .addComponent(jScrollPane4, javax.swing.GroupLayout.DEFAULT_SIZE, 291, Short.MAX_VALUE)
+                .addContainerGap())
         );
 
-        semesterExams.addTab("Semester Exams", jPanel5);
+        JTabbedPanePane.addTab("Semester Exams", jPanel5);
 
         jLabel1.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
@@ -398,7 +413,7 @@ public class ClassManager extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jLabel6)
                         .addGap(14, 14, 14))
-                    .addComponent(semesterExams)))
+                    .addComponent(JTabbedPanePane)))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -409,7 +424,7 @@ public class ClassManager extends javax.swing.JFrame {
                     .addComponent(jLabel5)
                     .addComponent(jLabel6))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(semesterExams, javax.swing.GroupLayout.PREFERRED_SIZE, 405, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(JTabbedPanePane, javax.swing.GroupLayout.PREFERRED_SIZE, 405, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(refresh, javax.swing.GroupLayout.PREFERRED_SIZE, 16, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -423,8 +438,11 @@ public class ClassManager extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void refreshActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_refreshActionPerformed
+        ClassManager newFrame = new ClassManager();
+        newFrame.JTabbedPanePane.setSelectedIndex(this.JTabbedPanePane.getSelectedIndex());
         this.dispose();
-        new ClassManager().setVisible(true);
+        newFrame.setVisible(true);
+        
     }//GEN-LAST:event_refreshActionPerformed
 
     private void removeQuarterAssessmentActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_removeQuarterAssessmentActionPerformed
@@ -563,6 +581,10 @@ public class ClassManager extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_markSemesterExamActionPerformed
 
+    private void generateEffort1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_generateEffort1ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_generateEffort1ActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -600,12 +622,14 @@ public class ClassManager extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel Homeworks;
+    private javax.swing.JTabbedPane JTabbedPanePane;
     private javax.swing.JButton addHomework;
     private javax.swing.JButton addNewStudent;
     private javax.swing.JButton addQuarterAssessment;
     private javax.swing.JButton addSemesterExam;
     private javax.swing.JButton addStudent;
     private javax.swing.JButton generateEffort;
+    private javax.swing.JButton generateEffort1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel2;
@@ -633,7 +657,6 @@ public class ClassManager extends javax.swing.JFrame {
     private javax.swing.JButton removeQuarterAssessment;
     private javax.swing.JButton removeSemesterExam;
     private javax.swing.JButton removeStudent;
-    private javax.swing.JTabbedPane semesterExams;
     private javax.swing.JLabel signedInName;
     // End of variables declaration//GEN-END:variables
 }

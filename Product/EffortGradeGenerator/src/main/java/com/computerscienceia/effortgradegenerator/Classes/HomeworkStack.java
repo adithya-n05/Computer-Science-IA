@@ -36,7 +36,7 @@ public class HomeworkStack implements Serializable{
     
     public void pushCompletionRateNode(){
         if(isEmpty()){
-            top = new HomeworkNodeStack(false, true, 0.0, "completionRateNode", "None", new Date());
+            top = new HomeworkNodeStack(false, true, 1.0, "completionRateNode", "None", new Date());
         }else{
             HomeworkNodeStack temp = top;
             ArrayList<Boolean> completedList = new ArrayList<>();

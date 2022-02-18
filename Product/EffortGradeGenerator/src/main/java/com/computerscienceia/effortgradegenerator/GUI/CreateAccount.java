@@ -7,8 +7,11 @@ package com.computerscienceia.effortgradegenerator.GUI;
 import com.computerscienceia.effortgradegenerator.Classes.ArrayListHelper;
 import com.computerscienceia.effortgradegenerator.Classes.Teacher;
 import com.computerscienceia.effortgradegenerator.Classes.TeacherManager;
+import com.computerscienceia.effortgradegenerator.Classes.ValidationHelper;
 import java.awt.Window;
 import java.io.IOException;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 import javax.swing.JOptionPane;
 import javax.swing.SwingUtilities;
 
@@ -212,23 +215,59 @@ public class CreateAccount extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void createAccountActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_createAccountActionPerformed
-    if(username.getText().trim().isEmpty()|| firstName.getText().trim().isEmpty()||lastName.getText().trim().isEmpty()||id.getText().trim().isEmpty()||password.getText().trim().isEmpty()||confirmPassword.getText().trim().isEmpty()){
-        JOptionPane.showMessageDialog(null, "Please complete all fields");
-    }
+    Pattern pattern = Pattern.compile("\\s");
+    Matcher matcher1 = pattern.matcher(firstName.getText());
+    Matcher matcher2 = pattern.matcher(lastName.getText());
+    Matcher matcher3 = pattern.matcher(username.getText());
+    Matcher matcher4 = pattern.matcher(password.getText());
+    boolean foundFirstName = matcher1.find();
+    boolean foundLastName = matcher2.find();
+    boolean foundUsername = matcher3.find();
+    boolean foundPassword = matcher4.find();
+    
     String idChecker = id.getText();
-    if(idChecker.equals("Your School ID")){
-        JOptionPane.showMessageDialog(null, "Please enter an ID");
-    }
     int idNumber = Integer.parseInt(id.getText());
     int location = ArrayListHelper.binarySearchTeacher(TeacherManager.allTeachers, idNumber);
-    if(location != -1){
-        JOptionPane.showMessageDialog(null,"ID already exists, please login to your existing account");
-        return;
-    }
+    if(username.getText().trim().isEmpty()|| firstName.getText().trim().isEmpty()||lastName.getText().trim().isEmpty()||id.getText().trim().isEmpty()||password.getText().trim().isEmpty()||confirmPassword.getText().trim().isEmpty()){
+            JOptionPane.showMessageDialog(null, "Please complete all fields");
+            return;
+        }else if(id.getText().equals("Your School ID")){
+            JOptionPane.showMessageDialog(null, "Please enter an ID");
+            return;
+        }else if(location != -1){
+                JOptionPane.showMessageDialog(null,"ID already exists, please login to your existing account");
+                return;
+        }else if(idNumber>99999 || idNumber<0){
+            JOptionPane.showMessageDialog(null, "Invalid ID number. Please enter correct ID");
+            return;
+        }else if(firstName.getText().length()<3 || lastName.getText().length()<3){
+            JOptionPane.showMessageDialog(null, "Please ensure last name and first name are longer than 2 characters");
+            return;
+        }else if(password.getText().length()<3 || username.getText().length()<3){
+            JOptionPane.showMessageDialog(null, "Please ensure username and password are longer than 2 characters");
+            return;
+        }else if(foundFirstName == true){
+            JOptionPane.showMessageDialog(null,"Please ensure there are no whitespaces in your first name");
+            return;
+        }else if(foundLastName == true){
+            JOptionPane.showMessageDialog(null,"Please ensure there are no whitespaces in your last name");
+            return;
+        }else if(foundUsername == true){
+            JOptionPane.showMessageDialog(null,"Please ensure there are no whitespaces in your username");
+            return;
+        }else if(foundPassword == true){
+            JOptionPane.showMessageDialog(null,"Please ensure there are no whitespaces in your password");
+            return;
+        }else if(!password.getText().equals(confirmPassword.getText())){
+            JOptionPane.showMessageDialog(null, "Passwords do not match. Please reconfirm your password.");
+            return;
+        }else if(!ValidationHelper.isAlpha(firstName.getText()) || !ValidationHelper.isAlpha(lastName.getText())){
+            JOptionPane.showMessageDialog(null, "Please only enter alphabets for first name and last name");
+            return;
+        }else{
     
     String usernameString = username.getText();
     Teacher teacherChecker;
-    boolean usernameExists = false;
     for(int i = 0; i<TeacherManager.allTeachers.size(); i++){
         teacherChecker = TeacherManager.allTeachers.get(i);
         if(teacherChecker.getUsername().equals(usernameString)){
@@ -240,11 +279,6 @@ public class CreateAccount extends javax.swing.JFrame {
     String firstNameString = firstName.getText();
     String lastNameString = lastName.getText();
     String passwordString = password.getText();
-    String confirmPasswordString = confirmPassword.getText();
-    
-    if(!passwordString.equals(confirmPasswordString)){
-        JOptionPane.showMessageDialog(null, "Passwords do not match. Please reconfirm your password.");
-    }
     Teacher newTeacher = new Teacher(usernameString, passwordString, idNumber, firstNameString, lastNameString);
     TeacherManager.addTeacher(newTeacher);
     try {
@@ -252,7 +286,7 @@ public class CreateAccount extends javax.swing.JFrame {
     } catch (IOException e) {
     }
     this.dispose();
-
+        }
          
     }//GEN-LAST:event_createAccountActionPerformed
 

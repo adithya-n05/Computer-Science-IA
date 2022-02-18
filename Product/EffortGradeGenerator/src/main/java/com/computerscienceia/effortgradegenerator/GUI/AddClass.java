@@ -8,6 +8,7 @@ import com.computerscienceia.effortgradegenerator.Classes.Teacher;
 import com.computerscienceia.effortgradegenerator.Classes.Class;
 import com.computerscienceia.effortgradegenerator.Classes.TeacherManager;
 import java.io.IOException;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -94,11 +95,11 @@ public class AddClass extends javax.swing.JFrame {
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(subjectName, javax.swing.GroupLayout.PREFERRED_SIZE, 175, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(higherLevel))
-                        .addGap(58, 58, 58))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(101, 101, 101)
-                        .addComponent(submit)
-                        .addContainerGap())))
+                        .addGap(58, 58, 58))))
+            .addGroup(layout.createSequentialGroup()
+                .addGap(170, 170, 170)
+                .addComponent(submit)
+                .addGap(0, 0, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -106,9 +107,9 @@ public class AddClass extends javax.swing.JFrame {
                 .addGap(24, 24, 24)
                 .addComponent(jLabel4)
                 .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel1)
-                    .addComponent(className, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(className, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel1))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel5)
@@ -133,9 +134,18 @@ public class AddClass extends javax.swing.JFrame {
     private void submitActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_submitActionPerformed
         String classNameString = className.getText();
         String subjectNameString = subjectName.getText();
-        boolean  higherLevelBoolean = higherLevel.isSelected();
+
+        if(!classNameString.matches("[A-Za-z0-9]+")){
+            JOptionPane.showMessageDialog(null, "Please enter alphanumeric digits only for the class name");
+            return;
+        }else if(!subjectNameString.matches("[A-Za-z]+")){
+            JOptionPane.showMessageDialog(null,"Please ensure that the subject name only contains alphabets");
+            return;
+        }else{
+                boolean  higherLevelBoolean = higherLevel.isSelected();
         Class classObject = new Class(classNameString, subjectNameString, higherLevelBoolean);
         EffortGradeGenerator.primaryTeacher.addClass(classObject);
+        }
         try {
             TeacherManager.save("Effort Grade Generator");
         } catch (IOException e) {
