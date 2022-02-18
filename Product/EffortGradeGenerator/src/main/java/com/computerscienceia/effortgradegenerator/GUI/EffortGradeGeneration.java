@@ -4,6 +4,7 @@
  */
 package com.computerscienceia.effortgradegenerator.GUI;
 import com.computerscienceia.effortgradegenerator.Classes.EffortGradeCalculator;
+import java.util.Date;
 import javax.swing.JOptionPane;
 
 
@@ -164,7 +165,9 @@ public class EffortGradeGeneration extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-        // TODO add your handling code here:
+        Date now = new Date();
+        EffortGradeGenerator.primaryStudent.getEffortInfluence().add(EffortGradeCalculator.CalculateEffortGrade(EffortGradeGenerator.primaryStudent.getSemesterExams().peekEMAValue().get("EMANode"), EffortGradeGenerator.primaryStudent.getQuarterTests().peekEMAValue().get("EMANode"), EffortGradeGenerator.primaryStudent.getHomeworkTracker().peekPercentageCompletedValue().get("completionRateNode"), preference.getText()) + " - " + now.toString());
+        this.dispose();
     }//GEN-LAST:event_jButton2ActionPerformed
 
     /**

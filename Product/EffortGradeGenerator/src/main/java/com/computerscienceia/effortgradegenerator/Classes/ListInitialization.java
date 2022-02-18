@@ -46,6 +46,23 @@ public class ListInitialization {
        }     
     }
     
+    public static String[] listOfEffortScores(){
+        int size = 0;
+        if(EffortGradeGenerator.primaryStudent.getAllEffortGrades().size() == 0){
+           size = 1;
+           String[] listOfStudentsStringsBlank = new String[size];
+           return listOfStudentsStringsBlank;
+       }else{
+            size = EffortGradeGenerator.primaryStudent.getAllEffortGrades().size();
+           String[] listOfStudentsStrings = new String[size];
+            for(int i =0; i<EffortGradeGenerator.primaryStudent.getAllEffortGrades().size(); i++){
+                listOfStudentsStrings[i] = EffortGradeGenerator.primaryStudent.getAllEffortGrades().get(i);
+            }
+            return listOfStudentsStrings;
+        }
+    }
+    
+    
     public static String[] listOfStudentsAsStringsHomework(){
        Class mainClass = EffortGradeGenerator.primaryClass;
        ArrayList<Student> listOfStudents = mainClass.getListOfStudents();

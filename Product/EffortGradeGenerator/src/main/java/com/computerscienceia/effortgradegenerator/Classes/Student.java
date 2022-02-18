@@ -13,8 +13,8 @@ import java.util.ArrayList;
  */
 public class Student extends Person implements Serializable{
     private HomeworkStack homeworkTracker = new HomeworkStack();
-    private ArrayList<String> allEffortGrades =  new ArrayList<String>();
-    private ArrayList<Character> effortInfluence = new ArrayList<Character>();
+    private ArrayList<String> allEffortGrades =  new ArrayList<>();
+    private ArrayList<String> effortInfluence = new ArrayList<>();
     private AssessmentStack quarterTests = new AssessmentStack();
     private AssessmentStack semesterExams = new AssessmentStack();
     
@@ -50,11 +50,11 @@ public class Student extends Person implements Serializable{
         this.allEffortGrades = allEffortGrades;
     }
 
-    public ArrayList<Character> getEffortInfluence() {
+    public ArrayList<String> getEffortInfluence() {
         return effortInfluence;
     }
 
-    public void setEffortInfluence(ArrayList<Character> effortInfluence) {
+    public void setEffortInfluence(ArrayList<String> effortInfluence) {
         this.effortInfluence = effortInfluence;
     }
 

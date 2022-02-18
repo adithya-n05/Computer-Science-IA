@@ -582,7 +582,20 @@ public class ClassManager extends javax.swing.JFrame {
     }//GEN-LAST:event_markSemesterExamActionPerformed
 
     private void generateEffort1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_generateEffort1ActionPerformed
-        // TODO add your handling code here:
+        if(listOfStudents.isSelectionEmpty()){
+            JOptionPane.showMessageDialog(null,"Please select a student");
+        }else{
+            String studentName = (String)listOfStudents.getSelectedValue();
+            String[] _arr = studentName.split("\\s");
+             int id = Integer.parseInt(_arr[2]);
+            ArrayList<Student> listOfStudentsClass = EffortGradeGenerator.primaryClass.getListOfStudents();
+            for(int i =0; i<listOfStudentsClass.size(); i++){
+            if(listOfStudentsClass.get(i).getId() == id){
+                EffortGradeGenerator.primaryStudent = listOfStudentsClass.get(i);
+            }
+            }
+            new EffortGradeHistory().setVisible(true);
+        }
     }//GEN-LAST:event_generateEffort1ActionPerformed
 
     /**
